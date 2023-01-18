@@ -59,7 +59,6 @@ void handle_input_pong(struct Pong* pong, ALLEGRO_KEYBOARD_STATE* state)
     }
     else if (pong->state == PLAY)
     {
-        // movimientos del jugador 1
         if (al_key_down(state, ALLEGRO_KEY_S))
         {
             pong->player1.vy = PADDLE_SPEED;
