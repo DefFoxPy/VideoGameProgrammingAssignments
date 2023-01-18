@@ -19,8 +19,8 @@
 
 void init_pong(struct Pong* pong, struct Sounds* sounds)
 {
-    init_paddle(&pong->player1, PADDLE_X_OFFSET, PADDLE_Y_OFFSET, PADDLE_WIDTH, PADDLE_HEIGHT, true);
-    init_paddle(&pong->player2, TABLE_WIDTH - PADDLE_WIDTH - PADDLE_X_OFFSET, TABLE_HEIGHT - PADDLE_HEIGHT - PADDLE_Y_OFFSET, PADDLE_WIDTH, PADDLE_HEIGHT, true);
+    init_paddle(&pong->player1, PADDLE_X_OFFSET, TABLE_HEIGHT/2, PADDLE_WIDTH, PADDLE_HEIGHT, true);
+    init_paddle(&pong->player2, TABLE_WIDTH - PADDLE_WIDTH - PADDLE_X_OFFSET, TABLE_HEIGHT/2, PADDLE_WIDTH, PADDLE_HEIGHT, true);
     init_ball(&pong->ball, TABLE_WIDTH / 2 - BALL_SIZE / 2, TABLE_HEIGHT / 2 - BALL_SIZE / 2, BALL_SIZE);
     pong->state = START;
     pong->player1_score = 0;
