@@ -28,6 +28,8 @@ void init_paddle(struct Paddle* paddle, float x, float y, float w, float h, bool
 
 void build_paddle_hitbox(struct Paddle paddle, struct Hitbox* hitbox);
 
-void update_paddle(struct Paddle* paddle, float dt, struct Ball ball);
+void update_paddle(struct Paddle* paddle, float dt);
+
+void ia(struct Paddle* paddle, struct Ball ball);
 
 void render_paddle(struct Paddle paddle);

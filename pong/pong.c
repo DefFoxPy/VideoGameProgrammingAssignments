@@ -112,8 +112,10 @@ void update_pong(struct Pong* pong, double dt)
 {
     if (pong->state == PLAY)
     {
-        update_paddle(&pong->player1, dt, pong->ball);
-        update_paddle(&pong->player2, dt, pong->ball);
+        ia(&pong->player1, pong->ball);
+        ia(&pong->player2, pong->ball);
+        update_paddle(&pong->player1, dt);
+        update_paddle(&pong->player2, dt);
         update_ball(&pong->ball, dt);
 
         struct Hitbox ball_hitbox;

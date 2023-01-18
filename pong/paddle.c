@@ -33,7 +33,7 @@ void build_paddle_hitbox(struct Paddle paddle, struct Hitbox* hitbox)
     hitbox->y2 = paddle.y + paddle.height;
 }
 
-void update_paddle(struct Paddle* paddle, float dt, struct Ball ball)
+void ia(struct Paddle* paddle, struct Ball ball)
 {
     if (paddle->IA)
     {
@@ -45,7 +45,7 @@ void update_paddle(struct Paddle* paddle, float dt, struct Ball ball)
         float paddle_centro = paddle->y + paddle->height / 2;
 
         // determinar si la pelota está en el territorio de la IA (lado del tablero)
-        bool en_territorio = fabs(ball.x - paddle->x) < TABLE_WIDTH / 2;
+        bool en_territorio = fabs(ball.x + ball.width/2 - paddle->x + paddle->width) < TABLE_WIDTH / 2;
         // condicional forzado pasa saber si la pelota biene al jugador  
         bool esta_viniendo = (ball.vx < 0 && paddle->x < TABLE_WIDTH / 2) ||
                              (ball.vx > 0 && paddle->x > TABLE_WIDTH / 2); 
@@ -91,8 +91,11 @@ void update_paddle(struct Paddle* paddle, float dt, struct Ball ball)
         {
             paddle->vy = 0;
         }
-    }
+    }    
+}
 
+void update_paddle(struct Paddle* paddle, float dt)
+{
     paddle->y += paddle->vy * dt;
     paddle->y = MAX(0, MIN(paddle->y, TABLE_HEIGHT - PADDLE_HEIGHT));
 }
