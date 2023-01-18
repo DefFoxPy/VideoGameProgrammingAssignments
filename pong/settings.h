@@ -30,5 +30,7 @@
 #define BALL_SIZE 4
 #define MID_LINE_WIDTH 2
 #define FPS 60.0
+#define IA_PLAYER_1 false
+#define IA_PLAYER_2 true
 #define MAX_POINTS 5
 
