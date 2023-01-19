@@ -111,8 +111,8 @@ void update_pong(struct Pong* pong, double dt)
 {
     if (pong->state == PLAY)
     {
-        ia(&pong->player1, pong->ball);
-        ia(&pong->player2, pong->ball);
+        ia_movement(&pong->player1, pong->ball);
+        ia_movement(&pong->player2, pong->ball);
         update_paddle(&pong->player1, dt);
         update_paddle(&pong->player2, dt);
         update_ball(&pong->ball, dt);

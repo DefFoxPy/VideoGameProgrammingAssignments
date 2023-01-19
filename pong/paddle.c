@@ -33,36 +33,33 @@ void build_paddle_hitbox(struct Paddle paddle, struct Hitbox* hitbox)
     hitbox->y2 = paddle.y + paddle.height;
 }
 
-void ia(struct Paddle* paddle, struct Ball ball)
+void ia_movement(struct Paddle* paddle, struct Ball ball)
 {
     if (paddle->IA)
     {
-         /* Movimientos de la IA
-            En este caso seguirá el movimiento de la pelota
-            la IA se moverá cuando la pelota esté en su campo
-            sino se colocará en una posición neutra
+         /* AI movements
+            In this case it will follow the movement of the ball.
+            the AI will move when the ball is in its field
+            otherwise it will be placed in the middle
         */
-        float paddle_centro = paddle->y + paddle->height / 2;
+        float paddle_middle = paddle->y + paddle->height / 2;
 
-        // determinar si la pelota está en el territorio de la IA (lado del tablero)
-        bool en_territorio = fabs(ball.x + ball.width/2 - paddle->x + paddle->width) < TABLE_WIDTH / 2;
-        // condicional forzado pasa saber si la pelota biene al jugador  
-        bool esta_viniendo = (ball.vx < 0 && paddle->x < TABLE_WIDTH / 2) ||
+        // determine if the ball is in the territory of the IA (backboard side)
+        bool is_our_side = fabs(ball.x + ball.width/2 - paddle->x + paddle->width) < TABLE_WIDTH / 2;
+        // conditional to determine if the ball reaches the paddle.
+        bool is_ball_coming = (ball.vx < 0 && paddle->x < TABLE_WIDTH / 2) ||
                              (ball.vx > 0 && paddle->x > TABLE_WIDTH / 2); 
 
-        if (en_territorio && esta_viniendo)
+        if (is_our_side && is_ball_coming)
         {
-            // verdadero si la pelota está por arriba del jugador, caso contrario false
-            bool aux = ball.y + ball.height / 2 < paddle_centro;
-            // una variable que le indica a la IA a que diferencia hacer el cambio de velocidad
-            // para generar un movimiento más fluido
-            float diferencia = fabs(ball.y + ball.height / 2 - paddle_centro);  
+            bool aux = ball.y + ball.height / 2 < paddle_middle;
+            float difference = fabs(ball.y + ball.height / 2 - paddle_middle);  
             
-            if (aux && diferencia > BALL_SIZE) 
+            if (aux && difference > BALL_SIZE) 
             {
                 paddle->vy = -PADDLE_SPEED;
             }
-            else if (!aux && diferencia > BALL_SIZE) 
+            else if (!aux && difference > BALL_SIZE) 
             {
                 paddle->vy = PADDLE_SPEED;
             }
@@ -71,15 +68,15 @@ void ia(struct Paddle* paddle, struct Ball ball)
                 paddle->vy = 0;
             }
         }
-        else if (!esta_viniendo) // dirigirse al centro de la pantalla
+        else if (!is_ball_coming) // paddle must go to the middle
         {  
-            float diferencia = fabs(paddle_centro - TABLE_HEIGHT / 2);
+            float difference = fabs(paddle_middle - TABLE_HEIGHT / 2);
 
-            if (paddle_centro > TABLE_HEIGHT / 2 && diferencia > PADDLE_WIDTH) 
+            if (paddle_middle > TABLE_HEIGHT / 2 && difference > PADDLE_WIDTH) 
             {
                 paddle->vy = -PADDLE_SPEED;
             }
-            else if (paddle_centro < TABLE_HEIGHT / 2 && diferencia > PADDLE_WIDTH) 
+            else if (paddle_middle < TABLE_HEIGHT / 2 && difference > PADDLE_WIDTH) 
             {
                 paddle->vy = PADDLE_SPEED;
             }

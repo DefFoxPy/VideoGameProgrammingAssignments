@@ -21,7 +21,7 @@ struct Paddle
     float width;
     float height;
     float vy;
-    bool IA; // indica si será un jugador o la IA el que va a jugar
+    bool IA; // indicates if the paddle will be controlled by a player or by the AI
 };
 
 void init_paddle(struct Paddle* paddle, float x, float y, float w, float h, bool ia);
@@ -30,6 +30,6 @@ void build_paddle_hitbox(struct Paddle paddle, struct Hitbox* hitbox);
 
 void update_paddle(struct Paddle* paddle, float dt);
 
-void ia(struct Paddle* paddle, struct Ball ball);
+void ia_movement(struct Paddle* paddle, struct Ball ball);
 
 void render_paddle(struct Paddle paddle);
