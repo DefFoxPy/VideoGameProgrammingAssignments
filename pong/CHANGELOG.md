@@ -25,7 +25,7 @@ Add a constant that defines if the paddle will be an AI or a player
 
 ### Changed
 
-- [move the AI code elsewhere](https://github.com/juanmpy05/curso-video-juegos/commit/3b7f9ce29f2ad246c2f105acaa782cef80877ef5) 
+- [move the AI code elsewhere](https://github.com/juanmpy05/curso-video-juegos/commit/7e34cdba4f0d51e8f10cbbcb3ff6bf32ec5ecb92)
 
 ### Fixed
 
