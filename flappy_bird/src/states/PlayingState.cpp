@@ -19,9 +19,10 @@ PlayingState::PlayingState(StateMachine* sm) noexcept
 
 }
 
-void PlayingState::enter(std::shared_ptr<World> _world, std::shared_ptr<Bird> _bird) noexcept
+void PlayingState::enter(std::shared_ptr<World> _world, std::shared_ptr<Bird> _bird, int _score) noexcept
 {
     world = _world;
+    score = _score;
     world->reset(true);
     
     if (_bird == nullptr)
@@ -46,7 +47,7 @@ void PlayingState::handle_inputs(const sf::Event& event) noexcept
 
     else if (event.key.code == sf::Keyboard::P) 
     {
-        state_machine->change_state("pause", world, bird);
+        state_machine->change_state("pause", world, bird, score);
     }
 }
 
