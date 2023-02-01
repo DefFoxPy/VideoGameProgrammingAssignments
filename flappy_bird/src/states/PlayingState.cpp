@@ -12,6 +12,7 @@
 #include <src/text_utilities.hpp>
 #include <src/states/StateMachine.hpp>
 #include <src/states/PlayingState.hpp>
+#include <src/NormalMode.hpp>
 
 PlayingState::PlayingState(StateMachine* sm) noexcept
     : BaseState{sm}
@@ -36,16 +37,23 @@ void PlayingState::enter(std::shared_ptr<World> _world, std::shared_ptr<Bird> _b
     {
         bird = _bird;
     }
+
+    if (gameMode == nullptr) 
+    {
+        auto currentGameMode = state_machine->getGameMode();
+
+        if (currentGameMode == "Normal") 
+        {
+            gameMode = std::make_shared<NormalMode>(world, bird);
+        }
+    }
 }
 
 void PlayingState::handle_inputs(const sf::Event& event) noexcept
 {
-    if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
-    {
-        bird->jump();
-    }
+    gameMode->handle_inputs(event);
 
-    else if (event.key.code == sf::Keyboard::P) 
+    if (event.key.code == sf::Keyboard::P) 
     {
         state_machine->change_state("pause", world, bird, score);
     }
@@ -53,8 +61,7 @@ void PlayingState::handle_inputs(const sf::Event& event) noexcept
 
 void PlayingState::update(float dt) noexcept
 {
-    bird->update(dt);
-    world->update(dt);
+    gameMode->update(dt);
 
     if (world->collides(bird->get_collision_rect()))
     {
