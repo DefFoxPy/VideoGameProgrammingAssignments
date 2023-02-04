@@ -13,6 +13,7 @@
 #include <src/states/StateMachine.hpp>
 #include <src/states/PlayingState.hpp>
 #include <src/NormalMode.hpp>
+#include <src/HardMode.hpp>
 
 PlayingState::PlayingState(StateMachine* sm) noexcept
     : BaseState{sm}
@@ -45,6 +46,10 @@ void PlayingState::enter(std::shared_ptr<World> _world, std::shared_ptr<Bird> _b
         if (currentGameMode == "Normal") 
         {
             gameMode = std::make_shared<NormalMode>(world, bird);
+        }
+        else  if(currentGameMode == "Hard")
+        {
+            gameMode = std::make_shared<HardMode>(world, bird);
         }
     }
 }

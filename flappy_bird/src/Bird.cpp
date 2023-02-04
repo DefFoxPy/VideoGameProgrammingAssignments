@@ -29,19 +29,46 @@ void Bird::jump() noexcept
         jumping = true;
     }
 }
+void Bird::left() noexcept{
+    if(!back)
+    {
+        back = true; 
+    }
+}
+
+void Bird::right() noexcept{ 
+    if(!ahead)
+    {
+        ahead = true; 
+    }
+}
 
 void Bird::update(float dt) noexcept
 {
     vy += Settings::GRAVITY * dt;
+    vx += dt;
 
     if (jumping)
     {
         Settings::sounds["jump"].play();
         vy = -Settings::JUMP_TAKEOFF_SPEED;
         jumping = false;
+        vx= 0;
+    }
+    else if(back)
+    {
+        vx = -Settings::JUMP_TAKEOFF_SPEED; //toca ver si se puede hacer de otra forma
+        back = false;
+    }
+    else if(ahead)
+    {
+        vx = Settings::JUMP_TAKEOFF_SPEED;
+        ahead = false;
     }
 
     y += vy * dt;
+    x += vx * dt;
+    
     sprite.setPosition(x, y);
 }
 

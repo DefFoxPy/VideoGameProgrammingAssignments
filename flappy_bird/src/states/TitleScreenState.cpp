@@ -28,7 +28,8 @@ void TitleScreenState::handle_inputs(const sf::Event& event) noexcept
     }
     else if (event.key.code == sf::Keyboard::B) // establecer el juego en modo dificil
     {
-
+        state_machine->setGameMode("Hard");
+        state_machine->change_state("count_down"); 
     }    
 }
 
