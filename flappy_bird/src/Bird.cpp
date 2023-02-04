@@ -53,13 +53,14 @@ void Bird::update(float dt) noexcept
         Settings::sounds["jump"].play();
         vy = -Settings::JUMP_TAKEOFF_SPEED;
         jumping = false;
+        vx= 0;
     }
-    if(back)
+    else if(back)
     {
         vx = -Settings::JUMP_TAKEOFF_SPEED; //toca ver si se puede hacer de otra forma
         back = false;
     }
-    if(ahead)
+    else if(ahead)
     {
         vx = Settings::JUMP_TAKEOFF_SPEED;
         ahead = false;
