@@ -21,12 +21,12 @@ TitleScreenState::TitleScreenState(StateMachine* sm) noexcept
 
 void TitleScreenState::handle_inputs(const sf::Event& event) noexcept
 {
-    if (event.key.code == sf::Keyboard::A) // establecer el juego en modo normal
+    if (event.key.code == sf::Keyboard::A)
     { 
         state_machine->setGameMode("Normal");
         state_machine->change_state("count_down");    
     }
-    else if (event.key.code == sf::Keyboard::B) // establecer el juego en modo dificil
+    else if (event.key.code == sf::Keyboard::B)
     {
         state_machine->setGameMode("Hard");
         state_machine->change_state("count_down"); 

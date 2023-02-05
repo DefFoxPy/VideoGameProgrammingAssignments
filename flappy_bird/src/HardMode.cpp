@@ -16,18 +16,19 @@ HardMode::HardMode(std::shared_ptr<World> _world, std::shared_ptr<Bird> _bird) :
 
 void HardMode::handle_inputs(const sf::Event& event) noexcept 
 {
-    if (event.key.code == sf::Keyboard::Up) {
+    if (event.key.code == sf::Keyboard::Up) 
+    {
         bird->jump();
     }
     
-    else if(event.key.code == sf::Keyboard::Left){
+    else if (event.key.code == sf::Keyboard::Left)
+    {
         bird->left();
     }
-    else if(event.key.code == sf::Keyboard::Right){
+    else if (event.key.code == sf::Keyboard::Right)
+    {
         bird->right();
-    }
-
-    
+    }  
 } 
 
 void HardMode::update(float dt) noexcept
