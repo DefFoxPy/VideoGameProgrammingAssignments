@@ -26,6 +26,10 @@ public:
 
     void change_state(const std::string& state_name, std::shared_ptr<World> world = nullptr, std::shared_ptr<Bird> bird = nullptr, int score = 0) noexcept;
 
+    void setGameMode(std::string mode) noexcept;
+
+    std::string getGameMode() const noexcept;
+
     void handle_inputs(const sf::Event& event) noexcept;
     
     void update(float dt) noexcept;
@@ -35,4 +39,5 @@ public:
 private:
     std::unordered_map<std::string, StateBuilder> states;
     std::shared_ptr<BaseState> current_state{std::make_shared<BaseState>(this)};
+    std::string game_mode;
 };

@@ -29,6 +29,17 @@ void Bird::jump() noexcept
         jumping = true;
     }
 }
+void Bird::left() noexcept
+{
+    jumping = true;
+    vx = -Settings::BIRD_HORIZONTAL_SPEED;
+}
+
+void Bird::right() noexcept
+{ 
+    jumping = true;
+    vx = Settings::BIRD_HORIZONTAL_SPEED;
+}
 
 void Bird::update(float dt) noexcept
 {
@@ -42,6 +53,20 @@ void Bird::update(float dt) noexcept
     }
 
     y += vy * dt;
+    x += vx * dt;
+
+    // keep the bird in the word
+    if (x <= 0)
+    {
+        x = 0;
+    }
+    else if (x > Settings::WINDOW_WIDTH - Settings::BIRD_WIDTH)
+    {
+        x = Settings::WINDOW_WIDTH - Settings::BIRD_WIDTH;
+    }
+
+    vx = 0.f;
+    
     sprite.setPosition(x, y);
 }
 

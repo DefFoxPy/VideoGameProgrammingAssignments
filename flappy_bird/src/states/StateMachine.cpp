@@ -30,6 +30,16 @@ void StateMachine::change_state(const std::string& state_name, std::shared_ptr<W
     current_state->enter(world, bird, score);
 }
 
+void StateMachine::setGameMode(std::string mode) noexcept
+{
+    game_mode = mode;
+}
+
+std::string StateMachine::getGameMode() const noexcept
+{
+    return game_mode;
+}
+
 void StateMachine::handle_inputs(const sf::Event& event) noexcept
 {
     current_state->handle_inputs(event);

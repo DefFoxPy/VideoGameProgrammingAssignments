@@ -21,10 +21,16 @@ TitleScreenState::TitleScreenState(StateMachine* sm) noexcept
 
 void TitleScreenState::handle_inputs(const sf::Event& event) noexcept
 {
-    if (event.key.code == sf::Keyboard::Enter)
-    {
-        state_machine->change_state("count_down");
+    if (event.key.code == sf::Keyboard::A)
+    { 
+        state_machine->setGameMode("Normal");
+        state_machine->change_state("count_down");    
     }
+    else if (event.key.code == sf::Keyboard::B)
+    {
+        state_machine->setGameMode("Hard");
+        state_machine->change_state("count_down"); 
+    }    
 }
 
 void TitleScreenState::update(float dt) noexcept
@@ -36,5 +42,7 @@ void TitleScreenState::render(sf::RenderTarget& target) const noexcept
 {
     world.render(target);
     render_text(target, Settings::VIRTUAL_WIDTH / 2, Settings::VIRTUAL_HEIGHT / 3, "Flappy Bird", Settings::FLAPPY_TEXT_SIZE, "flappy", sf::Color::White, true);
-    render_text(target, Settings::VIRTUAL_WIDTH / 2, 2 * Settings::VIRTUAL_HEIGHT / 3, "Press Enter to start", Settings::MEDIUM_TEXT_SIZE, "font", sf::Color::White, true);
+    //render_text(target, Settings::VIRTUAL_WIDTH / 2, 2 * Settings::VIRTUAL_HEIGHT / 3, "Press Enter to start", Settings::MEDIUM_TEXT_SIZE, "font", sf::Color::White, true);
+    render_text(target, Settings::VIRTUAL_WIDTH / 2, 2 * Settings::VIRTUAL_HEIGHT / 3, "Press A to Normal Mode", Settings::MEDIUM_TEXT_SIZE, "font", sf::Color::White, true);
+    render_text(target, Settings::VIRTUAL_WIDTH / 2, 2 * Settings::VIRTUAL_HEIGHT / 3 + 30, "Press B to Hard Mode", Settings::MEDIUM_TEXT_SIZE, "font", sf::Color::White, true);
 }

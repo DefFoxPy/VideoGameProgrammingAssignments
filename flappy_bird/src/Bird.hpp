@@ -29,12 +29,19 @@ public:
 
     void render(sf::RenderTarget& target) const noexcept;
 
+    void left() noexcept; 
+
+    void right() noexcept; 
+
 private:
     float x;
     float y;
     float width;
     float height;
     float vy;
+    float vx;
     sf::Sprite sprite;
+    bool back{false}; 
+    bool ahead{false}; 
     bool jumping{false};
 };
