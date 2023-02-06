@@ -34,7 +34,7 @@ public:
 
     bool update_scored(const sf::FloatRect& rect) noexcept;
 
-    void update(float dt) noexcept;
+    void update(float dt, bool hardmode=false) noexcept;
 
     void render(sf::RenderTarget& target) const noexcept;
 private:
