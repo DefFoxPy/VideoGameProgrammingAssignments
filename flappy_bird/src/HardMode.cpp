@@ -2,7 +2,7 @@
     ISPPJ1 2023
     Study Case: Flappy Bird
 
-    Author: CarrlosULA
+    Author: Mint
 
 
     This file contains the definition of the class HardMode.
