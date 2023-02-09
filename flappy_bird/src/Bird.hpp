@@ -25,13 +25,17 @@ public:
 
     void jump() noexcept;
 
+    void left() noexcept; 
+
+    void right() noexcept;
+
+    void set_invisible(bool _invisible) noexcept;
+
+    bool get_invisible() const noexcept; 
+
     void update(float dt) noexcept;
 
     void render(sf::RenderTarget& target) const noexcept;
-
-    void left() noexcept; 
-
-    void right() noexcept; 
 
 private:
     float x;
@@ -40,8 +44,7 @@ private:
     float height;
     float vy;
     float vx;
-    sf::Sprite sprite;
-    bool back{false}; 
-    bool ahead{false}; 
+    sf::Sprite sprite; 
     bool jumping{false};
+    bool invisible{false};
 };

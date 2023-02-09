@@ -25,24 +25,40 @@ World::World(bool _generate_logs) noexcept
 void World::reset(bool _generate_logs) noexcept
 {
     generate_logs = _generate_logs;
+    powerUp_taken = false;
 }
 
-bool World::collides(const sf::FloatRect& rect) const noexcept
+bool World::collides(const sf::FloatRect& rect, bool bird_invisible) const noexcept
 {
     if (rect.top + rect.height >= Settings::VIRTUAL_HEIGHT)
     {
         return true;
     }
     
-    for (auto log_pair: logs)
+    if (!bird_invisible)
     {
-        if (log_pair->collides(rect))
+        for (auto log_pair: logs)
         {
-            return true;
+            if (log_pair->collides(rect))
+            {
+                return true;
+            }
         }
     }
 
     return false;
+}
+
+bool World::collides_with_powerUp(const sf::FloatRect& rect) noexcept
+{
+    if (powerUp == nullptr)
+    {
+        return false;
+    }
+
+    powerUp_taken = powerUp->get_collision_rect().intersects(rect);
+
+    return powerUp_taken;
 }
 
 bool World::update_scored(const sf::FloatRect& rect) noexcept
@@ -173,7 +189,7 @@ void World::update(float dt, bool hardmode) noexcept
 
     if (powerUp) 
     {
-        if (powerUp->is_out_of_game()) 
+        if (powerUp->is_out_of_game() or powerUp_taken) 
         {
             powerUp_factory.remove(powerUp);
             powerUp.reset();
@@ -196,7 +212,7 @@ void World::render(sf::RenderTarget& target) const noexcept
 
     target.draw(ground);
 
-    if (powerUp) 
+    if (powerUp and !powerUp_taken) 
     {
         powerUp->render(target);
     }

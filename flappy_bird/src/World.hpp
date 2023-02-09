@@ -31,7 +31,9 @@ public:
 
     void reset(bool _generate_logs) noexcept;
 
-    bool collides(const sf::FloatRect& rect) const noexcept;
+    bool collides(const sf::FloatRect& rect, bool bird_invisible = false) const noexcept;
+
+    bool collides_with_powerUp(const sf::FloatRect& rect) noexcept;
 
     bool update_scored(const sf::FloatRect& rect) noexcept;
 
@@ -40,6 +42,7 @@ public:
     void render(sf::RenderTarget& target) const noexcept;
 private:
     bool generate_logs;
+    bool powerUp_taken{false};
 
     sf::Sprite background;
     sf::Sprite ground;
