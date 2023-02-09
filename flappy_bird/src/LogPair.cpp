@@ -8,13 +8,12 @@
     This file contains the definition of the class LogPair.
 */
 
-#include <Settings.hpp>
 #include <src/LogPair.hpp>
 
-LogPair::LogPair(float _x, float _y) noexcept
+LogPair::LogPair(float _x, float _y, float _gap) noexcept
     : x{_x}, y{_y},
       top{x, y + Settings::LOG_HEIGHT, true},
-      bottom{x, y + Settings::LOGS_GAP + Settings::LOG_HEIGHT, false}
+      bottom{x, y + _gap + Settings::LOG_HEIGHT, false}
 {
 
 }

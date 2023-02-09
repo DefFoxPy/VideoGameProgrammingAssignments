@@ -10,6 +10,8 @@
 
 #include <Settings.hpp>
 #include <src/World.hpp>
+#include <cstdlib> // para los numeros aleatorios
+#include <ctime> // uso del reloj para los numeros aleatorios
 
 World::World(bool _generate_logs) noexcept
     : generate_logs{_generate_logs}, background{Settings::textures["background"]}, ground{Settings::textures["ground"]},
@@ -56,25 +58,74 @@ bool World::update_scored(const sf::FloatRect& rect) noexcept
     return false;
 }
 
-void World::update(float dt) noexcept
-{
-    if (generate_logs)
+void World::update(float dt, bool hardmode) noexcept
+{   
+    if (hardmode) 
     {
-        logs_spawn_timer += dt;
-
-        if (logs_spawn_timer >= Settings::TIME_TO_SPAWN_LOGS)
+        if (generate_logs)
         {
-            logs_spawn_timer = 0.f;
+            logs_spawn_timer += dt;
 
-            std::uniform_int_distribution<int> dist{-20, 20};
-            float y = std::max(-Settings::LOG_HEIGHT + 10, std::min(last_log_y + dist(rng), Settings::VIRTUAL_HEIGHT + 90 - Settings::LOG_HEIGHT));
+            if (logs_spawn_timer >= Settings::TIME_TO_SPAWN_LOGS)
+            {
+                logs_spawn_timer = 0.f;
+                int num = (rand()%40)+10, inf = 10, sup=90;
+                std::uniform_int_distribution<int> dist{-30, 30};
+                std::uniform_int_distribution<int> dist_x{0, (int)Settings::LOG_WIDTH};
 
-            last_log_y = y;
+                float y = std::max(-Settings::LOG_HEIGHT + (rand()%sup)+inf, std::min(last_log_y + dist (rng), Settings::VIRTUAL_HEIGHT + (rand()%sup)+inf - Settings::LOG_HEIGHT));
+                float x = Settings::VIRTUAL_WIDTH + dist_x(rng);
+                float gap = Settings::LOGS_GAP;
+                //aplica un rango para los numeros aleateorios, dependiendo de los ultimos valores
+                    
+                    if(last_log_y > y){
+                        std::cout<<"\nif1";
+                        if((last_log_y+y)/-last_log_y > 0.3){
+                            inf = last_log_y * 1.3;
+                            sup = last_log_y;
+                        }
+                        else{
+                            sup = last_log_y * 1.3;
+                            inf = last_log_y;
+                        }
+                    }
+                    else if(last_log_y < y){
+                        std::cout<<"\nif2";
+                        if((last_log_y+y)/-y > 0.3){
+                            sup= y* 1.3;
+                            inf = y;
+                        }
+                        else{
+                            inf = y * 1.3;
+                            sup = y;
+                        }
+                    }
+                    
+                last_log_y = y;
 
-            logs.push_back(log_factory.create(Settings::VIRTUAL_WIDTH, y));
+                logs.push_back(log_factory.create(x, y, gap));
+            }
+        }    
+    }
+    else 
+    {
+        if (generate_logs)
+        {
+            logs_spawn_timer += dt;
+
+            if (logs_spawn_timer >= Settings::TIME_TO_SPAWN_LOGS)
+            {
+                logs_spawn_timer = 0.f;
+
+                std::uniform_int_distribution<int> dist{-20, 20};
+                float y = std::max(-Settings::LOG_HEIGHT + 10, std::min(last_log_y + dist(rng), Settings::VIRTUAL_HEIGHT + 90 - Settings::LOG_HEIGHT));
+
+                last_log_y = y;
+
+                logs.push_back(log_factory.create(Settings::VIRTUAL_WIDTH, y));
+            }
         }
     }
-
     background_x += -Settings::BACK_SCROLL_SPEED * dt;
 
     if (background_x <= -Settings::BACKGROUND_LOOPING_POINT)

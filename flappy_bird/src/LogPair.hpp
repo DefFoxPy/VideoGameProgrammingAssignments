@@ -12,11 +12,12 @@
 
 #include <src/Bird.hpp>
 #include <src/Log.hpp>
+#include <Settings.hpp>
 
 class LogPair
 {
 public:
-    LogPair(float _x, float _y) noexcept;
+    LogPair(float _x, float _y, float _gap = Settings::LOGS_GAP) noexcept;
 
     bool collides(const sf::FloatRect& rect) const noexcept;
 
