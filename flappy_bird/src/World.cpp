@@ -65,6 +65,7 @@ void World::update(float dt, bool hardmode) noexcept
         if (generate_logs)
         {
             logs_spawn_timer += dt;
+            powerUp_spawn_timer += dt;
 
             if (logs_spawn_timer >= Settings::TIME_TO_SPAWN_LOGS)
             {
@@ -104,6 +105,16 @@ void World::update(float dt, bool hardmode) noexcept
                 last_log_y = y;
 
                 logs.push_back(log_factory.create(x, y, gap));
+            }
+            
+            if (powerUp_spawn_timer >= Settings::TIME_TO_SPAWN_POTION)
+            {
+                powerUp_spawn_timer = 0.f;
+                std::uniform_int_distribution<int> powerUp_dist{(int)Settings::POTION_HEIGHT, (int)Settings::VIRTUAL_HEIGHT - (int)Settings::POTION_HEIGHT};
+
+                float y = powerUp_dist(rng);
+
+                powerUp = powerUp_factory.create(Settings::VIRTUAL_WIDTH, y);
             }
         }    
     }
@@ -159,6 +170,19 @@ void World::update(float dt, bool hardmode) noexcept
             ++it;
         }
     }
+
+    if (powerUp) 
+    {
+        if (powerUp->is_out_of_game()) 
+        {
+            powerUp_factory.remove(powerUp);
+            powerUp.reset();
+        }
+        else 
+        {
+            powerUp->update(dt);
+        }
+    }
 }
 
 void World::render(sf::RenderTarget& target) const noexcept
@@ -171,4 +195,9 @@ void World::render(sf::RenderTarget& target) const noexcept
     }
 
     target.draw(ground);
+
+    if (powerUp) 
+    {
+        powerUp->render(target);
+    }
 }

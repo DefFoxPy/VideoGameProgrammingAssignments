@@ -18,6 +18,7 @@
 
 #include <src/Factory.hpp>
 #include <src/LogPair.hpp>
+#include <src/PowerUp.hpp>
 
 class World
 {
@@ -47,11 +48,13 @@ private:
     float ground_x{0.f};
 
     Factory<LogPair> log_factory;
+    Factory<PowerUp> powerUp_factory;
 
     std::list<std::shared_ptr<LogPair>> logs;
-
+    std::shared_ptr<PowerUp> powerUp;
     std::mt19937 rng;
 
     float logs_spawn_timer{0.f};
     float last_log_y{0.f};
+    float powerUp_spawn_timer{0.f};
 };

@@ -36,6 +36,7 @@ struct Settings
     static constexpr float POTION_HEIGHT{30.f};
     static constexpr float LOG_WIDTH{70.f};
     static constexpr float LOG_HEIGHT{288.f};
+    static constexpr float TIME_TO_SPAWN_POTION{5.f};
     static constexpr float LOGS_GAP{90.f};
     static constexpr float GROUND_HEIGHT{16.f};
     static constexpr float BACKGROUND_LOOPING_POINT{1157.f};
