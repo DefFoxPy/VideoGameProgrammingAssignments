@@ -24,6 +24,8 @@ void PauseState::enter(std::shared_ptr<World> _world, std::shared_ptr<Bird> _bir
     world = _world;
     bird = _bird;
     score = _score;
+
+    Settings::music.pause();
 }
 
 void PauseState::handle_inputs(const sf::Event& event) noexcept
@@ -45,4 +47,5 @@ void PauseState::render(sf::RenderTarget& target) const noexcept
     world->render(target);
     bird->render(target);
     render_text(target, Settings::VIRTUAL_WIDTH / 2, Settings::VIRTUAL_HEIGHT / 2, "Game paused\npress 'P' to continue", Settings::FLAPPY_TEXT_SIZE, "flappy", sf::Color::White, true);
-}
+    render_text(target, 20, 10, "Score: " + std::to_string(score), Settings::FLAPPY_TEXT_SIZE, "flappy", sf::Color::White);
+}   

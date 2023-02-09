@@ -39,6 +39,13 @@ void PlayingState::enter(std::shared_ptr<World> _world, std::shared_ptr<Bird> _b
         bird = _bird;
     }
 
+    auto music = Settings::music.getStatus();
+
+    if (music != sf::SoundSource::Status::Playing) 
+    {
+        Settings::music.play();
+    }
+
     if (gameMode == nullptr) 
     {
         auto currentGameMode = state_machine->getGameMode();
