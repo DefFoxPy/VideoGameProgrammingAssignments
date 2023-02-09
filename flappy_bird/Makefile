@@ -4,7 +4,7 @@ INCLUDE = -I.
 
 BUILD_DIR = build
 
-OBJ_RULES = text_utilities.o Settings.o Game.o Bird.o Log.o LogPair.o World.o StateMachine.o TitleScreenState.o CountDownState.o PlayingState.o PauseState.o NormalMode.o HardMode.o
+OBJ_RULES = text_utilities.o Settings.o Game.o Bird.o Log.o LogPair.o World.o StateMachine.o TitleScreenState.o CountDownState.o PlayingState.o PauseState.o NormalMode.o HardMode.o PowerUp.o
 
 LIBS = -lsfml-graphics -lsfml-audio -lsfml-window -lsfml-system $(BUILD_DIR)/*.o
 
@@ -52,6 +52,9 @@ NormalMode.o: $(BUILD_DIR) src/NormalMode.hpp src/NormalMode.cpp
 
 HardMode.o: $(BUILD_DIR) src/HardMode.hpp src/HardMode.cpp
 	$(CXX) -c $(INCLUDE) src/HardMode.cpp -o $(BUILD_DIR)/$@
+
+PowerUp.o: $(BUILD_DIR) src/PowerUp.hpp src/PowerUp.cpp
+	$(CXX) -c $(INCLUDE) src/PowerUp.cpp -o $(BUILD_DIR)/$@
 
 $(BUILD_DIR):
 	mkdir -p $@

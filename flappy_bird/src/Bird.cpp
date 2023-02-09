@@ -41,6 +41,26 @@ void Bird::right() noexcept
     vx = Settings::BIRD_HORIZONTAL_SPEED;
 }
 
+void Bird::set_invisible(bool _invisible) noexcept
+{
+    invisible = _invisible;
+    
+    if (invisible)
+    {
+        sprite.setTexture(Settings::textures["bird_potion"]);    
+    }
+    else
+    {
+        sprite.setTexture(Settings::textures["bird"]);
+    }
+    
+}
+
+bool Bird::get_invisible() const noexcept
+{
+    return invisible;
+}
+
 void Bird::update(float dt) noexcept
 {
     vy += Settings::GRAVITY * dt;

@@ -25,24 +25,40 @@ World::World(bool _generate_logs) noexcept
 void World::reset(bool _generate_logs) noexcept
 {
     generate_logs = _generate_logs;
+    powerUp_taken = false;
 }
 
-bool World::collides(const sf::FloatRect& rect) const noexcept
+bool World::collides(const sf::FloatRect& rect, bool bird_invisible) const noexcept
 {
     if (rect.top + rect.height >= Settings::VIRTUAL_HEIGHT)
     {
         return true;
     }
     
-    for (auto log_pair: logs)
+    if (!bird_invisible)
     {
-        if (log_pair->collides(rect))
+        for (auto log_pair: logs)
         {
-            return true;
+            if (log_pair->collides(rect))
+            {
+                return true;
+            }
         }
     }
 
     return false;
+}
+
+bool World::collides_with_powerUp(const sf::FloatRect& rect) noexcept
+{
+    if (powerUp == nullptr)
+    {
+        return false;
+    }
+
+    powerUp_taken = powerUp->get_collision_rect().intersects(rect);
+
+    return powerUp_taken;
 }
 
 bool World::update_scored(const sf::FloatRect& rect) noexcept
@@ -65,6 +81,7 @@ void World::update(float dt, bool hardmode) noexcept
         if (generate_logs)
         {
             logs_spawn_timer += dt;
+            powerUp_spawn_timer += dt;
 
             if (logs_spawn_timer >= Settings::TIME_TO_SPAWN_LOGS)
             {
@@ -104,6 +121,16 @@ void World::update(float dt, bool hardmode) noexcept
                 last_log_y = y;
 
                 logs.push_back(log_factory.create(x, y, gap));
+            }
+            
+            if (powerUp_spawn_timer >= Settings::TIME_TO_SPAWN_POTION)
+            {
+                powerUp_spawn_timer = 0.f;
+                std::uniform_int_distribution<int> powerUp_dist{(int)Settings::POTION_HEIGHT, (int)Settings::VIRTUAL_HEIGHT - (int)Settings::POTION_HEIGHT};
+
+                float y = powerUp_dist(rng);
+
+                powerUp = powerUp_factory.create(Settings::VIRTUAL_WIDTH, y);
             }
         }    
     }
@@ -159,6 +186,19 @@ void World::update(float dt, bool hardmode) noexcept
             ++it;
         }
     }
+
+    if (powerUp) 
+    {
+        if (powerUp->is_out_of_game() or powerUp_taken) 
+        {
+            powerUp_factory.remove(powerUp);
+            powerUp.reset();
+        }
+        else 
+        {
+            powerUp->update(dt);
+        }
+    }
 }
 
 void World::render(sf::RenderTarget& target) const noexcept
@@ -171,4 +211,9 @@ void World::render(sf::RenderTarget& target) const noexcept
     }
 
     target.draw(ground);
+
+    if (powerUp and !powerUp_taken) 
+    {
+        powerUp->render(target);
+    }
 }

@@ -32,10 +32,12 @@ struct Settings
     static constexpr int VIRTUAL_HEIGHT{288};
     static constexpr float BIRD_WIDTH{39.f};
     static constexpr float BIRD_HEIGHT{28.f};
-    static constexpr float POTION_WIDTH{30.f};
-    static constexpr float POTION_HEIGHT{30.f};
+    static constexpr float POTION_WIDTH{21.f};
+    static constexpr float POTION_HEIGHT{38.f};
+    static constexpr float POTION_TIME_LIMIT{4.F};
     static constexpr float LOG_WIDTH{70.f};
     static constexpr float LOG_HEIGHT{288.f};
+    static constexpr float TIME_TO_SPAWN_POTION{10.f};
     static constexpr float LOGS_GAP{90.f};
     static constexpr float GROUND_HEIGHT{16.f};
     static constexpr float BACKGROUND_LOOPING_POINT{1157.f};

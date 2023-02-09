@@ -33,5 +33,6 @@ private:
     std::shared_ptr<Bird> bird;
     std::shared_ptr<World> world;
     int score{0};
+    float powerUp_limit{0.f};
     std::shared_ptr<GameMode> gameMode;
 };

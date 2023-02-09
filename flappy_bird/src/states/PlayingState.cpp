@@ -75,11 +75,28 @@ void PlayingState::update(float dt) noexcept
 {
     gameMode->update(dt);
 
-    if (world->collides(bird->get_collision_rect()))
+    if (bird->get_invisible())
+    {
+        powerUp_limit += dt;
+
+        if (powerUp_limit >= Settings::POTION_TIME_LIMIT)
+        {
+            powerUp_limit = 0.f;
+            bird->set_invisible(false);
+            world->reset(true);
+        }
+    }
+
+    if (world->collides(bird->get_collision_rect(), bird->get_invisible()))
     {
         Settings::sounds["explosion"].play();
         Settings::sounds["hurt"].play();
         state_machine->change_state("count_down");
+    }
+
+    if (world->collides_with_powerUp(bird->get_collision_rect()))
+    {
+        bird->set_invisible(true);
     }
 
     if (world->update_scored(bird->get_collision_rect()))
