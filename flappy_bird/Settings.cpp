@@ -44,7 +44,7 @@ void Settings::load_textures()
         throw std::runtime_error{"Error loading texture graphics/bird.png"};
     }
 
-    Settings::textures["potion"] = texture;
+    Settings::textures["bird"] = texture;
 
     if (!texture.loadFromFile(Settings::GRAPHICS_PATH / "potion.png"))
     {
