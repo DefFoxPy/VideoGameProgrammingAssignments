@@ -57,6 +57,7 @@ struct Settings
     static std::unordered_map<std::string, sf::Font> fonts;
 
     static sf::Music music;
+    static sf::Music music_potion;
 
     static void init();
 

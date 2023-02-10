@@ -39,11 +39,18 @@ void PlayingState::enter(std::shared_ptr<World> _world, std::shared_ptr<Bird> _b
         bird = _bird;
     }
 
-    auto music = Settings::music.getStatus();
-
-    if (music != sf::SoundSource::Status::Playing) 
+    if (bird->get_invisible())
     {
-        Settings::music.play();
+        Settings::music_potion.play();
+    }
+    else
+    {
+        auto music = Settings::music.getStatus();
+
+        if (music != sf::SoundSource::Status::Playing)
+        {
+            Settings::music.play();
+        }
     }
 
     if (gameMode == nullptr) 
@@ -81,6 +88,8 @@ void PlayingState::update(float dt) noexcept
 
         if (powerUp_limit >= Settings::POTION_TIME_LIMIT)
         {
+            Settings::music_potion.stop();
+            Settings::music.play();
             powerUp_limit = 0.f;
             bird->set_invisible(false);
             world->reset(true);
@@ -97,6 +106,8 @@ void PlayingState::update(float dt) noexcept
     if (world->collides_with_powerUp(bird->get_collision_rect()))
     {
         bird->set_invisible(true);
+        Settings::music.pause();
+        Settings::music_potion.play();
     }
 
     if (world->update_scored(bird->get_collision_rect()))
@@ -104,6 +115,7 @@ void PlayingState::update(float dt) noexcept
         ++score;
         Settings::sounds["score"].play();
     }
+
 }
 
 void PlayingState::render(sf::RenderTarget& target) const noexcept
