@@ -83,9 +83,9 @@ void Bird::update(float dt) noexcept
     {
         x = 0;
     }
-    else if (x > Settings::WINDOW_WIDTH - Settings::BIRD_WIDTH)
+    else if (x > Settings::VIRTUAL_WIDTH - Settings::BIRD_WIDTH)
     {
-        x = Settings::WINDOW_WIDTH - Settings::BIRD_WIDTH;
+        x = Settings::VIRTUAL_WIDTH - Settings::BIRD_WIDTH;
     }
     
     sprite.setPosition(x, y);

@@ -34,6 +34,11 @@ bool World::collides(const sf::FloatRect& rect, bool bird_invisible) const noexc
     {
         return true;
     }
+
+    if (rect.top < 0)
+    {
+        return true;
+    }
     
     if (!bird_invisible)
     {
