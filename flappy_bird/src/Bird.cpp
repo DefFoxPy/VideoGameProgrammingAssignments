@@ -31,14 +31,17 @@ void Bird::jump() noexcept
 }
 void Bird::left() noexcept
 {
-    jumping = true;
     vx = -Settings::BIRD_HORIZONTAL_SPEED;
 }
 
 void Bird::right() noexcept
 { 
-    jumping = true;
     vx = Settings::BIRD_HORIZONTAL_SPEED;
+}
+
+void Bird::stop_horizontal() noexcept 
+{
+    vx = 0.f;
 }
 
 void Bird::set_invisible(bool _invisible) noexcept
@@ -84,8 +87,6 @@ void Bird::update(float dt) noexcept
     {
         x = Settings::WINDOW_WIDTH - Settings::BIRD_WIDTH;
     }
-
-    vx = 0.f;
     
     sprite.setPosition(x, y);
 }

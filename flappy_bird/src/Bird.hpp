@@ -29,6 +29,8 @@ public:
 
     void right() noexcept;
 
+    void stop_horizontal() noexcept;
+
     void set_invisible(bool _invisible) noexcept;
 
     bool get_invisible() const noexcept; 

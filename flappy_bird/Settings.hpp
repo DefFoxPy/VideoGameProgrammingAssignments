@@ -43,9 +43,9 @@ struct Settings
     static constexpr float BACKGROUND_LOOPING_POINT{1157.f};
     static constexpr float MAIN_SCROLL_SPEED{100.f};
     static constexpr float BACK_SCROLL_SPEED{50.f}; // MAIN_SCROLL_SPEED / 2
-    static constexpr float GRAVITY{400.f};
+    static constexpr float GRAVITY{680.f};
     static constexpr float JUMP_TAKEOFF_SPEED{GRAVITY / 6.f};
-    static constexpr float BIRD_HORIZONTAL_SPEED{MAIN_SCROLL_SPEED * 50.f};
+    static constexpr float BIRD_HORIZONTAL_SPEED{MAIN_SCROLL_SPEED * 2.f};
     static constexpr float TIME_TO_SPAWN_LOGS{1.5f};
     static constexpr int MEDIUM_TEXT_SIZE{18};
     static constexpr int HUGE_TEXT_SIZE{56};

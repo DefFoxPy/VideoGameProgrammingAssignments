@@ -21,14 +21,18 @@ void HardMode::handle_inputs(const sf::Event& event) noexcept
         bird->jump();
     }
     
-    else if (event.key.code == sf::Keyboard::Left)
+    if (event.key.code == sf::Keyboard::Left && event.key.code == sf::Keyboard::Left)
     {
         bird->left();
     }
-    else if (event.key.code == sf::Keyboard::Right)
+    else if (event.key.code == sf::Keyboard::Right && event.key.code == sf::Keyboard::Right)
     {
         bird->right();
-    }  
+    } 
+    else 
+    {
+        bird->stop_horizontal();
+    } 
 } 
 
 void HardMode::update(float dt) noexcept
