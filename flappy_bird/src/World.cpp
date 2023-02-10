@@ -93,26 +93,29 @@ void World::update(float dt, bool hardmode) noexcept
                 float y = std::max(-Settings::LOG_HEIGHT + (rand()%sup)+inf, std::min(last_log_y + dist (rng), Settings::VIRTUAL_HEIGHT + (rand()%sup)+inf - Settings::LOG_HEIGHT));
                 float x = Settings::VIRTUAL_WIDTH + dist_x(rng);
                 float gap = Settings::LOGS_GAP;
-                //aplica un rango para los numeros aleateorios, dependiendo de los ultimos valores
                     
-                    if(last_log_y > y){
-                        std::cout<<"\nif1";
-                        if((last_log_y+y)/-last_log_y > 0.3){
+                    if(last_log_y > y)
+                    {               
+                        if((last_log_y+y)/-last_log_y > 0.3)
+                        {
                             inf = last_log_y * 1.3;
                             sup = last_log_y;
                         }
-                        else{
+                        else
+                        {
                             sup = last_log_y * 1.3;
                             inf = last_log_y;
                         }
                     }
-                    else if(last_log_y < y){
-                        std::cout<<"\nif2";
-                        if((last_log_y+y)/-y > 0.3){
+                    else if(last_log_y < y)
+                    {
+                        if((last_log_y+y)/-y > 0.3)
+                        {
                             sup= y* 1.3;
                             inf = y;
                         }
-                        else{
+                        else
+                        {
                             inf = y * 1.3;
                             sup = y;
                         }
