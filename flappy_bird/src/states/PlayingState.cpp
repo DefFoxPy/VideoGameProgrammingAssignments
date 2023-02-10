@@ -98,6 +98,8 @@ void PlayingState::update(float dt) noexcept
 
     if (world->collides(bird->get_collision_rect(), bird->get_invisible()))
     {
+        Settings::music_potion.stop();
+        Settings::music.play();
         Settings::sounds["explosion"].play();
         Settings::sounds["hurt"].play();
         state_machine->change_state("count_down");
