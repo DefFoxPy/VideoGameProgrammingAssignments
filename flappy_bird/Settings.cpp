@@ -101,16 +101,6 @@ void Settings::load_sounds()
     sound.setBuffer(result.first->second);
     Settings::sounds["jump"] = sound;
 
-    /*if (!buffer.loadFromFile(Settings::SOUNDS_PATH / "birdPotion.wav"))
-    {
-        throw std::runtime_error{"Error loading sound sounds/birdPotion.wav"};
-    }
-
-    result = Settings::sound_buffers.emplace("birdPotion", buffer);
-
-    sound.setBuffer(result.first->second);
-    Settings::sounds["birdPotion"] = sound;
-    */
     if (!buffer.loadFromFile(Settings::SOUNDS_PATH / "explosion.wav"))
     {
         throw std::runtime_error{"Error loading sound sounds/explosion.wav"};
