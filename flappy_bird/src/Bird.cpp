@@ -48,7 +48,7 @@ void Bird::set_invisible(bool _invisible) noexcept
     if (invisible)
     {
         sprite.setTexture(Settings::textures["bird_potion"]);  
-        Settings::sounds["birdPotion"].play();  
+        Settings::music_potion.play(); 
     }
     else
     {
