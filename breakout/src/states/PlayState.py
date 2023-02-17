@@ -34,6 +34,7 @@ class PlayState(BaseState):
             + settings.PADDLE_GROW_UP_POINTS * (self.paddle.size + 1) * self.level
         )
         self.powerups = params.get("powerups", [])
+        self.catchBall = False
 
         if not params.get("resume", False):
             self.balls[0].vx = random.randint(-80, 80)
@@ -49,6 +50,7 @@ class PlayState(BaseState):
 
     def update(self, dt: float) -> None:
         self.paddle.update(dt)
+        self.catchBall = self.paddle.catchBall
 
         for ball in self.balls:
             ball.update(dt)
@@ -56,10 +58,18 @@ class PlayState(BaseState):
 
             # Check collision with the paddle
             if ball.collides(self.paddle):
-                settings.SOUNDS["paddle_hit"].stop()
-                settings.SOUNDS["paddle_hit"].play()
-                ball.rebound(self.paddle)
-                ball.push(self.paddle)
+                
+                if not self.catchBall:
+                    settings.SOUNDS["paddle_hit"].stop()
+                    settings.SOUNDS["paddle_hit"].play()
+                    if ball.vy == 0:
+                        ball.vy = random.randint(-170, -100)
+                    ball.rebound(self.paddle)
+                    ball.push(self.paddle)
+                    
+                else:
+                    ball.vy = 0
+                    ball.vx = self.paddle.vx
 
             # Check collision with brickset
             if not ball.collides(self.brickset):
@@ -99,14 +109,14 @@ class PlayState(BaseState):
                 )
 
             # Chance to generate CatchBall
-            elif random.random() < 0.1:
+            elif random.random() < 0.9:
                 r = brick.get_collision_rect()
                 self.powerups.append(
                     self.powerups_abstract_factory.get_factory("CatchBall").create(
                         r.centerx - 8, r.centery - 8
                     )
                 )
-                
+
         # Removing all balls that are not in play
         self.balls = [ball for ball in self.balls if ball.in_play]
 
@@ -217,3 +227,5 @@ class PlayState(BaseState):
                 live_factor=self.live_factor,
                 powerups=self.powerups,
             )
+        if input_id == "enter" and self.catchBall:
+            self.paddle.catchBall = False

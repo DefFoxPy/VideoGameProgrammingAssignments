@@ -22,6 +22,9 @@ class CatchBall(PowerUp):
         super().__init__(x, y, 8)
 
     def take(self, play_state: TypeVar("PlayState")) -> None:
+        paddle = play_state.paddle
+
         settings.SOUNDS["paddle_hit"].stop()
         settings.SOUNDS["paddle_hit"].play()
+        paddle.catchBall = True
         self.in_play = False
