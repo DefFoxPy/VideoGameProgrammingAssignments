@@ -98,6 +98,15 @@ class PlayState(BaseState):
                     )
                 )
 
+            # Chance to generate CatchBall
+            elif random.random() < 0.1:
+                r = brick.get_collision_rect()
+                self.powerups.append(
+                    self.powerups_abstract_factory.get_factory("CatchBall").create(
+                        r.centerx - 8, r.centery - 8
+                    )
+                )
+                
         # Removing all balls that are not in play
         self.balls = [ball for ball in self.balls if ball.in_play]
 
