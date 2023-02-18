@@ -64,12 +64,16 @@ class PlayState(BaseState):
                     settings.SOUNDS["paddle_hit"].play()
                     if ball.vy == 0:
                         ball.vy = random.randint(-170, -100)
+                        ball.vx = random.randint(-80,80)
                     ball.rebound(self.paddle)
                     ball.push(self.paddle)
                     
                 else:
                     ball.vy = 0
-                    ball.vx = self.paddle.vx
+                    if self.paddle.x != 0 and (self.paddle.x + self.paddle.width) < settings.VIRTUAL_WIDTH: 
+                        ball.vx = self.paddle.vx
+                    else:
+                        ball.vx = 0
 
             # Check collision with brickset
             if not ball.collides(self.brickset):
