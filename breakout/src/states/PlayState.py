@@ -117,7 +117,7 @@ class PlayState(BaseState):
                 )
 
             # Chance to generate CatchBall
-            elif random.random() < 0.1:
+            elif random.random() < 0.5:
                 r = brick.get_collision_rect()
                 self.powerups.append(
                     self.powerups_abstract_factory.get_factory("CatchBall").create(

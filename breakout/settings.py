@@ -73,6 +73,7 @@ TEXTURES = {
     "spritesheet": pygame.image.load(BASE_DIR / "graphics" / "breakout.png"),
     "hearts": pygame.image.load(BASE_DIR / "graphics" / "hearts.png"),
     "arrows": pygame.image.load(BASE_DIR / "graphics" / "arrows.png"),
+    "missile": pygame.image.load(BASE_DIR / "graphics" / "missile.png")
 }
 
 FRAMES = {
@@ -82,6 +83,7 @@ FRAMES = {
     "hearts": generate_frames(TEXTURES["hearts"], 10, 9),
     "arrows": generate_frames(TEXTURES["arrows"], 24, 24),
     "powerups": generate_powerups_frames(),
+    "missile": generate_frames(TEXTURES["missile"], 20, 16),
 }
 
 pygame.font.init()
