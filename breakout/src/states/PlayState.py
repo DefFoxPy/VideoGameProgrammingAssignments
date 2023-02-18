@@ -26,6 +26,7 @@ class PlayState(BaseState):
         self.lives = params["lives"]
         self.paddle = params["paddle"]
         self.balls = params["balls"]
+        self.missiles = params["missile"]
         self.brickset = params["brickset"]
         self.live_factor = params["live_factor"]
         self.points_to_next_live = params["points_to_next_live"]
@@ -55,7 +56,7 @@ class PlayState(BaseState):
         for ball in self.balls:
             ball.update(dt)
             ball.solve_world_boundaries()
-
+            
             # Check collision with the paddle
             if ball.collides(self.paddle):
                 
@@ -117,16 +118,46 @@ class PlayState(BaseState):
                 )
 
             # Chance to generate CatchBall
-            elif random.random() < 0.5:
+            elif random.random() < 0.1:
                 r = brick.get_collision_rect()
                 self.powerups.append(
                     self.powerups_abstract_factory.get_factory("CatchBall").create(
                         r.centerx - 8, r.centery - 8
                     )
                 )
+            
+            # Chance to generate Cannons
+            elif random.random() < 0.5:
+                r = brick.get_collision_rect()
+                self.powerups.append(
+                    self.powerups_abstract_factory.get_factory("Cannons").create(
+                        r.centerx - 8, r.centery - 8
+                    )
+                )
+
+        # update missile
+        for missile in self.missiles:
+            missile.update(dt)
+            missile.solve_world_boundaries()
+            
+
+            #Check collision with brickset
+            if missile.collides(self.brickset):
+                print("collision with brickset")
+                continue
+
+            #brick = self.brickset.get_colliding_brick(ball.get_collision_rect())
+
+            #if brick is None:
+            #    continue
+
+            #brick.hit()
+            #self.score += brick.score()
+            #ball.rebound(brick)
 
         # Removing all balls that are not in play
         self.balls = [ball for ball in self.balls if ball.in_play]
+        self.missiles = [missile for missile in self.missiles if missile.in_play]
 
         self.brickset.update(dt)
 
@@ -210,6 +241,9 @@ class PlayState(BaseState):
 
         for powerup in self.powerups:
             powerup.render(surface)
+
+        for missile in self.missils:
+            missile.render(surface)
 
     def on_input(self, input_id: str, input_data: InputData) -> None:
         if input_id == "move_left":

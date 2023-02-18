@@ -65,8 +65,8 @@ def generate_ball_frames() -> List[pygame.Rect]:
         frames.append(pygame.Rect(x, y, ball_size, ball_size))
         x += ball_size
 
+    frames.append(pygame.Rect(0, 16*13, 20, 16))
     return frames
-
 
 def generate_brick_frames(spritesheet: pygame.Surface) -> List[pygame.Rect]:
     all_frames = generate_frames(spritesheet, 32, 16)
