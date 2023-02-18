@@ -272,3 +272,7 @@ class PlayState(BaseState):
             )
         if input_id == "enter" and self.catchBall:
             self.paddle.catchBall = False
+
+        if input_id == "shot": #and self.Cannons:
+            #code para crear un misil
+            pass
