@@ -33,7 +33,7 @@ class Cannons(PowerUp):
 
         m1.vy = 0
         m2.vy = 0
-        play_state.missile.append(m1)
-        play_state.missile.append(m2)
+        play_state.missiles.append(m1)
+        play_state.missiles.append(m2)
         
         self.in_play = False

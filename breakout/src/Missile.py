@@ -40,7 +40,7 @@ class Missile:
 
     def render(self, surface):
         surface.blit(
-            self.texture, (self.x, self.y), settings.FRAMES["spritesheet"][self.frame]
+            self.texture, (self.x, self.y), settings.FRAMES["missile"][1]
         )
 
     @staticmethod

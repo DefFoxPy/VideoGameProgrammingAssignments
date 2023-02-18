@@ -26,7 +26,7 @@ class PlayState(BaseState):
         self.lives = params["lives"]
         self.paddle = params["paddle"]
         self.balls = params["balls"]
-        self.missiles = params["missile"]
+        self.missiles = params["missiles"]
         self.brickset = params["brickset"]
         self.live_factor = params["live_factor"]
         self.points_to_next_live = params["points_to_next_live"]
@@ -138,7 +138,7 @@ class PlayState(BaseState):
         # update missile
         for missile in self.missiles:
             missile.update(dt)
-            missile.solve_world_boundaries()
+            #missile.solve_world_boundaries()
             
 
             #Check collision with brickset
@@ -173,6 +173,7 @@ class PlayState(BaseState):
                     score=self.score,
                     lives=self.lives,
                     paddle=self.paddle,
+                    missiles=self.missiles,
                     brickset=self.brickset,
                     points_to_next_live=self.points_to_next_live,
                     live_factor=self.live_factor,
@@ -242,7 +243,7 @@ class PlayState(BaseState):
         for powerup in self.powerups:
             powerup.render(surface)
 
-        for missile in self.missils:
+        for missile in self.missiles:
             missile.render(surface)
 
     def on_input(self, input_id: str, input_data: InputData) -> None:
