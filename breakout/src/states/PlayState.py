@@ -62,14 +62,18 @@ class PlayState(BaseState):
                 if not self.catchBall:
                     settings.SOUNDS["paddle_hit"].stop()
                     settings.SOUNDS["paddle_hit"].play()
+                    
                     if ball.vy == 0:
                         ball.vy = random.randint(-170, -100)
                         ball.vx = random.randint(-80,80)
+                    
                     ball.rebound(self.paddle)
                     ball.push(self.paddle)
                     
                 else:
                     ball.vy = 0
+                    
+                    # Holds the ball attached to the paddle
                     if self.paddle.x != 0 and (self.paddle.x + self.paddle.width) < settings.VIRTUAL_WIDTH: 
                         ball.vx = self.paddle.vx
                     else:
