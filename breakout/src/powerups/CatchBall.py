@@ -19,7 +19,7 @@ class CatchBall(PowerUp):
     Power-up to  catch the ball to the game.
     """
     def __init__(self, x: int, y: int) -> None:
-        super().__init__(x, y, 3)
+        super().__init__(x, y, 10)
 
     def take(self, play_state: TypeVar("PlayState")) -> None:
         paddle = play_state.paddle
