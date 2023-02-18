@@ -80,5 +80,5 @@ def generate_powerups_frames() -> List[pygame.Rect]:
 
     for j in range(10):
         frames.append(pygame.Rect(j * 16, y, 16, 16))
-
+    frames.append(pygame.Rect(0,13*16,16,32))
     return frames
