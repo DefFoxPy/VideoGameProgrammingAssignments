@@ -32,12 +32,6 @@ class Missile:
     def get_collision_rect(self) -> pygame.Rect:
         return pygame.Rect(self.x, self.y, self.width, self.height)
 
-    def solve_world_boundaries(self) -> None:
-        r = self.get_collision_rect()
-
-        if r.bottom < 0:
-            self.in_play = False
-
     def collides(self, another: Any) -> bool:
         return self.get_collision_rect().colliderect(another.get_collision_rect())
 
@@ -46,7 +40,7 @@ class Missile:
 
     def render(self, surface):
         surface.blit(
-            self.texture, (self.x, self.y), settings.FRAMES["missile"][0]
+            self.texture, (self.x, self.y), settings.FRAMES["balls"][self.frame]
         )
 
     @staticmethod

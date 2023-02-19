@@ -133,7 +133,7 @@ class PlayState(BaseState):
                 )
             
             # Chance to generate Cannons
-            elif random.random() < 0.9:
+            elif random.random() < 0.5:
                 r = brick.get_collision_rect()
                 self.powerups.append(
                     self.powerups_abstract_factory.get_factory("Cannons").create(
@@ -144,11 +144,6 @@ class PlayState(BaseState):
         # update missile
         for missile in self.missiles:
             missile.update(dt)
-<<<<<<< Updated upstream
-            missile.solve_world_boundaries()
-
-            # Check collision with brickset
-=======
 
 
             #missile.solve_world_boundaries()
@@ -159,13 +154,10 @@ class PlayState(BaseState):
                     continue
 
             #Check collision with brickset
->>>>>>> Stashed changes
             if not missile.collides(self.brickset):
                 continue
 
             brick = self.brickset.get_colliding_brick(missile.get_collision_rect())
-<<<<<<< Updated upstream
-=======
 
             if brick is None:
                 continue
@@ -192,14 +184,13 @@ class PlayState(BaseState):
         #        continue
 
             #brick = self.brickset.get_colliding_brick(ball.get_collision_rect())
->>>>>>> Stashed changes
 
-            if brick is None:
-                continue
+            #if brick is None:
+            #    continue
 
-            brick.hit()
-            self.score += brick.score()
-            missile.in_play = False
+            #brick.hit()
+            #self.score += brick.score()
+            #ball.rebound(brick)
 
         # Removing all balls that are not in play
         self.balls = [ball for ball in self.balls if ball.in_play]
@@ -209,8 +200,6 @@ class PlayState(BaseState):
 
         if not self.balls:
             self.lives -= 1
-            self.paddle.catchBall = False
-            self.paddle.cannons = False
             if self.lives == 0:
                 self.state_machine.change("game_over", score=self.score)
             else:
@@ -221,6 +210,7 @@ class PlayState(BaseState):
                     score=self.score,
                     lives=self.lives,
                     paddle=self.paddle,
+                    missiles=self.missiles,
                     brickset=self.brickset,
                     points_to_next_live=self.points_to_next_live,
                     live_factor=self.live_factor,
