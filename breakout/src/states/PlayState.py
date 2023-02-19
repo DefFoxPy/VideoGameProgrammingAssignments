@@ -133,7 +133,7 @@ class PlayState(BaseState):
                 )
             
             # Chance to generate Cannons
-            elif random.random() < 0.9:
+            elif random.random() < 0.1:
                 r = brick.get_collision_rect()
                 self.powerups.append(
                     self.powerups_abstract_factory.get_factory("Cannons").create(
@@ -157,7 +157,7 @@ class PlayState(BaseState):
 
             brick.hit()
             self.score += brick.score()
-            missile.in_play = False
+            #missile.in_play = False
 
         # Removing all balls that are not in play
         self.balls = [ball for ball in self.balls if ball.in_play]
