@@ -144,55 +144,13 @@ class PlayState(BaseState):
         # update missile
         for missile in self.missiles:
             missile.update(dt)
-<<<<<<< Updated upstream
             missile.solve_world_boundaries()
 
-            # Check collision with brickset
-=======
-
-
-            #missile.solve_world_boundaries()
-            if self.cannons:
-                missile.x = self.paddle.x
-
-                if self.active and self.cannons:
-                    continue
-
             #Check collision with brickset
->>>>>>> Stashed changes
             if not missile.collides(self.brickset):
                 continue
 
             brick = self.brickset.get_colliding_brick(missile.get_collision_rect())
-<<<<<<< Updated upstream
-=======
-
-            if brick is None:
-                continue
-
-            brick.hit()
-            self.score += brick.score()
-            #missile.rebound(brick)
-
-
-            
-        #        print("collision with brickset")
-        #        continue
-
-
-            #borrar
-            #  if input_id == "shot" and self.cannons:
-            #  missil = Missile(self.paddle.x + self.paddle.width//2, self.paddle.y - 8)
-            #  self.missiles.append(missil) 
-            #  self.paddle.cannons = False
-            #borrar
-            #Check collision with brickset
-        #    if missile.collides(self.brickset):
-        #        print("collision with brickset")
-        #        continue
-
-            #brick = self.brickset.get_colliding_brick(ball.get_collision_rect())
->>>>>>> Stashed changes
 
             if brick is None:
                 continue
