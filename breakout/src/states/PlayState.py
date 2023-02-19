@@ -15,9 +15,12 @@ from gale.factory import AbstractFactory
 from gale.state_machine import BaseState
 from gale.input_handler import InputHandler, InputData, InputData
 from gale.text import render_text
+from gale.factory import Factory
+from src.Missile import Missile
 
 import settings
 import src.powerups
+
 
 class PlayState(BaseState):
     def enter(self, **params: dict):
@@ -36,6 +39,7 @@ class PlayState(BaseState):
         )
         self.powerups = params.get("powerups", [])
         self.catchBall = False
+        self.cannons = False
 
         if not params.get("resume", False):
             self.balls[0].vx = random.randint(-80, 80)
@@ -52,6 +56,7 @@ class PlayState(BaseState):
     def update(self, dt: float) -> None:
         self.paddle.update(dt)
         self.catchBall = self.paddle.catchBall
+        self.cannons = self.paddle.cannons
 
         for ball in self.balls:
             ball.update(dt)
@@ -265,6 +270,7 @@ class PlayState(BaseState):
                 lives=self.lives,
                 paddle=self.paddle,
                 balls=self.balls,
+                missiles=self.missiles,
                 brickset=self.brickset,
                 points_to_next_live=self.points_to_next_live,
                 live_factor=self.live_factor,
@@ -273,6 +279,7 @@ class PlayState(BaseState):
         if input_id == "enter" and self.catchBall:
             self.paddle.catchBall = False
 
-        if input_id == "shot": #and self.Cannons:
-            #code para crear un misil
-            pass
+        if input_id == "shot" and self.cannons:
+            missil = Missile(self.paddle.x + self.paddle.width//2, self.paddle.y - 8)
+            self.missiles.append(missil) 
+            self.paddle.cannons = False

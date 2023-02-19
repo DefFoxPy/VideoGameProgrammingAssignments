@@ -23,7 +23,7 @@ class Missile:
         self.width = 20
         self.height = 16
 
-        self.vy = 0
+        self.vy = settings.MISSIL_SPEED
 
         self.texture = settings.TEXTURES["spritesheet"]
         self.frame = 7

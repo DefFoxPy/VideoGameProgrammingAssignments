@@ -25,15 +25,16 @@ class Cannons(PowerUp):
 
     def take(self, play_state: TypeVar("PlayState")) -> None:
         paddle = play_state.paddle
+        paddle.cannons = True
 
-        m1 = self.missile_factory.create(paddle.x, paddle.y - 8)
-        m2 = self.missile_factory.create(paddle.width - 16, paddle.y - 8)
+        #m1 = self.missile_factory.create(paddle.x, paddle.y - 8)
+        #m2 = self.missile_factory.create(paddle.width - 16, paddle.y - 8)
         settings.SOUNDS["paddle_hit"].stop()
         settings.SOUNDS["paddle_hit"].play()
 
-        m1.vy = 0
-        m2.vy = 0
-        play_state.missiles.append(m1)
-        play_state.missiles.append(m2)
+        #m1.vy = 0
+        #m2.vy = 0
+        #play_state.missiles.append(m1)
+        #play_state.missiles.append(m2)
         
         self.in_play = False

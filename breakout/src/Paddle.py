@@ -19,6 +19,7 @@ class Paddle:
         self.width = 64
         self.height = 16
         self.catchBall = False
+        self.cannons = False
 
         # By default, the blue paddle
         self.skin = 0
