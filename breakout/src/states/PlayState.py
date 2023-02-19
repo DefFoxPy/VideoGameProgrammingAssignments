@@ -157,7 +157,7 @@ class PlayState(BaseState):
 
             brick.hit()
             self.score += brick.score()
-            #missile.in_play = False
+            missile.in_play = False
 
         # Removing all balls that are not in play
         self.balls = [ball for ball in self.balls if ball.in_play]
