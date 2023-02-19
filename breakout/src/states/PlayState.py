@@ -40,6 +40,7 @@ class PlayState(BaseState):
         self.powerups = params.get("powerups", [])
         self.catchBall = False
         self.cannons = False
+        self.active = False
 
         if not params.get("resume", False):
             self.balls[0].vx = random.randint(-80, 80)
@@ -145,7 +146,7 @@ class PlayState(BaseState):
             missile.update(dt)
             missile.solve_world_boundaries()
 
-            # Check collision with brickset
+            #Check collision with brickset
             if not missile.collides(self.brickset):
                 continue
 
