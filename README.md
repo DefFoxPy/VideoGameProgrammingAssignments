@@ -7,5 +7,7 @@ _task code_
 
 3- [BreakOut](https://github.com/DefFoxPy/VideoGameProgrammingAssignments/tree/main/breakout)
 
+4- [Match3](https://github.com/DefFoxPy/VideoGameProgrammingAssignments/tree/main/match3)
+
 ## Initial code where the assignments come from
 [R3mmurd](https://github.com/R3mmurd/VideoGameProgramming)
