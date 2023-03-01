@@ -6,7 +6,7 @@
 
 
     This file contains the definition of the class HardMode.
-*/
+*/  
 
 #include <src/HardMode.hpp>
 
@@ -38,5 +38,5 @@ void HardMode::handle_inputs(const sf::Event& event) noexcept
 void HardMode::update(float dt) noexcept
 {
     bird->update(dt);
-    world->update(dt, true);
+    world->update_hardmode(dt);
 }
