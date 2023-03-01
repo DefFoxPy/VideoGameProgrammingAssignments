@@ -10,8 +10,8 @@
 
 #include <Settings.hpp>
 #include <src/World.hpp>
-#include <cstdlib> // para los numeros aleatorios
-#include <ctime> // uso del reloj para los numeros aleatorios
+#include <cstdlib>
+#include <ctime>
 
 World::World(bool _generate_logs) noexcept
     : generate_logs{_generate_logs}, background{Settings::textures["background"]}, ground{Settings::textures["ground"]},
@@ -136,7 +136,6 @@ void World::update(float dt) noexcept
 
 void World::update_hardmode(float dt) noexcept
 {
-
     if (generate_logs)
     {
         logs_spawn_timer += dt;
@@ -153,35 +152,34 @@ void World::update_hardmode(float dt) noexcept
             float x = Settings::VIRTUAL_WIDTH + dist_x(rng);
             float gap = Settings::LOGS_GAP;
                 
-                if(last_log_y > y)
-                {               
-                    if((last_log_y+y)/-last_log_y > 0.3)
-                    {
-                        inf = last_log_y * 1.3;
-                        sup = last_log_y;
-                    }
-                    else
-                    {
-                        sup = last_log_y * 1.3;
-                        inf = last_log_y;
-                    }
-                }
-                else if(last_log_y < y)
+            if(last_log_y > y)
+            {               
+                if((last_log_y+y)/-last_log_y > 0.3)
                 {
-                    if((last_log_y+y)/-y > 0.3)
-                    {
-                        sup= y* 1.3;
-                        inf = y;
-                    }
-                    else
-                    {
-                        inf = y * 1.3;
-                        sup = y;
-                    }
+                    inf = last_log_y * 1.3;
+                    sup = last_log_y;
                 }
+                else
+                {
+                    sup = last_log_y * 1.3;
+                    inf = last_log_y;
+                }
+            }
+            else if(last_log_y < y)
+            {
+                if((last_log_y+y)/-y > 0.3)
+                {
+                    sup= y* 1.3;
+                    inf = y;
+                }
+                else
+                {
+                    inf = y * 1.3;
+                    sup = y;
+                }
+            }
                 
             last_log_y = y;
-
             logs.push_back(log_factory.create(x, y, gap));
         }
         
@@ -221,7 +219,6 @@ void World::update_hardmode(float dt) noexcept
             auto log_pair = *it;
             log_factory.remove(log_pair);
             it = logs.erase(it);
-            
         }
         else
         {
@@ -229,7 +226,7 @@ void World::update_hardmode(float dt) noexcept
             ++it;
         }
     }
-    
+
     if (powerUp) 
     {
         if (powerUp->is_out_of_game() or powerUp_taken) 
