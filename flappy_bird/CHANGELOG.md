@@ -1,3 +1,10 @@
+## [1.4.2] 2023-03-01
+
+## Changed
+
+- [each game mode has its way of updating itself for the world](https://github.com/DefFoxPy/VideoGameProgrammingAssignments/commit/984577011078570274c3e635280beffde14726d3)
+- [change in documentation and code style](https://github.com/DefFoxPy/VideoGameProgrammingAssignments/commit/12e98a751bb9228020fc5cf05ea627a8e68a130f)
+
 ## [1.4.1] 2023-02-10
 
 add music and effect for potion
