@@ -71,6 +71,16 @@ class PlayState(BaseState):
         InputHandler.unregister_listener(self)
 
     def update(self, _: float) -> None:
+        # hace que el title se mueva con el movimiento del mouse
+        if self.highlighted_tile: 
+            mouse_pos_x, mouse_pos_y = pygame.mouse.get_pos()
+
+            mouse_pos_x = mouse_pos_x * settings.VIRTUAL_WIDTH // settings.WINDOW_WIDTH - self.board.x - settings.TILE_SIZE // 2
+            mouse_pos_y = mouse_pos_y * settings.VIRTUAL_HEIGHT // settings.WINDOW_HEIGHT - self.board.y - settings.TILE_SIZE // 2
+
+            self.board.tiles[self.highlighted_i1][self.highlighted_j1].x = mouse_pos_x
+            self.board.tiles[self.highlighted_i1][self.highlighted_j1].y = mouse_pos_y
+
         if self.timer <= 0:
             Timer.clear()
             settings.SOUNDS["game-over"].play()
@@ -143,6 +153,7 @@ class PlayState(BaseState):
                     self.highlighted_tile = True
                     self.highlighted_i1 = i
                     self.highlighted_j1 = j
+                    print(i, j) # DEBUG
                 else:
                     self.highlighted_i2 = i
                     self.highlighted_j2 = j
