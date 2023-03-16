@@ -35,6 +35,8 @@ class PlayState(BaseState):
         self.highlighted_j1 = 0
         self.highlighted_i2 = 0
         self.highlighted_j2 = 0
+        self.temp_x = 0
+        self.temp_y = 0
         self.highlighted_tile = False
 
         self.active = True
@@ -75,6 +77,7 @@ class PlayState(BaseState):
         InputHandler.unregister_listener(self)
 
     def update(self, _: float) -> None:
+
         if self.timer <= 0:
             Timer.clear()
             settings.SOUNDS["game-over"].play()
@@ -142,11 +145,24 @@ class PlayState(BaseState):
             i = (pos_y - self.board.y) // settings.TILE_SIZE
             j = (pos_x - self.board.x) // settings.TILE_SIZE
 
-            if 0 <= i < settings.BOARD_HEIGHT and 0 <= j <= settings.BOARD_WIDTH:
+            if 0 <= i < settings.BOARD_HEIGHT and 0 <= j < settings.BOARD_WIDTH:
                 if not self.highlighted_tile:
                     self.highlighted_tile = True
                     self.highlighted_i1 = i
                     self.highlighted_j1 = j
+                    self.temp_x = j * settings.TILE_SIZE
+                    self.temp_y = i * settings.TILE_SIZE
+                    print(self.temp_x, self.temp_y)
+
+        elif input_id in "mup mdown mleft mright".split() and self.highlighted_tile:
+            mouse_pos_x, mouse_pos_y = input_data.position
+
+            mouse_pos_x = mouse_pos_x * settings.VIRTUAL_WIDTH // settings.WINDOW_WIDTH - self.board.x - settings.TILE_SIZE // 2
+            mouse_pos_y = mouse_pos_y * settings.VIRTUAL_HEIGHT // settings.WINDOW_HEIGHT - self.board.y - settings.TILE_SIZE // 2
+
+            self.board.tiles[self.highlighted_i1][self.highlighted_j1].x = mouse_pos_x
+            self.board.tiles[self.highlighted_i1][self.highlighted_j1].y = mouse_pos_y
+
 
         elif input_id == "click" and input_data.released:
             pos_x, pos_y = input_data.position
@@ -155,7 +171,7 @@ class PlayState(BaseState):
             i = (pos_y - self.board.y) // settings.TILE_SIZE
             j = (pos_x - self.board.x) // settings.TILE_SIZE
             
-            if 0 <= i < settings.BOARD_HEIGHT and 0 <= j <= settings.BOARD_WIDTH:
+            if 0 <= i < settings.BOARD_HEIGHT and 0 <= j < settings.BOARD_WIDTH:
                 self.highlighted_i2 = i
                 self.highlighted_j2 = j
                 di = abs(self.highlighted_i2 - self.highlighted_i1)
@@ -201,6 +217,15 @@ class PlayState(BaseState):
                         ],
                         on_finish=arrive,
                     )
+
+                else:
+                    self.board.tiles[self.highlighted_i1][self.highlighted_j1].x = self.temp_x 
+                    self.board.tiles[self.highlighted_i1][self.highlighted_j1].y = self.temp_y
+                    print("regresa con segunda entro del tablero")
+            else:
+                self.board.tiles[self.highlighted_i1][self.highlighted_j1].x = self.temp_x
+                self.board.tiles[self.highlighted_i1][self.highlighted_j1].y = self.temp_y
+                print("regresa pero esta fuera del tablero")
 
             self.highlighted_tile = False
 
