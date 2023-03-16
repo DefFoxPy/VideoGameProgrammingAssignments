@@ -213,7 +213,7 @@ class PlayState(BaseState):
                         0.25,
                         [
                             (tile1, {"x": tile2.x, "y": tile2.y}),
-                            (tile2, {"x": tile1.x, "y": tile1.y}),
+                            (tile2, {"x": self.temp_x, "y": self.temp_y}),
                         ],
                         on_finish=arrive,
                     )
