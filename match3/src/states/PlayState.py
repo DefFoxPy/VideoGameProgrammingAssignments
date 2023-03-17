@@ -38,6 +38,7 @@ class PlayState(BaseState):
         self.temp_x = 0
         self.temp_y = 0
         self.highlighted_tile = False
+        self.block = False
 
         self.active = True
 
@@ -152,25 +153,29 @@ class PlayState(BaseState):
                     self.highlighted_j1 = j
                     self.temp_x = j * settings.TILE_SIZE
                     self.temp_y = i * settings.TILE_SIZE
-                    print(self.temp_x, self.temp_y)
 
-        elif input_id in "mup mdown mleft mright".split() and self.highlighted_tile:
-            mouse_pos_x, mouse_pos_y = input_data.position
+        elif input_id in "mup" and self.highlighted_tile and self.block == False:
+            self.block = True
+            self.board.tiles[self.highlighted_i1][self.highlighted_j1].y = self.temp_y - settings.TILE_SIZE
 
-            mouse_pos_x = mouse_pos_x * settings.VIRTUAL_WIDTH // settings.WINDOW_WIDTH - self.board.x - settings.TILE_SIZE // 2
-            mouse_pos_y = mouse_pos_y * settings.VIRTUAL_HEIGHT // settings.WINDOW_HEIGHT - self.board.y - settings.TILE_SIZE // 2
+        elif input_id in "mdown" and self.highlighted_tile and self.block == False:
+            self.block = True
+            self.board.tiles[self.highlighted_i1][self.highlighted_j1].y = self.temp_y + settings.TILE_SIZE
 
-            self.board.tiles[self.highlighted_i1][self.highlighted_j1].x = mouse_pos_x
-            self.board.tiles[self.highlighted_i1][self.highlighted_j1].y = mouse_pos_y
+        elif input_id in "mright" and self.highlighted_tile and self.block == False:
+            self.block = True
+            self.board.tiles[self.highlighted_i1][self.highlighted_j1].x = self.temp_x + settings.TILE_SIZE
 
+        elif input_id in "mleft" and self.highlighted_tile and self.block == False:
+            self.block = True
+            self.board.tiles[self.highlighted_i1][self.highlighted_j1].x = self.temp_x - settings.TILE_SIZE
 
         elif input_id == "click" and input_data.released:
-            pos_x, pos_y = input_data.position
-            pos_x = pos_x * settings.VIRTUAL_WIDTH // settings.WINDOW_WIDTH
-            pos_y = pos_y * settings.VIRTUAL_HEIGHT // settings.WINDOW_HEIGHT
-            i = (pos_y - self.board.y) // settings.TILE_SIZE
-            j = (pos_x - self.board.x) // settings.TILE_SIZE
-            
+            self.block = False
+            pos_x, pos_y = self.board.tiles[self.highlighted_i1][self.highlighted_j1].x, self.board.tiles[self.highlighted_i1][self.highlighted_j1].y
+            i = pos_y // settings.TILE_SIZE
+            j = pos_x // settings.TILE_SIZE
+
             if 0 <= i < settings.BOARD_HEIGHT and 0 <= j < settings.BOARD_WIDTH:
                 self.highlighted_i2 = i
                 self.highlighted_j2 = j
@@ -221,11 +226,9 @@ class PlayState(BaseState):
                 else:
                     self.board.tiles[self.highlighted_i1][self.highlighted_j1].x = self.temp_x 
                     self.board.tiles[self.highlighted_i1][self.highlighted_j1].y = self.temp_y
-                    print("regresa con segunda entro del tablero")
             else:
                 self.board.tiles[self.highlighted_i1][self.highlighted_j1].x = self.temp_x
                 self.board.tiles[self.highlighted_i1][self.highlighted_j1].y = self.temp_y
-                print("regresa pero esta fuera del tablero")
 
             self.highlighted_tile = False
 
