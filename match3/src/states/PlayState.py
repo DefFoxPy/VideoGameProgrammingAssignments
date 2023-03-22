@@ -211,7 +211,34 @@ class PlayState(BaseState):
                             tile1.i,
                             tile1.j,
                         )
-                        self.__calculate_matches([tile1, tile2])
+                        if not (self.__calculate_matches([tile1, tile2])): #revertir cambios
+                            
+                            tile1 = self.board.tiles[self.highlighted_i1][
+                            self.highlighted_j1
+                            ]
+                            tile2 = self.board.tiles[self.highlighted_i2][
+                                self.highlighted_j2
+                            ]
+                            (
+                                self.board.tiles[tile1.i][tile1.j],
+                                self.board.tiles[tile2.i][tile2.j],
+                            ) = (
+                                self.board.tiles[tile2.i][tile2.j],
+                                self.board.tiles[tile1.i][tile1.j],
+                            )
+                            tile1.i, tile1.j, tile2.i, tile2.j = (
+                                tile2.i,
+                                tile2.j,
+                                tile1.i,
+                                tile1.j,
+                            )
+                            Timer.tween(
+                                0.25,
+                                [
+                                    (tile1, {"x": tile2.x, "y": tile2.y}),
+                                    (tile2, {"x": self.temp_x, "y": self.temp_y}),
+                                ],
+                            ) 
 
                     # Swap tiles
                     Timer.tween(
@@ -222,7 +249,6 @@ class PlayState(BaseState):
                         ],
                         on_finish=arrive,
                     )
-
                 else:
                     self.board.tiles[self.highlighted_i1][self.highlighted_j1].x = self.temp_x 
                     self.board.tiles[self.highlighted_i1][self.highlighted_j1].y = self.temp_y
@@ -232,12 +258,12 @@ class PlayState(BaseState):
 
             self.highlighted_tile = False
 
-    def __calculate_matches(self, tiles: List) -> None:
+    def __calculate_matches(self, tiles: List) -> bool:
         matches = self.board.calculate_matches_for(tiles)
 
         if matches is None:
             self.active = True
-            return
+            return False
 
         settings.SOUNDS["match"].stop()
         settings.SOUNDS["match"].play()
@@ -256,3 +282,5 @@ class PlayState(BaseState):
                 [item[0] for item in falling_tiles]
             ),
         )
+
+        return True
