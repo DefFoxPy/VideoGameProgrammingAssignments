@@ -253,6 +253,8 @@ class PlayState(BaseState):
                     self.board.tiles[self.highlighted_i1][self.highlighted_j1].x = self.temp_x 
                     self.board.tiles[self.highlighted_i1][self.highlighted_j1].y = self.temp_y
             else:
+                if self.board.calculate_match_rec_pre():
+                    print("hay match")
                 self.board.tiles[self.highlighted_i1][self.highlighted_j1].x = self.temp_x
                 self.board.tiles[self.highlighted_i1][self.highlighted_j1].y = self.temp_y
 

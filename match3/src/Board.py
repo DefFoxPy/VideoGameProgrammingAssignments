@@ -62,7 +62,7 @@ class Board:
     def __calculate_match_rec(self, tile: Tile) -> Set[Tile]:
         if tile in self.in_stack:
             return []
-
+        
         self.in_stack.add(tile)
 
         color_to_match = tile.color
@@ -129,6 +129,52 @@ class Board:
 
         self.in_stack.remove(tile)
         return match
+
+    ## nuevo metodo
+    def calculate_match_rec_pre(self) -> bool:
+        ## Check horizontal match
+        for i in range(settings.BOARD_HEIGHT):
+            for j in range(settings.BOARD_WIDTH-2):  ##0 - 6 
+                if (self.tiles[i][j].color == self.tiles[i][j+1].color):
+                    if(i==0): #primera fila
+                        ##evaluar por la derecha
+                        if (j+3<settings.BOARD_WIDTH and (self.tiles[i][j].color==self.tiles[i][j+3].color or self.tiles[i][j].color==self.tiles[i+1][j+2].color)):
+                            return True
+                        elif(j+2<settings.BOARD_WIDTH and self.tiles[i][j].color==self.tiles[i+1][j+2].color):
+                            return True
+                        ##evaluar por la izquierda
+                        elif(j-2>=0 and (self.tiles[i][j].color==self.tiles[i][j-2].color or self.tiles[i][j].color==self.tiles[i+1][j-1].color)):
+                            return True
+                        elif(j-1>=0 and self.tiles[i][j].color==self.tiles[i+1][j-1].color):
+                            return True
+                    ## Filas del medio 
+                    elif(i>0 and i<settings.BOARD_HEIGHT-1):
+                        ##evaluar por la derecha
+                        if(j+3<settings.BOARD_WIDTH and (self.tiles[i][j].color==self.tiles[i-1][j+2].color or self.tiles[i][j].color==self.tiles[i][j+3].color or self.tiles[i][j].color==self.tiles[i][j+2].color)):
+                            return True
+                        elif(j+2<settings.BOARD_WIDTH and (self.tiles[i][j].color==self.tiles[i-1][j+2].color or self.tiles[i][j].color==self.tiles[i][j+2].color)):
+                            return True
+                        ##evaluar por la izquierda
+                        elif(j-2>=0 and (self.tiles[i][j].color==self.tiles[i-1][j-1].color or self.tiles[i][j].color==self.tiles[i][j-2].color or self.tiles[i][j].color==self.tiles[i+1][j-1].color)):
+                            return True
+                        elif(j-1>=0 and (self.tiles[i][j].color==self.tiles[i-1][j-1].color or self.tiles[i][j].color==self.tiles[i+1][j-1].color)):
+                            return True
+                    ## Ultima fila
+                    else: 
+                        ##evaluar por la derecha
+                        if (j+3<settings.BOARD_WIDTH and (self.tiles[i][j].color==self.tiles[i][j+3].color or self.tiles[i][j].color==self.tiles[i-1][j+2].color)):
+                            return True
+                        elif(j+2<settings.BOARD_WIDTH and self.tiles[i][j].color==self.tiles[i-1][j+2].color):
+                            return True
+                        ##evaluar por la izquierda
+                        elif(j-2>=0 and (self.tiles[i][j].color==self.tiles[i][j-2].color or self.tiles[i][j].color==self.tiles[i-1][j-1].color)):
+                            return True
+                        elif(j-1>=0 and self.tiles[i][j].color==self.tiles[i-1][j-1].color):
+                            return True
+             
+        print("sin match horizontales")
+        return False
+    ## fin de nue
 
     def calculate_matches_for(
         self, new_tiles: List[Tile]
