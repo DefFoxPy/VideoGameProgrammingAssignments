@@ -19,6 +19,7 @@ from gale.timer import Timer
 import settings
 
 
+
 class PlayState(BaseState):
     def enter(self, **enter_params: Dict[str, Any]) -> None:
         self.level = enter_params["level"]
@@ -138,6 +139,7 @@ class PlayState(BaseState):
     def on_input(self, input_id: str, input_data: InputData) -> None:
         if not self.active:
             return
+        
 
         if input_id == "click" and input_data.pressed:
             pos_x, pos_y = input_data.position
@@ -253,14 +255,16 @@ class PlayState(BaseState):
                     self.board.tiles[self.highlighted_i1][self.highlighted_j1].x = self.temp_x 
                     self.board.tiles[self.highlighted_i1][self.highlighted_j1].y = self.temp_y
             else:
-                if self.board.calculate_match_rec_pre():
-                    print("hay match")
                 self.board.tiles[self.highlighted_i1][self.highlighted_j1].x = self.temp_x
                 self.board.tiles[self.highlighted_i1][self.highlighted_j1].y = self.temp_y
 
             self.highlighted_tile = False
 
+            if not self.board.calculate_match_rec_pre():
+                print("No hay match")
+
     def __calculate_matches(self, tiles: List) -> bool:
+        
         matches = self.board.calculate_matches_for(tiles)
 
         if matches is None:

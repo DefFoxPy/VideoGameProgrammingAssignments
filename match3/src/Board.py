@@ -181,31 +181,31 @@ class Board:
                         ##evaluar por abajo
                         if (i+3<settings.BOARD_HEIGHT and (self.tiles[i][j].color==self.tiles[i+3][j].color or self.tiles[i][j].color==self.tiles[i+2][j+1].color)):
                             return True
-                        elif(j+2<settings.BOARD_WIDTH and self.tiles[i][j].color==self.tiles[i+2][j+1].color):
+                        elif(i+2<settings.BOARD_WIDTH and self.tiles[i][j].color==self.tiles[i+2][j+1].color):
                             return True
                         ##evaluar por arriba
                         elif(i-2>=0 and (self.tiles[i][j].color==self.tiles[i-2][j].color or self.tiles[i][j].color==self.tiles[i-1][j+1].color)):
                             return True
-                        elif(j-1>=0 and self.tiles[i][j].color==self.tiles[i+1][j-1].color):
+                        elif(i-1>=0 and self.tiles[i][j].color==self.tiles[i+1][j+1].color):
                             return True
                     ## columnas del medio 
-                    elif(j>0 and i<settings.BOARD_WIDTH-1):
+                    elif(j>0 and j<settings.BOARD_WIDTH-1):
                         ##evaluar por abajo
-                        if(i+3<settings.BOARD_HEIGHT and (self.tiles[i][j].color==self.tiles[i+2][j-1].color or self.tiles[i][j].color==self.tiles[i+3][j-1].color or self.tiles[i][j].color==self.tiles[i+2][j+1].color)):
+                        if(i+3<settings.BOARD_HEIGHT and (self.tiles[i][j].color==self.tiles[i+2][j-1].color or self.tiles[i][j].color==self.tiles[i+3][j].color or self.tiles[i][j].color==self.tiles[i+2][j+1].color)):
                             return True
-                        elif(j+2<settings.BOARD_HEIGHT and (self.tiles[i][j].color==self.tiles[i+2][j-1].color or self.tiles[i][j].color==self.tiles[i+2][j+1].color)):
+                        elif(i+2<settings.BOARD_HEIGHT and (self.tiles[i][j].color==self.tiles[i+2][j-1].color or self.tiles[i][j].color==self.tiles[i+2][j+1].color)):
                             return True
                         ##evaluar por arriba 
                         elif(i-2>=0 and (self.tiles[i][j].color==self.tiles[i-1][j-1].color or self.tiles[i][j].color==self.tiles[i-2][j].color or self.tiles[i][j].color==self.tiles[i-1][j+1].color)):
                             return True
-                        elif(j-1>=0 and (self.tiles[i][j].color==self.tiles[i-1][j-1].color or self.tiles[i][j].color==self.tiles[i-1][j+1].color)):
+                        elif(i-1>=0 and (self.tiles[i][j].color==self.tiles[i-1][j-1].color or self.tiles[i][j].color==self.tiles[i-1][j+1].color)):
                             return True
                     ## Ultima columna
                     else: 
                         ##evaluar por abajo
-                        if (i+3<settings.BOARD_HEIGHT and (self.tiles[i][j].color==self.tiles[i+3][j].color or self.tiles[i][j].color==self.tiles[i+2][j-1].color)):
+                        if (i+3<settings.BOARD_HEIGHT and (self.tiles[i][j].color==self.tiles[i+2][j-1].color or self.tiles[i][j].color==self.tiles[i+3][j].color)):
                             return True
-                        elif(i+2<settings.BOARD_HEIGHT and self.tiles[i][j].color==self.tiles[i-1][j+2].color):
+                        elif(i+2<settings.BOARD_HEIGHT and self.tiles[i][j].color==self.tiles[i+2][j-1].color):
                             return True
                         ##evaluar por la arriba
                         elif(i-2>=0 and (self.tiles[i][j].color==self.tiles[i-1][j-1].color or self.tiles[i][j].color==self.tiles[i-2][j].color)):
