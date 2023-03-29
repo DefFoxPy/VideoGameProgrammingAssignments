@@ -17,6 +17,7 @@ from gale.text import render_text
 from gale.timer import Timer
 
 import settings
+from src.Board import Board
 
 
 
@@ -262,6 +263,7 @@ class PlayState(BaseState):
 
             if not self.board.calculate_match_rec_pre():
                 print("No hay match")
+                self.board = Board(settings.VIRTUAL_WIDTH - 272, 16)
 
     def __calculate_matches(self, tiles: List) -> bool:
         

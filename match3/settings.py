@@ -47,6 +47,8 @@ BACKGROUND_LOOPING_POINT = -1024 + VIRTUAL_WIDTH - 4 + 51
 
 LEVEL_TIME = 60
 
+NO_MATCH = False
+
 BASE_DIR = Path(__file__).parent
 
 TEXTURES = {

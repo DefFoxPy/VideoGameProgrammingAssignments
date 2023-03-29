@@ -26,12 +26,12 @@ class BeginGameState(BaseState):
         self.level_label_y = -64
         self.level = enter_params.get("level", 1)
         self.score = enter_params.get("score", 0)
-
+        
         # A surface that supports alpha for the screen
         self.screen_alpha_surface = pygame.Surface(
             (settings.VIRTUAL_WIDTH, settings.VIRTUAL_HEIGHT), pygame.SRCALPHA
         )
-
+        
         # first, over a period of 1 second, transition out alpha to 0
         # (fade-in).
         Timer.tween(
