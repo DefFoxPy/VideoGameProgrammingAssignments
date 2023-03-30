@@ -107,13 +107,27 @@ class Board:
 
         match: List[Tile] = []
 
-        if len(h_match) >= 2:
+        if len(h_match) == 3:
+            print('Ocurrió el match 4 en horizontal')
             for t in h_match:
                 if t not in self.in_match:
                     self.in_match.add(t)
                     match.append(t)
 
-        if len(v_match) >= 2:
+        elif len(h_match) >= 2:
+            for t in h_match:
+                if t not in self.in_match:
+                    self.in_match.add(t)
+                    match.append(t)
+
+        if len(v_match) == 3:
+            print('Ocurrió el match 4 en vertical')
+            for t in v_match:
+                if t not in self.in_match:
+                    self.in_match.add(t)
+                    match.append(t)
+
+        elif len(v_match) >= 2:
             for t in v_match:
                 if t not in self.in_match:
                     self.in_match.add(t)
@@ -197,7 +211,7 @@ class Board:
                 if(band):
                     return band
 
-        print("sin match horizontales")
+        ##print("sin match horizontales")
 
         ## Check verticales match
         for j in range(settings.BOARD_WIDTH):
@@ -255,7 +269,7 @@ class Board:
                 
                 if(band):
                     return band
-        print("sin match verticales")
+        ##print("sin match verticales")
         return band
     ## fin de nue
 
