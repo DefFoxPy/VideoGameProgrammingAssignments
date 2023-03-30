@@ -132,6 +132,11 @@ class Board:
 
     ## nuevo metodo
     def calculate_match_rec_pre(self) -> bool:
+        # to do
+        #if check_precit_horizontal(self.board): return True
+        #elif check_precit_vertical: return True
+        #return False
+
         ## Check horizontal match 2 continue
         band = False
         for i in range(settings.BOARD_HEIGHT):
