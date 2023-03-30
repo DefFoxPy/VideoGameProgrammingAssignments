@@ -91,6 +91,11 @@ class PlayState(BaseState):
             settings.SOUNDS["next-level"].play()
             self.state_machine.change("begin", level=self.level + 1, score=self.score)
 
+        # actualiza el tablero si no hay match posibles
+        if not self.board.calculate_match_rec_pre():
+                print("No hay match")
+                self.board = Board(settings.VIRTUAL_WIDTH - 272, 16)
+
     def render(self, surface: pygame.Surface) -> None:
         self.board.render(surface)
 
@@ -260,10 +265,6 @@ class PlayState(BaseState):
                 self.board.tiles[self.highlighted_i1][self.highlighted_j1].y = self.temp_y
 
             self.highlighted_tile = False
-
-            if not self.board.calculate_match_rec_pre():
-                print("No hay match")
-                self.board = Board(settings.VIRTUAL_WIDTH - 272, 16)
 
     def __calculate_matches(self, tiles: List) -> bool:
         
