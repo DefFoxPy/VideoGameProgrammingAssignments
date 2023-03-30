@@ -132,45 +132,54 @@ class Board:
 
     ## nuevo metodo
     def calculate_match_rec_pre(self) -> bool:
-        ## Check horizontal match
+        ## Check horizontal match 2 continue
+        band = False
         for i in range(settings.BOARD_HEIGHT):
             for j in range(settings.BOARD_WIDTH-2):  ##0 - 6 
+                #para dos contiguos
                 if (self.tiles[i][j].color == self.tiles[i][j+1].color):
                     if(i==0): #primera fila
                         ##evaluar por la derecha
                         if (j+3<settings.BOARD_WIDTH and (self.tiles[i][j].color==self.tiles[i][j+3].color or self.tiles[i][j].color==self.tiles[i+1][j+2].color)):
-                            return True
+                            band = True
                         elif(j+2<settings.BOARD_WIDTH and self.tiles[i][j].color==self.tiles[i+1][j+2].color):
-                            return True
+                            band = True
                         ##evaluar por la izquierda
                         elif(j-2>=0 and (self.tiles[i][j].color==self.tiles[i][j-2].color or self.tiles[i][j].color==self.tiles[i+1][j-1].color)):
-                            return True
+                            band = True
                         elif(j-1>=0 and self.tiles[i][j].color==self.tiles[i+1][j-1].color):
-                            return True
+                            band = True
                     ## Filas del medio 
                     elif(i>0 and i<settings.BOARD_HEIGHT-1):
                         ##evaluar por la derecha
                         if(j+3<settings.BOARD_WIDTH and (self.tiles[i][j].color==self.tiles[i-1][j+2].color or self.tiles[i][j].color==self.tiles[i][j+3].color or self.tiles[i][j].color==self.tiles[i][j+2].color)):
-                            return True
+                            band = True
                         elif(j+2<settings.BOARD_WIDTH and (self.tiles[i][j].color==self.tiles[i-1][j+2].color or self.tiles[i][j].color==self.tiles[i][j+2].color)):
-                            return True
+                            band = True
                         ##evaluar por la izquierda
                         elif(j-2>=0 and (self.tiles[i][j].color==self.tiles[i-1][j-1].color or self.tiles[i][j].color==self.tiles[i][j-2].color or self.tiles[i][j].color==self.tiles[i+1][j-1].color)):
-                            return True
+                            band = True
                         elif(j-1>=0 and (self.tiles[i][j].color==self.tiles[i-1][j-1].color or self.tiles[i][j].color==self.tiles[i+1][j-1].color)):
-                            return True
+                            band = True
                     ## Ultima fila
                     else: 
                         ##evaluar por la derecha
                         if (j+3<settings.BOARD_WIDTH and (self.tiles[i][j].color==self.tiles[i][j+3].color or self.tiles[i][j].color==self.tiles[i-1][j+2].color)):
-                            return True
+                            band = True
                         elif(j+2<settings.BOARD_WIDTH and self.tiles[i][j].color==self.tiles[i-1][j+2].color):
-                            return True
+                            band = True
                         ##evaluar por la izquierda
                         elif(j-2>=0 and (self.tiles[i][j].color==self.tiles[i][j-2].color or self.tiles[i][j].color==self.tiles[i-1][j-1].color)):
-                            return True
+                            band = True
                         elif(j-1>=0 and self.tiles[i][j].color==self.tiles[i-1][j-1].color):
-                            return True
+                            band = True
+                #para match en la mitad de dos fichas iguales
+                elif(self.tiles[i][j].color == self.tiles[i][j+2].color):
+                
+
+                if(band):
+                    return band
+
         print("sin match horizontales")
 
         ## Check verticales match
@@ -180,41 +189,42 @@ class Board:
                     if(j==0): #primera columna
                         ##evaluar por abajo
                         if (i+3<settings.BOARD_HEIGHT and (self.tiles[i][j].color==self.tiles[i+3][j].color or self.tiles[i][j].color==self.tiles[i+2][j+1].color)):
-                            return True
+                            band = True
                         elif(i+2<settings.BOARD_WIDTH and self.tiles[i][j].color==self.tiles[i+2][j+1].color):
-                            return True
+                            band = True
                         ##evaluar por arriba
                         elif(i-2>=0 and (self.tiles[i][j].color==self.tiles[i-2][j].color or self.tiles[i][j].color==self.tiles[i-1][j+1].color)):
-                            return True
+                            band = True
                         elif(i-1>=0 and self.tiles[i][j].color==self.tiles[i+1][j+1].color):
-                            return True
+                            band = True
                     ## columnas del medio 
                     elif(j>0 and j<settings.BOARD_WIDTH-1):
                         ##evaluar por abajo
                         if(i+3<settings.BOARD_HEIGHT and (self.tiles[i][j].color==self.tiles[i+2][j-1].color or self.tiles[i][j].color==self.tiles[i+3][j].color or self.tiles[i][j].color==self.tiles[i+2][j+1].color)):
-                            return True
+                            band = True
                         elif(i+2<settings.BOARD_HEIGHT and (self.tiles[i][j].color==self.tiles[i+2][j-1].color or self.tiles[i][j].color==self.tiles[i+2][j+1].color)):
-                            return True
+                            band = True
                         ##evaluar por arriba 
                         elif(i-2>=0 and (self.tiles[i][j].color==self.tiles[i-1][j-1].color or self.tiles[i][j].color==self.tiles[i-2][j].color or self.tiles[i][j].color==self.tiles[i-1][j+1].color)):
-                            return True
+                            band = True
                         elif(i-1>=0 and (self.tiles[i][j].color==self.tiles[i-1][j-1].color or self.tiles[i][j].color==self.tiles[i-1][j+1].color)):
-                            return True
+                            band = True
                     ## Ultima columna
                     else: 
                         ##evaluar por abajo
                         if (i+3<settings.BOARD_HEIGHT and (self.tiles[i][j].color==self.tiles[i+2][j-1].color or self.tiles[i][j].color==self.tiles[i+3][j].color)):
-                            return True
+                            band = True
                         elif(i+2<settings.BOARD_HEIGHT and self.tiles[i][j].color==self.tiles[i+2][j-1].color):
-                            return True
+                            band = True
                         ##evaluar por la arriba
                         elif(i-2>=0 and (self.tiles[i][j].color==self.tiles[i-1][j-1].color or self.tiles[i][j].color==self.tiles[i-2][j].color)):
-                            return True
+                            band = True
                         elif(i-1>=0 and self.tiles[i][j].color==self.tiles[i-1][j-1].color):
-                            return True        
-                
+                            band = True        
+                if(band):
+                    return band
         print("sin match verticales")
-        return False
+        return band
     ## fin de nue
 
     def calculate_matches_for(
