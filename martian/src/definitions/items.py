@@ -12,7 +12,7 @@ from typing import Dict, Any
 import random
 
 from gale.timer import Timer
-
+from gale.text import Text, render_text
 import settings
 from src.GameItem import GameItem
 from src.Player import Player
@@ -43,12 +43,15 @@ def pickup_red_coin(coin: GameItem, player: Player):
 def pickup_yellow_coin(coin: GameItem, player: Player):
     pickup_coin(coin, player, 50, 54, random.uniform(20, 25))
 
+def pickup_block_coin(coin: GameItem, player: Player):
+    print("Hola")
+    pickup_coin(coin, player, 0, 50, random.uniform(20, 25))
 
 ITEMS: Dict[str, Dict[int, Dict[str, Any]]] = {
     "coins": {
         62: {
             "texture_id": "tiles",
-            "solidness": dict(top=False, right=False, bottom=False, left=False),
+            "solidness": dict(top=True, right=True, bottom=True, left=True),
             "consumable": True,
             "collidable": True,
             "on_consume": pickup_green_coin,
@@ -74,5 +77,12 @@ ITEMS: Dict[str, Dict[int, Dict[str, Any]]] = {
             "collidable": True,
             "on_consume": pickup_yellow_coin,
         },
-    }
+        50: {
+            "texture_id": "tiles",
+            "solidness": dict(top=True, right=True, bottom=True, left=True),
+            "consumable": True,
+            "collidable": True,
+            "on_consume": pickup_block_coin,
+        },
+    },
 }

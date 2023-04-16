@@ -36,4 +36,4 @@ class Player(GameEntity):
             },
         )
         self.score = 0
-        self.coins_counter = {54: 0, 55: 0, 61: 0, 62: 0}
+        self.coins_counter = {54: 0, 55: 0, 61: 0, 62: 0, 50: 0}

@@ -9,6 +9,11 @@ from gale import frames
 from gale import input_handler
 
 input_handler.InputHandler.set_keyboard_action(input_handler.KEY_ESCAPE, 'quit')
+input_handler.InputHandler.set_keyboard_action(input_handler.KEY_RETURN, "enter")
+input_handler.InputHandler.set_keyboard_action(input_handler.KEY_UP, "move_up")
+input_handler.InputHandler.set_keyboard_action(input_handler.KEY_DOWN, "move_down")
+input_handler.InputHandler.set_keyboard_action(input_handler.KEY_RIGHT, "move_right")
+input_handler.InputHandler.set_keyboard_action(input_handler.KEY_LEFT, "move_left")
 
 # Size we want to emulate
 VIRTUAL_WIDTH = 320
@@ -24,7 +29,9 @@ BASE_DIR = pathlib.Path(__file__).parent
 # TEXTURES = {
 #     'my_texture': pygame.image.load(BASE_DIR / "assets" / "graphics" / "my_texture.png")
 # }
-TEXTURES = {}
+TEXTURES = {
+    "road_0": pygame.image.load(BASE_DIR/"graphics" / "object" / "road_0.png")
+}
 
 # Register your frames, for instance:
 # FRAMES = {
@@ -46,4 +53,10 @@ pygame.font.init()
 # FONTS = {
 #     'small': pygame.font.Font(BASE_DIR / "assets"  / "fonts" / "font.ttf", 8)
 # }
-FONTS = {}
+FONTS = {
+    "tiny": pygame.font.Font(BASE_DIR / "fonts" / "font.ttf", 6),
+    "small": pygame.font.Font(BASE_DIR / "fonts" / "font.ttf", 8),
+    "medium": pygame.font.Font(BASE_DIR / "fonts" / "font.ttf", 12),
+    "large": pygame.font.Font(BASE_DIR / "fonts" / "font.ttf", 24)
+
+}
