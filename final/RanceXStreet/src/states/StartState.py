@@ -31,59 +31,57 @@ class StartState(BaseState):
             elif self.selected == 2:
                 print("Higt_score")
             else:
-                print("Exit")
+                pygame.quit()
     
     def render(self, surface: pygame.surface) -> None:
-        surface.fill([0, 255, 0])
-        render_text(
-            surface,
-            "RanceXStreet",
-            settings.FONTS["large"],
-            settings.VIRTUAL_WIDTH // 2,
-            settings.VIRTUAL_HEIGHT // 3,
-            (255, 0, 0),
-            center=True
-        )
-        color = (52, 235, 216)
+        surface.blit(settings.TEXTURES["startstate"], (0, 0))
+
+        color = (206,173,139)
+        font = settings.FONTS["medium"]
         if self.selected == 1:
-            color = (255, 255, 255)
+            color = (255, 175,37)
+            font = settings.FONTS["mediumPlus"]
         
         render_text(
             surface,
             "Play Game",
-            settings.FONTS["medium"],
-            settings.VIRTUAL_WIDTH // 2,
-            settings.VIRTUAL_HEIGHT - 90,
+            font,
+            1050,
+            480,
             color,
-            center= True,
+            center= False,
         )
 
-        color = (52, 235, 216)
+        color = (206,173,139)
+        font = settings.FONTS["medium"]
         if self.selected == 2:
-            color = (255, 255, 255)
+            color = (255, 175,37)
+            font = settings.FONTS["mediumPlus"]
         
         render_text(
             surface,
             "High scores",
-            settings.FONTS["medium"],
-            settings.VIRTUAL_WIDTH // 2,
-            settings.VIRTUAL_HEIGHT - 75,
+            font,
+            1030,
+            540,
             color,
-            center= True,
+            center= False,
         )
 
-        color = (52, 235, 216)
+        color = (206,173,139)
+        font = settings.FONTS["medium"]
         if self.selected == 3:
-            color = (255, 255, 255)
+            color = (255, 175,37)
+            font = settings.FONTS["mediumPlus"]
         
         render_text(
             surface,
             "Exit",
-            settings.FONTS["medium"],
-            settings.VIRTUAL_WIDTH // 2,
-            settings.VIRTUAL_HEIGHT - 60,
+            font,
+            1160,
+            600,
             color,
-            center= True,
+            center= False,
         )
         
             

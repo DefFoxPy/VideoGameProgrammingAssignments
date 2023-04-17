@@ -16,9 +16,8 @@ input_handler.InputHandler.set_keyboard_action(input_handler.KEY_RIGHT, "move_ri
 input_handler.InputHandler.set_keyboard_action(input_handler.KEY_LEFT, "move_left")
 
 # Size we want to emulate
-VIRTUAL_WIDTH = 320
-VIRTUAL_HEIGHT = 180
-
+VIRTUAL_WIDTH = 1280
+VIRTUAL_HEIGHT = 720
 # Size of our actual window
 WINDOW_WIDTH = 1280
 WINDOW_HEIGHT = 720
@@ -30,7 +29,8 @@ BASE_DIR = pathlib.Path(__file__).parent
 #     'my_texture': pygame.image.load(BASE_DIR / "assets" / "graphics" / "my_texture.png")
 # }
 TEXTURES = {
-    "road_0": pygame.image.load(BASE_DIR/"graphics" / "object" / "road_0.png")
+    "road_0": pygame.image.load(BASE_DIR / "graphics" / "object" / "road_0.png"),
+    "startstate":pygame.image.load(BASE_DIR / "graphics" / "startstate.png"),
 }
 
 # Register your frames, for instance:
@@ -54,9 +54,10 @@ pygame.font.init()
 #     'small': pygame.font.Font(BASE_DIR / "assets"  / "fonts" / "font.ttf", 8)
 # }
 FONTS = {
-    "tiny": pygame.font.Font(BASE_DIR / "fonts" / "font.ttf", 6),
-    "small": pygame.font.Font(BASE_DIR / "fonts" / "font.ttf", 8),
-    "medium": pygame.font.Font(BASE_DIR / "fonts" / "font.ttf", 12),
-    "large": pygame.font.Font(BASE_DIR / "fonts" / "font.ttf", 24)
+    "tiny": pygame.font.Font(BASE_DIR / "fonts" / "Supersonic Rocketship.ttf", 16),
+    "small": pygame.font.Font(BASE_DIR / "fonts" / "Supersonic Rocketship.ttf", 32),
+    "medium": pygame.font.Font(BASE_DIR / "fonts" / "Supersonic Rocketship.ttf", 40),
+    "mediumPlus": pygame.font.Font(BASE_DIR / "fonts" / "Supersonic Rocketship.ttf", 43),
+    "large": pygame.font.Font(BASE_DIR / "fonts" / "Supersonic Rocketship.ttf", 50)
 
 }
