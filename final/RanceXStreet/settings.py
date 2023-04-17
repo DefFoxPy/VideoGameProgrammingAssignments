@@ -29,7 +29,11 @@ BASE_DIR = pathlib.Path(__file__).parent
 #     'my_texture': pygame.image.load(BASE_DIR / "assets" / "graphics" / "my_texture.png")
 # }
 TEXTURES = {
-    "road_0": pygame.image.load(BASE_DIR / "graphics" / "object" / "road_0.png"),
+    "road_0_left": pygame.image.load(BASE_DIR / "graphics" / "object" / "road_0_left.png"),
+    "road_0_right": pygame.image.load(BASE_DIR / "graphics" / "object" / "road_0_right.png"),
+    "Soil_Tile": pygame.image.load(BASE_DIR / "graphics" / "object" / "Soil_Tile.png"),
+    "grass": pygame.image.load(BASE_DIR / "graphics" / "object" / "grass.png"),
+    "background": pygame.image.load(BASE_DIR / "graphics" / "background.png"),
     "startstate":pygame.image.load(BASE_DIR / "graphics" / "startstate.png"),
 }
 
