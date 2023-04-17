@@ -15,14 +15,12 @@ class StartState(BaseState):
         InputHandler.unregister_listener(self)
     
     def on_input(self, input_id: str, input_data: InputData) -> None:
-        if input_id == "move_down" and input_data.pressed and self.selected == 1:
-            self.selected = 2
-        elif input_id == "move_down" and input_data.pressed and self.selected == 2:
-            self.selected = 3
-        elif input_id == "move_up" and input_data.pressed and self.selected == 3:
-            self.selected = 2
-        elif input_id == "move_up" and input_data.pressed and self.selected == 2:
-            self.selected = 1
+        if input_id == "move_down" and input_data.pressed:
+            self.selected = min(3, self.selected + 1)
+
+        elif input_id == "move_up" and input_data.pressed:
+            self.selected = max(1, self.selected - 1) 
+
         elif input_id == "enter" and input_data.pressed:
 
             if self.selected == 1:
