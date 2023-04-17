@@ -22,6 +22,7 @@ class StartState(BaseState):
             self.selected = max(1, self.selected - 1) 
 
         elif input_id == "enter" and input_data.pressed:
+
             if self.selected == 1:
                 print("Play")
                 self.state_machine.change("play")
@@ -80,4 +81,7 @@ class StartState(BaseState):
             color,
             center= False,
         )
+        
+            
+        
         
