@@ -26,7 +26,6 @@ class Rancexstreet(Game, InputListener):
         self.state_machine.update(dt)
 
     def render(self, surface: pygame.Surface) -> None:
-        pass
         surface.fill([255,255,255])
         #surface.blit(settings.TEXTURES["road_0"], (0, 0))
         self.state_machine.render(surface)
