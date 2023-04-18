@@ -11,8 +11,9 @@ import settings
 
 from src import states
 
-class Rancexstreet(Game, InputListener):
+class Rancexstreet(Game):
     def init(self) -> None:
+        InputHandler.register_listener(self)
         self.state_machine = StateMachine(
             {   
                 "start": states.StartState,

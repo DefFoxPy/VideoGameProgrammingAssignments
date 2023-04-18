@@ -22,6 +22,8 @@ VIRTUAL_HEIGHT = 720
 WINDOW_WIDTH = 1280
 WINDOW_HEIGHT = 720
 
+PLAYER_SPEED = 250
+
 BASE_DIR = pathlib.Path(__file__).parent
 
 # Register your textures from the graphics folder, for instance:
@@ -34,7 +36,8 @@ TEXTURES = {
     "Soil_Tile": pygame.image.load(BASE_DIR / "graphics" / "object" / "Soil_Tile.png"),
     "grass": pygame.image.load(BASE_DIR / "graphics" / "object" / "grass.png"),
     "background": pygame.image.load(BASE_DIR / "graphics" / "background.png"),
-    "startstate":pygame.image.load(BASE_DIR / "graphics" / "startstate.png"),
+    "startstate": pygame.image.load(BASE_DIR / "graphics" / "startstate.png"),
+    "car1": pygame.image.load(BASE_DIR / "graphics" / "vehicle" / "Audi.png"),
 }
 
 # Register your frames, for instance:
