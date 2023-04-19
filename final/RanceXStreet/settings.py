@@ -34,7 +34,6 @@ TEXTURES = {
     "road_0_left": pygame.image.load(BASE_DIR / "graphics" / "object" / "road_0_left.png"),
     "road_0_right": pygame.image.load(BASE_DIR / "graphics" / "object" / "road_0_right.png"),
     "Soil_Tile": pygame.image.load(BASE_DIR / "graphics" / "object" / "Soil_Tile.png"),
-    "grass": pygame.image.load(BASE_DIR / "graphics" / "object" / "grass.png"),
     "background": pygame.image.load(BASE_DIR / "graphics" / "background.png"),
     "startstate": pygame.image.load(BASE_DIR / "graphics" / "startstate.png"),
     "car1": pygame.image.load(BASE_DIR / "graphics" / "vehicle" / "Audi.png"),

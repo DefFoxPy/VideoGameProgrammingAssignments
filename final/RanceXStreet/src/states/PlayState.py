@@ -21,7 +21,7 @@ class PlayState(BaseState):
 
     def update(self, dt: float) -> None:
         self.yRelativa = self.displayY % settings.VIRTUAL_HEIGHT
-        self.displayY += 15  
+        self.displayY += 30  
 
         self.player.update(dt)
 

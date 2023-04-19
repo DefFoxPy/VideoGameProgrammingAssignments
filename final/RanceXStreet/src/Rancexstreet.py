@@ -27,7 +27,7 @@ class Rancexstreet(Game):
         self.state_machine.update(dt)
 
     def render(self, surface: pygame.Surface) -> None:
-        surface.blit(settings.TEXTURES["Soil_Tile"],[0, 0])
+        #surface.blit(settings.TEXTURES["Soil_Tile"],[0, 0])
         self.state_machine.render(surface)
 
     def on_input(self, input_id: str, input_data: InputData) -> None:
