@@ -11,7 +11,7 @@ from src.Player import Player
 class CarSelectState(BaseState):
     def enter(self) -> None:
         self.player = Player((settings.VIRTUAL_WIDTH - settings.TEXTURES["car1"].get_width()) // 2 , (settings.VIRTUAL_HEIGHT - settings.TEXTURES["car1"].get_height()) // 2)
-        self.select = 0
+        self.player.rotate = 180
         self.retardo = False
         self.displayX = 0.0
         InputHandler.register_listener(self)

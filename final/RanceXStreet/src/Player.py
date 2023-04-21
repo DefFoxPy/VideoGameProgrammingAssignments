@@ -12,12 +12,11 @@ class Player:
         self.skin = 0
         self.vx = 0
         self.vy = 0
-        self.cambio = 0
+        self.rotate = 0
 
     def get_collision_rect(self) -> pygame.Rect:
         return pygame.Rect(self.x, self.y, self.width, self.height)
     
-
     def update(self, dt: float) -> None:
         next_x = self.x + self.vx * dt
         next_y = self.y + self.vy * dt
@@ -43,4 +42,4 @@ class Player:
             self.y = self.y + self.height
 
     def render(self, surface: pygame.Surface) -> None:
-        surface.blit(settings.TEXTURES["car"+str(self.skin)] , (self.x, self.y))
+        surface.blit(pygame.transform.rotate(settings.TEXTURES["car"+str(self.skin)],self.rotate) , (self.x, self.y))
