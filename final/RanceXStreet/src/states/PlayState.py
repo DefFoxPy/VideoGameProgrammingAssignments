@@ -8,32 +8,34 @@ from gale.text import render_text
 import settings
 from src.Player import Player
 
+
 class PlayState(BaseState):
     def enter(self, **params: dict) -> None:  
         self.posX = 610
         self.posY = settings.VIRTUAL_HEIGHT - 230 
         self.wallLeft = 460
         self.wallRight = 1000
-        self.player = Player(self.posX, self.posY)
+        self.player = params["player"]
+        self.player.x = self.posX
+        self.player.y = self.posY 
         self.displayX = 0
         self.displayY = 0
         InputHandler.register_listener(self)
 
     def update(self, dt: float) -> None:
         self.yRelativa = self.displayY % settings.VIRTUAL_HEIGHT
-        self.displayY += 30  
+        self.displayY += 50  
 
         self.player.update(dt)
 
     def render(self, surface: pygame.Surface) -> None:
-        surface.blit(settings.TEXTURES["Soil_Tile"],[self.displayX, self.yRelativa - settings.VIRTUAL_HEIGHT])
-        
+        surface.blit(settings.TEXTURES["Soil_Tile"],[self.displayX, self.yRelativa - settings.VIRTUAL_HEIGHT])        
         surface.blit(settings.TEXTURES["road_0_left"],[380, self.yRelativa - settings.VIRTUAL_HEIGHT])
         surface.blit(settings.TEXTURES["road_0_right"],[730, self.yRelativa - settings.VIRTUAL_HEIGHT])
         if self.yRelativa < settings.VIRTUAL_HEIGHT:
             surface.blit(settings.TEXTURES["Soil_Tile"],[self.displayX, self.yRelativa])
             surface.blit(settings.TEXTURES["road_0_left"],[380, self.yRelativa])
-        surface.blit(settings.TEXTURES["road_0_right"],[730, self.yRelativa])
+            surface.blit(settings.TEXTURES["road_0_right"],[730, self.yRelativa])
         self.player.render(surface)
         pygame.display.flip()
         

@@ -25,14 +25,14 @@ class StartState(BaseState):
 
             if self.selected == 1:
                 print("Play")
-                self.state_machine.change("play")
+                self.state_machine.change("carSelect")
             elif self.selected == 2:
                 print("Higt_score")
             else:
                 pygame.quit()
     
     def render(self, surface: pygame.surface) -> None:
-        surface.blit(settings.TEXTURES["startstate"], (0, 0))
+        surface.blit(settings.TEXTURES["startate"], (0, 0))
 
         color = (206,173,139)
         font = settings.FONTS["medium"]

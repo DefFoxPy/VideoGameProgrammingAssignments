@@ -30,13 +30,25 @@ BASE_DIR = pathlib.Path(__file__).parent
 # TEXTURES = {
 #     'my_texture': pygame.image.load(BASE_DIR / "assets" / "graphics" / "my_texture.png")
 # }
+
 TEXTURES = {
     "road_0_left": pygame.image.load(BASE_DIR / "graphics" / "object" / "road_0_left.png"),
     "road_0_right": pygame.image.load(BASE_DIR / "graphics" / "object" / "road_0_right.png"),
     "Soil_Tile": pygame.image.load(BASE_DIR / "graphics" / "object" / "Soil_Tile.png"),
     "background": pygame.image.load(BASE_DIR / "graphics" / "background.png"),
-    "startstate": pygame.image.load(BASE_DIR / "graphics" / "startstate.png"),
-    "car1": pygame.image.load(BASE_DIR / "graphics" / "vehicle" / "Audi.png"),
+    "EscenaStar": pygame.image.load(BASE_DIR / "graphics" / "EscenaStar.png"),
+    "EscenaSelect": pygame.image.load(BASE_DIR / "graphics" / "EscenaSelect.png"),
+    "cartel1": pygame.image.load(BASE_DIR / "graphics" / "cartel1.png"),
+    "carSelectState": pygame.image.load(BASE_DIR / "graphics" / "carSelectState.png"),
+    "startate": pygame.image.load(BASE_DIR / "graphics" / "startstate.png"),
+    "car0": pygame.image.load(BASE_DIR / "graphics" / "vehicle" / "Audi.png"),
+    "car1": pygame.image.load(BASE_DIR / "graphics" / "vehicle" / "Black_viper.png"),
+    "car2": pygame.image.load(BASE_DIR / "graphics" / "vehicle" / "Car.png"),
+    "car3": pygame.image.load(BASE_DIR / "graphics" / "vehicle" / "Mini_truck.png"),
+    "car4": pygame.image.load(BASE_DIR / "graphics" / "vehicle" / "Mini_van.png"),
+    "car5": pygame.image.load(BASE_DIR / "graphics" / "vehicle" / "Police.png"),
+    "car6": pygame.image.load(BASE_DIR / "graphics" / "vehicle" / "taxi.png"),
+    "car7": pygame.image.load(BASE_DIR / "graphics" / "vehicle" / "truck.png"),    
 }
 
 # Register your frames, for instance:

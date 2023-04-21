@@ -2,15 +2,17 @@
 import pygame
 import settings
 
+
 class Player:
     def __init__(self,x: int, y: int) -> None:
         self.x = x
         self.y = y
         self.width = 98
         self.height = 214
-
+        self.skin = 0
         self.vx = 0
         self.vy = 0
+        self.cambio = 0
 
     def get_collision_rect(self) -> pygame.Rect:
         return pygame.Rect(self.x, self.y, self.width, self.height)
@@ -19,7 +21,7 @@ class Player:
     def update(self, dt: float) -> None:
         next_x = self.x + self.vx * dt
         next_y = self.y + self.vy * dt
-      
+
         if self.vx < 0:
             self.x = max(0, next_x)
         else:
@@ -41,4 +43,4 @@ class Player:
             self.y = self.y + self.height
 
     def render(self, surface: pygame.Surface) -> None:
-        surface.blit(settings.TEXTURES["car1"], (self.x, self.y))
+        surface.blit(settings.TEXTURES["car"+str(self.skin)] , (self.x, self.y))
