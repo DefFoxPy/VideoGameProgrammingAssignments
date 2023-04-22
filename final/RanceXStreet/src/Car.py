@@ -25,7 +25,10 @@ class Car:
         self.y += 50
         if self.y > settings.VIRTUAL_HEIGHT:
             self.y = -settings.TEXTURES["car1"].get_height()
+            self.rotate = 180
             self.x = random.randint(0,3)
+            if self.x > 1:
+                self.rotate = 0
             self.skin = random.randint(0, settings.NUM_SKIN-1)
             print("posx", self.x)
         
