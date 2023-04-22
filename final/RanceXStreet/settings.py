@@ -25,7 +25,7 @@ WINDOW_HEIGHT = 720
 PLAYER_SPEED = 250
 NUM_SKIN = 8
 NUM_VIAS = 4
-
+POS_SET = [462, 575, 701, 822]
 BASE_DIR = pathlib.Path(__file__).parent
 
 # Register your textures from the graphics folder, for instance:

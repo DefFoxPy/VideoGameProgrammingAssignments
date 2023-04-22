@@ -13,8 +13,8 @@ class PlayState(BaseState):
     def enter(self, **params: dict) -> None:  
         self.player = params["player"]
         self.player.rotate = 0
-        self.player.x = 610
-        self.player.y = settings.VIRTUAL_HEIGHT - 230 
+        self.player.x = settings.POS_SET[1]
+        self.player.y = settings.VIRTUAL_HEIGHT - settings.TEXTURES["car1"].get_height()
         self.displayX = 0
         self.displayY = 0
         self.car = Car(posx = random.randint(0,settings.NUM_VIAS-1), skin= random.randint(0,settings.NUM_SKIN-1))
@@ -29,11 +29,11 @@ class PlayState(BaseState):
     def render(self, surface: pygame.Surface) -> None:
         surface.blit(settings.TEXTURES["Soil_Tile"],[self.displayX, self.yRelativa - settings.VIRTUAL_HEIGHT])        
         surface.blit(settings.TEXTURES["road_0_left"],[380, self.yRelativa - settings.VIRTUAL_HEIGHT])
-        surface.blit(settings.TEXTURES["road_0_right"],[730, self.yRelativa - settings.VIRTUAL_HEIGHT])
+        surface.blit(settings.TEXTURES["road_0_right"],[681, self.yRelativa - settings.VIRTUAL_HEIGHT])
         if self.yRelativa < settings.VIRTUAL_HEIGHT:
             surface.blit(settings.TEXTURES["Soil_Tile"],[self.displayX, self.yRelativa])
             surface.blit(settings.TEXTURES["road_0_left"],[380, self.yRelativa])
-            surface.blit(settings.TEXTURES["road_0_right"],[730, self.yRelativa])
+            surface.blit(settings.TEXTURES["road_0_right"],[681, self.yRelativa])
         self.car.render(surface)
         self.player.render(surface)        
         pygame.display.flip()

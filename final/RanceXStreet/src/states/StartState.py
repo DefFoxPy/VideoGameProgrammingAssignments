@@ -24,10 +24,9 @@ class StartState(BaseState):
         elif input_id == "enter" and input_data.pressed:
 
             if self.selected == 1:
-                print("Play")
                 self.state_machine.change("carSelect")
             elif self.selected == 2:
-                print("Higt_score")
+                pass
             else:
                 pygame.quit()
     

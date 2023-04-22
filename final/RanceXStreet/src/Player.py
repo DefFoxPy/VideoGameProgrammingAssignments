@@ -7,8 +7,8 @@ class Player:
     def __init__(self,x: int, y: int) -> None:
         self.x = x
         self.y = y
-        self.width = 98
-        self.height = 214
+        self.width = settings.TEXTURES["car1"].get_width()
+        self.height = settings.TEXTURES["car1"].get_height()
         self.skin = 0
         self.vx = 0
         self.vy = 0
@@ -31,10 +31,10 @@ class Player:
         else:
             self.y = min(settings.VIRTUAL_HEIGHT - self.height, next_y)
         
-        if self.x < 460:
-            self.x = 460
-        if self.x + self.width > 1000:
-            self.x = 1000 - self.width
+        if self.x < settings.POS_SET[0]:
+            self.x = settings.POS_SET[0]
+        if self.x > settings.POS_SET[3]:
+            self.x = settings.POS_SET[3]
 
         if self.y < 5:
             self.y = 5

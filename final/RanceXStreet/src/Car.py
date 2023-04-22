@@ -16,7 +16,6 @@ class Car:
         self.skin = skin
         self.vy = 0
         self.rotate = 180
-        self.posSet = [470, 610, 745, 883]
     
     def get_collision_rect(self) -> pygame.Rect:
         return pygame.Rect(self.x, self.y, self.width, self.height)
@@ -30,11 +29,8 @@ class Car:
             if self.x > 1:
                 self.rotate = 0
             self.skin = random.randint(0, settings.NUM_SKIN-1)
-            print("posx", self.x)
-        
-
 
     def render(self, surface: pygame.Surface) -> None:
-        surface.blit(pygame.transform.rotate(settings.TEXTURES["car"+str(self.skin)],self.rotate) , (self.posSet[self.x], self.y))
+        surface.blit(pygame.transform.rotate(settings.TEXTURES["car"+str(self.skin)],self.rotate) , (settings.POS_SET[self.x], self.y))
 
     
