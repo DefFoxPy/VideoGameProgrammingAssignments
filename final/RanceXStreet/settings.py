@@ -23,6 +23,8 @@ WINDOW_WIDTH = 1280
 WINDOW_HEIGHT = 720
 
 PLAYER_SPEED = 250
+NUM_SKIN = 8
+NUM_VIAS = 4
 
 BASE_DIR = pathlib.Path(__file__).parent
 

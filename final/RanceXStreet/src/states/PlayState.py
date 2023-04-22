@@ -1,5 +1,5 @@
 
-import pygame
+import pygame, random
 
 from gale.input_handler import InputHandler, InputData
 from gale.state_machine import BaseState
@@ -17,12 +17,13 @@ class PlayState(BaseState):
         self.player.y = settings.VIRTUAL_HEIGHT - 230 
         self.displayX = 0
         self.displayY = 0
-        self.car = Car(posx = 2, skin=5)
+        self.car = Car(posx = random.randint(0,settings.NUM_VIAS-1), skin= random.randint(0,settings.NUM_SKIN-1))
         InputHandler.register_listener(self)
 
     def update(self, dt: float) -> None:
         self.yRelativa = self.displayY % settings.VIRTUAL_HEIGHT
         self.displayY += 50  
+        self.car.update(dt)
         self.player.update(dt)
 
     def render(self, surface: pygame.Surface) -> None:
