@@ -19,12 +19,15 @@ class PlayState(BaseState):
         self.displayY = 0
         self.car = Car(posx = random.randint(0,settings.NUM_VIAS-1), skin= random.randint(0,settings.NUM_SKIN-1))
         InputHandler.register_listener(self)
-
+        
     def update(self, dt: float) -> None:
-        self.yRelativa = self.displayY % settings.VIRTUAL_HEIGHT
-        self.displayY += 50  
-        self.car.update(dt)
         self.player.update(dt)
+        self.car.update(dt)
+        self.yRelativa = self.displayY % settings.VIRTUAL_HEIGHT
+        self.displayY += 50          
+        
+        if self.car.collides(self.player):
+            print("colision")
 
     def render(self, surface: pygame.Surface) -> None:
         surface.blit(settings.TEXTURES["Soil_Tile"],[self.displayX, self.yRelativa - settings.VIRTUAL_HEIGHT])        
@@ -34,8 +37,9 @@ class PlayState(BaseState):
             surface.blit(settings.TEXTURES["Soil_Tile"],[self.displayX, self.yRelativa])
             surface.blit(settings.TEXTURES["road_0_left"],[380, self.yRelativa])
             surface.blit(settings.TEXTURES["road_0_right"],[681, self.yRelativa])
+        self.player.render(surface)  
         self.car.render(surface)
-        self.player.render(surface)        
+              
         pygame.display.flip()
             
     def on_input(self, input_id: str, input_data: InputData) -> None:

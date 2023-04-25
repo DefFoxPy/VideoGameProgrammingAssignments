@@ -1,9 +1,7 @@
 
 import pygame, random
 
-from gale.input_handler import InputHandler, InputData
-from gale.state_machine import BaseState
-from gale.text import render_text
+from typing import Any
 
 import settings
 
@@ -18,7 +16,10 @@ class Car:
         self.rotate = 180
     
     def get_collision_rect(self) -> pygame.Rect:
-        return pygame.Rect(self.x, self.y, self.width, self.height)
+        return pygame.Rect(settings.POS_SET[self.x], self.y, self.width, self.height)
+    
+    def collides(self, another: Any) -> bool:
+        return self.get_collision_rect().colliderect(another.get_collision_rect())
     
     def update(self, dt: float) -> None:
         self.y += 50

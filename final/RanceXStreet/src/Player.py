@@ -14,9 +14,10 @@ class Player:
         self.vy = 0
         self.rotate = 0
 
+
     def get_collision_rect(self) -> pygame.Rect:
         return pygame.Rect(self.x, self.y, self.width, self.height)
-    
+   
     def update(self, dt: float) -> None:
         next_x = self.x + self.vx * dt
         next_y = self.y + self.vy * dt
