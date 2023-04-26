@@ -8,6 +8,8 @@ import pygame
 from gale import frames
 from gale import input_handler
 
+from src.utilities.frames import generate_icons_frames
+
 input_handler.InputHandler.set_keyboard_action(input_handler.KEY_ESCAPE, 'quit')
 input_handler.InputHandler.set_keyboard_action(input_handler.KEY_RETURN, "enter")
 input_handler.InputHandler.set_keyboard_action(input_handler.KEY_UP, "move_up")
@@ -27,6 +29,8 @@ NUM_SKIN = 8
 NUM_VIAS = 4
 POS_SET = [462, 575, 701, 822]
 BASE_DIR = pathlib.Path(__file__).parent
+ICON_HEIGHT = 81.8
+ICON_WIDHT = 80.9
 
 # Register your textures from the graphics folder, for instance:
 # TEXTURES = {
@@ -43,6 +47,7 @@ TEXTURES = {
     "cartel1": pygame.image.load(BASE_DIR / "graphics" / "cartel1.png"),
     "carSelectState": pygame.image.load(BASE_DIR / "graphics" / "carSelectState.png"),
     "startate": pygame.image.load(BASE_DIR / "graphics" / "startstate.png"),
+    "icons": pygame.image.load(BASE_DIR / "graphics" / "icons.png"),
     "car0": pygame.image.load(BASE_DIR / "graphics" / "vehicle" / "Audi.png"),
     "car1": pygame.image.load(BASE_DIR / "graphics" / "vehicle" / "Black_viper.png"),
     "car2": pygame.image.load(BASE_DIR / "graphics" / "vehicle" / "Car.png"),
@@ -57,7 +62,9 @@ TEXTURES = {
 # FRAMES = {
 #     'my_frames': frames.generate_frames(TEXTURES['my_texture'], 16, 16)
 # }
-FRAMES = {}
+FRAMES = {
+    "list_icons": generate_icons_frames(),
+}
 
 pygame.mixer.init()
 
