@@ -23,13 +23,9 @@ class Car:
     
     def update(self, dt: float) -> None:
         self.y += 50
-        if self.y > settings.VIRTUAL_HEIGHT:
-            self.y = -settings.TEXTURES["car1"].get_height()
-            self.rotate = 180
-            self.x = random.randint(0,3)
-            if self.x > 1:
-                self.rotate = 0
-            self.skin = random.randint(0, settings.NUM_SKIN-1)
+        self.rotate = 180
+        if self.x > 1:
+            self.rotate = 0
 
     def render(self, surface: pygame.Surface) -> None:
         surface.blit(pygame.transform.rotate(settings.TEXTURES["car"+str(self.skin)],self.rotate) , (settings.POS_SET[self.x], self.y))
