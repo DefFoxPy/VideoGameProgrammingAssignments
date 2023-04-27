@@ -21,6 +21,7 @@ class PlayState(BaseState):
         self.car_list = []
         self.time_car = 0
         self.time_game_over = 0
+        self.old_posx_car = -1
         
         InputHandler.register_listener(self)
         
@@ -29,8 +30,12 @@ class PlayState(BaseState):
         self.yRelativa = self.displayY % settings.VIRTUAL_HEIGHT
         self.displayY += 50         
         self.time_car += 1 
-        if self.time_car == 8:
-            car = Car(posx = random.randint(0,settings.NUM_VIAS-1), skin= random.randint(0,settings.NUM_SKIN-1))
+        if self.time_car == settings.GENERATE_CAR:
+            aux_pos = random.randint(0,settings.NUM_VIAS-1)
+            while aux_pos == self.old_posx_car:
+                aux_pos = random.randint(0, settings.NUM_VIAS-1)
+            car = Car(posx = aux_pos, skin= random.randint(0,settings.NUM_SKIN-1))
+            self.old_posx_car = aux_pos
             self.car_list.append(car)
             self.time_car = 0
 
