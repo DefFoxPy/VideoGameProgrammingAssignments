@@ -30,9 +30,6 @@ class PlayState(BaseState):
         self.displayY += 50         
         self.time_car += 1
         self.score += 1
-        if self.time_car == 8:
-            car = Car(posx = random.randint(0,settings.NUM_VIAS-1), skin= random.randint(0,settings.NUM_SKIN-1))
-        self.time_car += 1 
         if self.time_car == settings.GENERATE_CAR:
             aux_pos = random.randint(0,settings.NUM_VIAS-1)
             while aux_pos == self.old_posx_car:
