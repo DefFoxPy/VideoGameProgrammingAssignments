@@ -4,7 +4,6 @@ import pygame, random
 from gale.input_handler import InputHandler, InputData
 from gale.state_machine import BaseState
 from gale.text import render_text
-from typing import Dict, Tuple
 
 import settings
 
@@ -21,6 +20,7 @@ class PlayState(BaseState):
         self.car_list = []
         self.time_car = 0
         self.time_game_over = 0
+        self.score = 0
         
         InputHandler.register_listener(self)
         
@@ -28,7 +28,8 @@ class PlayState(BaseState):
         self.player.update(dt)
         self.yRelativa = self.displayY % settings.VIRTUAL_HEIGHT
         self.displayY += 50         
-        self.time_car += 1 
+        self.time_car += 1
+        self.score += 1
         if self.time_car == 8:
             car = Car(posx = random.randint(0,settings.NUM_VIAS-1), skin= random.randint(0,settings.NUM_SKIN-1))
             self.car_list.append(car)
@@ -55,7 +56,25 @@ class PlayState(BaseState):
         self.player.render(surface)  
         for car in self.car_list:
             car.render(surface)
-
+        
+        render_text(
+            surface,
+            "Score:",
+            settings.FONTS["mediumPlus"],
+            100,
+            90,
+            (0, 0, 0),
+            center= True,
+        )
+        render_text(
+            surface,
+            "Km: " + str(self.score/100),
+            settings.FONTS["medium"],
+            100,
+            133,
+            (255, 175,37),
+            center= False,
+        )
         pygame.display.flip()
             
     def on_input(self, input_id: str, input_data: InputData) -> None:
