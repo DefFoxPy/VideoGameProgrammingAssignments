@@ -19,6 +19,7 @@ class Rancexstreet(Game):
                 "start": states.StartState,
                 "carSelect": states.CarSelectState,
                 "play": states.PlayState,
+                "gameOver": states.GameOverState,
             }
         )
         self.state_machine.change("start")

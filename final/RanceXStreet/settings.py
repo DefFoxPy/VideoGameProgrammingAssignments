@@ -85,6 +85,7 @@ pygame.font.init()
 FONTS = {
     "tiny": pygame.font.Font(BASE_DIR / "fonts" / "Supersonic Rocketship.ttf", 16),
     "small": pygame.font.Font(BASE_DIR / "fonts" / "Supersonic Rocketship.ttf", 32),
+    "smallPlus": pygame.font.Font(BASE_DIR / "fonts" / "Supersonic Rocketship.ttf", 35),
     "medium": pygame.font.Font(BASE_DIR / "fonts" / "Supersonic Rocketship.ttf", 40),
     "mediumPlus": pygame.font.Font(BASE_DIR / "fonts" / "Supersonic Rocketship.ttf", 43),
     "large": pygame.font.Font(BASE_DIR / "fonts" / "Supersonic Rocketship.ttf", 50)
