@@ -17,9 +17,6 @@ class Car:
     
     def get_collision_rect(self) -> pygame.Rect:
         return pygame.Rect(settings.POS_SET[self.x], self.y, self.width, self.height)
-
-    def get_posx(self):
-        return self.x
     
     def collides(self, another: Any) -> bool:
         return self.get_collision_rect().colliderect(another.get_collision_rect())
