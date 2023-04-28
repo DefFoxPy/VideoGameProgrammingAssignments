@@ -12,10 +12,10 @@ class PlayState(BaseState):
     def enter(self, **params: dict) -> None:  
         self.player = params["player"]
         self.car_list = params["car_list"]
-        self.score = params["score"]
-        self.time_car = params["datos"][0]
-        self.old_posx_car = params["datos"][1]
-        self.old_skin_car = params["datos"][2]
+        self.score = params["datos"][0]
+        self.time_car = params["datos"][1]
+        self.old_posx_car = params["datos"][2]
+        self.old_skin_car = params["datos"][3]
         self.player.rotate = 0
         self.displayX = 0
         self.displayY = 0
@@ -85,7 +85,7 @@ class PlayState(BaseState):
             
     def on_input(self, input_id: str, input_data: InputData) -> None:
         if input_id == 'pause':
-            self.state_machine.change("pause", player=self.player ,score=self.score, car_list=self.car_list, datos=[self.time_car, self.old_posx_car, self.old_skin_car])
+            self.state_machine.change("pause", player=self.player ,score=self.score, car_list=self.car_list, datos=[self.score, self.time_car, self.old_posx_car, self.old_skin_car])
         elif input_id == "move_left":
             if input_data.pressed:
                 self.player.vx = -settings.PLAYER_SPEED
