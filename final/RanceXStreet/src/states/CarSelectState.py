@@ -30,7 +30,7 @@ class CarSelectState(BaseState):
         elif input_id == "move_left" and input_data.pressed:
             self.player.skin = max(0, self.player.skin - 1)
         elif input_id == "enter" and input_data.pressed and self.retardo:
-            self.state_machine.change("play", player=self.player)
+            self.state_machine.change("play", player=self.player, score=0, car_list=[], datos=[0, -1, -1])
 
     def render(self, surface: pygame.Surface) -> None:    
         if self.displayX < settings.VIRTUAL_WIDTH:
