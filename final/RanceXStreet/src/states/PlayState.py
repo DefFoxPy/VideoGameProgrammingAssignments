@@ -4,7 +4,6 @@ import pygame, random
 from gale.input_handler import InputHandler, InputData
 from gale.state_machine import BaseState
 from gale.text import render_text
-
 import settings
 
 from src.Car import Car
@@ -21,6 +20,7 @@ class PlayState(BaseState):
         self.time_car = 0
         self.time_game_over = 0
         self.score = 0
+        self.old_posx_car = -1
         
         InputHandler.register_listener(self)
         
@@ -32,6 +32,13 @@ class PlayState(BaseState):
         self.score += 1
         if self.time_car == 8:
             car = Car(posx = random.randint(0,settings.NUM_VIAS-1), skin= random.randint(0,settings.NUM_SKIN-1))
+        self.time_car += 1 
+        if self.time_car == settings.GENERATE_CAR:
+            aux_pos = random.randint(0,settings.NUM_VIAS-1)
+            while aux_pos == self.old_posx_car:
+                aux_pos = random.randint(0, settings.NUM_VIAS-1)
+            car = Car(posx = aux_pos, skin= random.randint(0,settings.NUM_SKIN-1))
+            self.old_posx_car = aux_pos
             self.car_list.append(car)
             self.time_car = 0
 
