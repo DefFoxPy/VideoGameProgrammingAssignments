@@ -46,7 +46,9 @@ TEXTURES = {
     "background": pygame.image.load(BASE_DIR / "graphics" / "background.png"),
     "EscenaStar": pygame.image.load(BASE_DIR / "graphics" / "EscenaStar.png"),
     "EscenaSelect": pygame.image.load(BASE_DIR / "graphics" / "EscenaSelect.png"),
+    "EscenaGameOver": pygame.image.load(BASE_DIR / "graphics" / "EscenaGameOver.png"),
     "cartel1": pygame.image.load(BASE_DIR / "graphics" / "cartel1.png"),
+    "cartel2": pygame.image.load(BASE_DIR / "graphics" / "cartel2.png"),
     "carSelectState": pygame.image.load(BASE_DIR / "graphics" / "carSelectState.png"),
     "startate": pygame.image.load(BASE_DIR / "graphics" / "startstate.png"),
     "icons": pygame.image.load(BASE_DIR / "graphics" / "icons.png"),
@@ -88,6 +90,6 @@ FONTS = {
     "smallPlus": pygame.font.Font(BASE_DIR / "fonts" / "Supersonic Rocketship.ttf", 35),
     "medium": pygame.font.Font(BASE_DIR / "fonts" / "Supersonic Rocketship.ttf", 40),
     "mediumPlus": pygame.font.Font(BASE_DIR / "fonts" / "Supersonic Rocketship.ttf", 43),
-    "large": pygame.font.Font(BASE_DIR / "fonts" / "Supersonic Rocketship.ttf", 50)
-
+    "large": pygame.font.Font(BASE_DIR / "fonts" / "Supersonic Rocketship.ttf", 50),
+    "largePlus": pygame.font.Font(BASE_DIR / "fonts" / "Supersonic Rocketship.ttf", 60),
 }
