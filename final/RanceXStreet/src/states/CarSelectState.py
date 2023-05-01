@@ -10,8 +10,8 @@ from src.Player import Player
 
 class CarSelectState(BaseState):
     def enter(self) -> None:
-        self.player = Player((settings.VIRTUAL_WIDTH - settings.TEXTURES["car1"].get_width()) // 2 , (settings.VIRTUAL_HEIGHT - settings.TEXTURES["car1"].get_height()) // 2)
-        self.player.rotate = 180
+        self.player = Player((settings.VIRTUAL_WIDTH - settings.CAR_WIDTH) // 2 , (settings.VIRTUAL_HEIGHT - settings.CAR_HEIGHT) // 2)
+        self.player.rotate = 0
         self.retardo = False
         self.displayX = 0.0
         self.display = True
@@ -32,9 +32,13 @@ class CarSelectState(BaseState):
 
     def on_input(self, input_id: str, input_data: InputData) -> None:
         if input_id == "move_right" and input_data.pressed:           
-            self.player.skin = min(7, self.player.skin + 1)
+            self.player.skin = min(8, self.player.skin + 1)
         elif input_id == "move_left" and input_data.pressed:
             self.player.skin = max(0, self.player.skin - 1)
+        elif input_id == "move_down" and input_data.pressed:
+            self.player.set = min(3, self.player.set + 1)
+        elif input_id == "move_up" and input_data.pressed:
+            self.player.set = max(0, self.player.set - 1)
         elif input_id == "enter" and input_data.pressed and self.retardo:
             self.state_machine.change("play", player=self.player, car_list=[], datos=[0, 0, -1, -1])
 
@@ -81,7 +85,7 @@ class CarSelectState(BaseState):
 
             #icon right                        
             self.player.render(surface)
-            if self.player.skin == 7:
+            if self.player.skin == 8:
                 surface.blit(settings.TEXTURES["icons"], ((settings.VIRTUAL_WIDTH) // 2 + 130, (settings.VIRTUAL_HEIGHT) // 2 - 45), settings.FRAMES["list_icons"][3]) 
             else:
                 surface.blit(settings.TEXTURES["icons"], ((settings.VIRTUAL_WIDTH) // 2 + 130, (settings.VIRTUAL_HEIGHT) // 2 - 40), settings.FRAMES["list_icons"][27]) 

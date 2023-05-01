@@ -23,7 +23,8 @@ def generate_cars_frames() ->List[pygame.Rect]:
     x = 0
     y = 0
     frames = []
-    for f in range(8):
+    for c in range(9):
         frames.append(pygame.Rect(x,y, settings.CAR_WIDTH , settings.CAR_HEIGHT))
-        x += settings.CAR_WIDTH    
+        x += settings.CAR_WIDTH 
+          
     return frames

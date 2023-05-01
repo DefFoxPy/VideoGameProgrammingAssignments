@@ -10,6 +10,7 @@ class Player:
         self.width = settings.TEXTURES["car1"].get_width()
         self.height = settings.TEXTURES["car1"].get_height()
         self.skin = 0
+        self.set = 0
         self.vx = 0
         self.vy = 0
         self.rotate = 0
@@ -42,4 +43,7 @@ class Player:
             self.y = self.y + self.height
 
     def render(self, surface: pygame.Surface) -> None:
-        surface.blit(pygame.transform.rotate(settings.TEXTURES["car"+str(self.skin)],self.rotate) , (self.x, self.y))
+        surface.blit(pygame.transform.rotate(settings.TEXTURES["Set_vehicle"+str(self.set)],self.rotate) , (self.x, self.y), settings.FRAMES["list_cars"][self.skin])
+        #surface.blit(pygame.transform.rotate(settings.TEXTURES["Set_vehicle0"],self.rotate) , (self.x, self.y), settings.FRAMES["list_cars"][1])
+        #surface.blit(settings.TEXTURES["Set_vehicle"+str(self.set)], (self.x, self.y), settings.FRAMES["list_cars"][self.skin])
+    #surface.blit(settings.TEXTURES["icons"], ((settings.VIRTUAL_WIDTH) // 2 + 130, (settings.VIRTUAL_HEIGHT) // 2 - 45), settings.FRAMES["list_icons"][3]) 
