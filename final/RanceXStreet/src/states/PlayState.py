@@ -7,6 +7,7 @@ from gale.text import render_text
 import settings
 
 from src.Car import Car
+from src.World import World
 
 class PlayState(BaseState):
     def enter(self, **params: dict) -> None:  
@@ -20,13 +21,12 @@ class PlayState(BaseState):
         self.displayX = 0
         self.displayY = 0
         self.time_game_over = 0
-        
+        self.world = World()        
         InputHandler.register_listener(self)
         
     def update(self, dt: float) -> None:
-        self.player.update(dt)
-        self.yRelativa = self.displayY % settings.VIRTUAL_HEIGHT
-        self.displayY += 50         
+        self.world.update(dt, self.score/100)
+        self.player.update(dt)            
         self.time_car += 1
         self.score += 1
         if self.time_car == settings.GENERATE_CAR:
@@ -53,39 +53,16 @@ class PlayState(BaseState):
                 self.car_list.pop(0)
             
     def render(self, surface: pygame.Surface) -> None:
-        surface.blit(settings.TEXTURES["Soil_Tile"],[self.displayX, self.yRelativa - settings.VIRTUAL_HEIGHT])        
-        surface.blit(settings.TEXTURES["road_0_left"],[380, self.yRelativa - settings.VIRTUAL_HEIGHT])
-        surface.blit(settings.TEXTURES["road_0_right"],[681, self.yRelativa - settings.VIRTUAL_HEIGHT])
-        if self.yRelativa < settings.VIRTUAL_HEIGHT:
-            surface.blit(settings.TEXTURES["Soil_Tile"],[self.displayX, self.yRelativa])
-            surface.blit(settings.TEXTURES["road_0_left"],[380, self.yRelativa])
-            surface.blit(settings.TEXTURES["road_0_right"],[681, self.yRelativa])
+        self.world.render(surface)
         self.player.render(surface)  
         for car in self.car_list:
             car.render(surface)
-        render_text(
-            surface,
-            "Score:",
-            settings.FONTS["mediumPlus"],
-            100,
-            90,
-            (0, 0, 0),
-            center= True,
-        )
-        render_text(
-            surface,
-            "Km: " + str(self.score/100),
-            settings.FONTS["medium"],
-            100,
-            133,
-            (255, 175,38),
-            center= False,
-        )        
+               
         pygame.display.flip()
             
     def on_input(self, input_id: str, input_data: InputData) -> None:
         if input_id == 'pause':
-            self.state_machine.change("pause", player=self.player ,score=self.score, car_list=self.car_list, datos=[self.score, self.time_car, self.old_posx_car, self.old_skin_car])
+            self.state_machine.change("pause", player=self.player ,score=self.score, car_list=self.car_list, datos=[self.score, self.time_car, self.old_posx_car, self.old_skin_car], world = self.world)
         elif input_id == "move_left":
             if input_data.pressed:
                 self.player.vx = -settings.PLAYER_SPEED

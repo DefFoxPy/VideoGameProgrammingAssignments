@@ -78,7 +78,7 @@ class GameOverState(BaseState):
             "Restart",
             font,
             850 - settings.ICON_WIDHT - 90,
-            380 + settings.ICON_HEIGHT + 25,
+            380 + settings.ICON_HEIGTH + 25,
             color,
             center= False,
         )
@@ -94,7 +94,7 @@ class GameOverState(BaseState):
             "Home",
             font,
             850,
-            380 + settings.ICON_HEIGHT + 25,
+            380 + settings.ICON_HEIGTH + 25,
             color,
             center= False,
         )
@@ -110,7 +110,7 @@ class GameOverState(BaseState):
             "Exit",
             font,
             850 + settings.ICON_WIDHT + 80,
-            380 + settings.ICON_HEIGHT + 25,
+            380 + settings.ICON_HEIGTH + 25,
             color,
             center= False,
         )
