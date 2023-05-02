@@ -40,7 +40,7 @@ class PlayState(BaseState):
             self.car_list.append(car)
             self.old_posx_car.append(aux_pos)
             self.old_skin_car.append(aux_skin)
-            if len(self.old_posx_car) == 4:
+            if len(self.old_posx_car) == settings.NUM_VIAS:
                 self.old_posx_car.pop(0)
             if len(self.old_skin_car) == settings.NUM_SKIN//2:
                 self.old_skin_car.pop(0)
@@ -55,7 +55,7 @@ class PlayState(BaseState):
                     self.state_machine.change("gameOver",self.score / 100)
             if car.y > settings.VIRTUAL_HEIGHT:
                 self.car_list.pop(0)
-            
+
     def render(self, surface: pygame.Surface) -> None:
         self.world.render(surface)
         self.player.render(surface)  
