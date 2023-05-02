@@ -22,7 +22,7 @@ class Car:
         return self.get_collision_rect().colliderect(another.get_collision_rect())
     
     def update(self, dt: float) -> None:
-        self.y += settings.CAR_SPEED
+        self.y += settings.CAR_SPEED[self.skin]
         self.rotate = 180
         if self.x > 1:
             self.rotate = 0

@@ -29,17 +29,21 @@ class PlayState(BaseState):
         self.player.update(dt)            
         self.time_car += 1
         self.score += 1
-        if self.time_car == settings.GENERATE_CAR:
+        if self.time_car >= settings.GENERATE_CAR * random.randint(1, max(1, 1-self.score//100)):
             aux_pos = random.randint(0,settings.NUM_VIAS-1)
             aux_skin = random.randint(0,settings.NUM_SKIN-1)
-            while aux_pos == self.old_posx_car:
+            while aux_pos in self.old_posx_car:
                 aux_pos = random.randint(0, settings.NUM_VIAS-1)
-            while aux_skin == self.old_skin_car:
+            while aux_skin in self.old_skin_car:
                 aux_skin = random.randint(0,settings.NUM_SKIN-1)
             car = Car(posx = aux_pos, skin= aux_skin)
-            self.old_posx_car = aux_pos
-            self.old_skin_car = aux_skin
             self.car_list.append(car)
+            self.old_posx_car.append(aux_pos)
+            self.old_skin_car.append(aux_skin)
+            if len(self.old_posx_car) == 4:
+                self.old_posx_car.pop(0)
+            if len(self.old_skin_car) == settings.NUM_SKIN//2:
+                self.old_skin_car.pop(0)
             self.time_car = 0
 
         for car in self.car_list:
