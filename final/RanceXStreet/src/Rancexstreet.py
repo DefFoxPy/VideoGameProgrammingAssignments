@@ -21,6 +21,8 @@ class Rancexstreet(Game):
                 "play": states.PlayState,
                 "gameOver": states.GameOverState,
                 "pause": states.PauseState, 
+                "highScore": states.HighScoreState,
+                "enterHighScore" : states.EnterHighScorestate,
             }
         )
         self.state_machine.change("start")

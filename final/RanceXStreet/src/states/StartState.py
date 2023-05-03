@@ -26,7 +26,7 @@ class StartState(BaseState):
             if self.selected == 1:
                 self.state_machine.change("carSelect")
             elif self.selected == 2:
-                pass
+                self.state_machine.change("highScore")
             else:
                 pygame.quit()
     

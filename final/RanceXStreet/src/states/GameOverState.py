@@ -12,6 +12,7 @@ class GameOverState(BaseState):
         self.selected = 2
         self.time_display = 0
         self.display = True
+        self.list_icons = [14, 18, 8]
         InputHandler.register_listener(self)
     
     def exit(self) -> None:
@@ -36,7 +37,7 @@ class GameOverState(BaseState):
             elif self.selected == 2:
                 self.state_machine.change("start")
             else:
-                pygame.quit()
+                self.state_machine.change("highScore")
         
     def render(self, surface: pygame.Surface) -> None:
         surface.blit(settings.TEXTURES["EscenaGameOver"], (0, 0))
@@ -59,7 +60,7 @@ class GameOverState(BaseState):
 
         render_text(
             surface,
-            "Your score: " + str(self.score) + "km",
+            "Your score: " + str(self.score) + " km",
             font_display,
             875,
             290,
@@ -69,10 +70,11 @@ class GameOverState(BaseState):
        
         color = (206,173,139)
         font = settings.FONTS["small"]
+        self.list_icons[0] = 14
         if self.selected == 1:
-            color = (255, 175,37)
+            color = (0, 0, 0)
             font = settings.FONTS["smallPlus"]
-        
+            self.list_icons[0] = 38        
         render_text(
             surface,
             "Restart",
@@ -85,8 +87,10 @@ class GameOverState(BaseState):
 
         color = (206,173,139)
         font = settings.FONTS["small"]
+        self.list_icons[1] = 18
         if self.selected == 2:
-            color = (255, 175,37)
+            self.list_icons[1] = 42
+            color = (0, 0, 0)
             font = settings.FONTS["smallPlus"]
         
         render_text(
@@ -101,32 +105,23 @@ class GameOverState(BaseState):
 
         color = (206,173,139)
         font = settings.FONTS["small"]
+        self.list_icons[2] = 8
         if self.selected == 3:
-            color = (255, 175,37)
+            color = (0, 0, 0)
             font = settings.FONTS["smallPlus"]
+            self.list_icons[2] = 32
         
         render_text(
             surface,
-            "Exit",
+            "High Score",
             font,
-            850 + settings.ICON_WIDHT + 80,
+            850 + settings.ICON_WIDHT + 30,
             380 + settings.ICON_HEIGTH + 25,
             color,
             center= False,
         )
 
-        if self.selected == 1:
-            surface.blit(settings.TEXTURES["icons"], (850 - settings.ICON_WIDHT -70, 380), settings.FRAMES["list_icons"][38])
-        else:
-            surface.blit(settings.TEXTURES["icons"], (850 - settings.ICON_WIDHT -70, 380), settings.FRAMES["list_icons"][14])
-
-        if self.selected == 2:
-            surface.blit(settings.TEXTURES["icons"], (850,380), settings.FRAMES["list_icons"][42])
-        else:
-            surface.blit(settings.TEXTURES["icons"], (850,380), settings.FRAMES["list_icons"][18])
-
-        if self.selected == 3:
-            surface.blit(settings.TEXTURES["icons"], (850 + settings.ICON_WIDHT + 70, 380), settings.FRAMES["list_icons"][33])
-        else:
-            surface.blit(settings.TEXTURES["icons"], (850 + settings.ICON_WIDHT + 70, 380), settings.FRAMES["list_icons"][9])
-
+        surface.blit(settings.TEXTURES["icons"], (850 - settings.ICON_WIDHT -70, 380), settings.FRAMES["list_icons"][self.list_icons[0]])
+        surface.blit(settings.TEXTURES["icons"], (850,380), settings.FRAMES["list_icons"][self.list_icons[1]])
+        surface.blit(settings.TEXTURES["icons"], (850 + settings.ICON_WIDHT + 70, 380), settings.FRAMES["list_icons"][self.list_icons[2]])
+ 

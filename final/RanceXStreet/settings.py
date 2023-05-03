@@ -38,7 +38,7 @@ ICON_HEIGTH = 81.8
 ICON_WIDHT = 80.9
 CAR_HEIGHT = 164
 CAR_WIDTH = 75
-
+NUM_HIGHSCORES = 10
 # Register your textures from the graphics folder, for instance:
 # TEXTURES = {
 #     'my_texture': pygame.image.load(BASE_DIR / "assets" / "graphics" / "my_texture.png")

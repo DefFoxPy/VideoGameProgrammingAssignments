@@ -52,7 +52,7 @@ class PlayState(BaseState):
                 print("colision")
                 self.time_game_over += 1
                 if self.time_game_over == 2: ## para crear el efecto de humo
-                    self.state_machine.change("gameOver",self.score / 100)
+                    self.state_machine.change("enterHighScore",self.score / 100)
             if car.y > settings.VIRTUAL_HEIGHT:
                 self.car_list.pop(0)
 
