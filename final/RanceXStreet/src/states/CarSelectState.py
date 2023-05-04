@@ -57,14 +57,14 @@ class CarSelectState(BaseState):
             settings.FONTS["largePlus"],
             settings.VIRTUAL_WIDTH // 2,
             110,
-            (0, 0, 0),
+            settings.COLOR_BLACK,
             center= True,
             )
 
-            color_display = (206,173,139)
+            color_display = settings.COLOR_LIGHT
             font_display = settings.FONTS["medium"]
             if self.display:
-                color_display = (255, 175,37)
+                color_display = settings.COLOR_ORANGE
                 font_display = settings.FONTS["mediumPlus"]
 
             render_text(

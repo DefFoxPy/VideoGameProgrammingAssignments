@@ -38,7 +38,13 @@ ICON_HEIGTH = 81.8
 ICON_WIDHT = 80.9
 CAR_HEIGHT = 164
 CAR_WIDTH = 75
-NUM_HIGHSCORES = 10
+NUM_HIGHSCORES = 7
+
+COLOR_BLACK = (0 , 0, 0)
+COLOR_ORANGE = (249, 154, 2)
+COLOR_ORANGE_DARK = (240, 38, 10)
+COLOR_LIGHT = (206,173,139)
+
 # Register your textures from the graphics folder, for instance:
 # TEXTURES = {
 #     'my_texture': pygame.image.load(BASE_DIR / "assets" / "graphics" / "my_texture.png")
@@ -54,6 +60,8 @@ TEXTURES = {
     "EscenaGameOver": pygame.image.load(BASE_DIR / "graphics" / "EscenaGameOver.png"),
     "cartel1": pygame.image.load(BASE_DIR / "graphics" / "cartel1.png"),
     "cartel2": pygame.image.load(BASE_DIR / "graphics" / "cartel2.png"),
+    "cartel3": pygame.image.load(BASE_DIR / "graphics" / "cartel3.png"),
+    "cartel4": pygame.image.load(BASE_DIR / "graphics" / "cartel4.png"),
     "carSelectState": pygame.image.load(BASE_DIR / "graphics" / "carSelectState.png"),
     "startate": pygame.image.load(BASE_DIR / "graphics" / "startstate.png"),
     "icons": pygame.image.load(BASE_DIR / "graphics" / "icons.png"),
@@ -95,7 +103,7 @@ pygame.font.init()
 #     'small': pygame.font.Font(BASE_DIR / "assets"  / "fonts" / "font.ttf", 8)
 # }
 FONTS = {
-    "tiny": pygame.font.Font(BASE_DIR / "fonts" / "Supersonic Rocketship.ttf", 16),
+    "tiny": pygame.font.Font(BASE_DIR / "fonts" / "Supersonic Rocketship.ttf", 20),
     "small": pygame.font.Font(BASE_DIR / "fonts" / "Supersonic Rocketship.ttf", 32),
     "smallPlus": pygame.font.Font(BASE_DIR / "fonts" / "Supersonic Rocketship.ttf", 35),
     "medium": pygame.font.Font(BASE_DIR / "fonts" / "Supersonic Rocketship.ttf", 40),

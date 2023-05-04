@@ -52,7 +52,7 @@ class PlayState(BaseState):
                 print("colision")
                 self.time_game_over += 1
                 if self.time_game_over == 2: ## para crear el efecto de humo
-                    self.state_machine.change("enterHighScore",self.score / 100)
+                    self.state_machine.change("enterHighScore",score = self.score / 100,world = self.world)
             if car.y > settings.VIRTUAL_HEIGHT:
                 self.car_list.pop(0)
 
@@ -61,6 +61,24 @@ class PlayState(BaseState):
         self.player.render(surface)  
         for car in self.car_list:
             car.render(surface)
+        render_text(
+            surface,
+            "Score:",
+            settings.FONTS["mediumPlus"],
+            100,
+            90,
+            settings.COLOR_BLACK,
+            center= True,
+        )
+        render_text(
+            surface,
+            "Km: " + str(self.score/100),
+            settings.FONTS["medium"],
+            100,
+            133,
+            settings.COLOR_LIGHT,
+            center= False,
+        ) 
                
         pygame.display.flip()
             

@@ -30,6 +30,6 @@ class PauseState(BaseState):
             settings.FONTS["large"],
             settings.VIRTUAL_WIDTH // 2,
             settings.VIRTUAL_HEIGHT // 2,
-            (0,0,0),
+            settings.COLOR_BLACK,
             center = True,
         )

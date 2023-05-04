@@ -33,10 +33,10 @@ class StartState(BaseState):
     def render(self, surface: pygame.surface) -> None:
         surface.blit(settings.TEXTURES["startate"], (0, 0))
 
-        color = (206,173,139)
+        color = settings.COLOR_LIGHT
         font = settings.FONTS["medium"]
         if self.selected == 1:
-            color = (255, 175,37)
+            color = settings.COLOR_ORANGE
             font = settings.FONTS["mediumPlus"]
         
         render_text(
@@ -49,10 +49,10 @@ class StartState(BaseState):
             center= False,
         )
 
-        color = (206,173,139)
+        color = settings.COLOR_LIGHT
         font = settings.FONTS["medium"]
         if self.selected == 2:
-            color = (255, 175,37)
+            color = settings.COLOR_ORANGE
             font = settings.FONTS["mediumPlus"]
         
         render_text(
@@ -65,10 +65,10 @@ class StartState(BaseState):
             center= False,
         )
 
-        color = (206,173,139)
+        color = settings.COLOR_LIGHT
         font = settings.FONTS["medium"]
         if self.selected == 3:
-            color = (255, 175,37)
+            color = settings.COLOR_ORANGE
             font = settings.FONTS["mediumPlus"]
         
         render_text(

@@ -23,21 +23,4 @@ class World:
             surface.blit(settings.TEXTURES["Soil_Tile"],[self.displayX, self.yRelativa])
             surface.blit(settings.TEXTURES["road_0_left"],[380, self.yRelativa])
             surface.blit(settings.TEXTURES["road_0_right"],[681, self.yRelativa])
-        render_text(
-            surface,
-            "Score:",
-            settings.FONTS["mediumPlus"],
-            100,
-            90,
-            (0, 0, 0),
-            center= True,
-        )
-        render_text(
-            surface,
-            "Km: " + str(self.score),
-            settings.FONTS["medium"],
-            100,
-            133,
-            (255, 175,38),
-            center= False,
-        ) 
+        

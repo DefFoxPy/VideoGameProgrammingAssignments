@@ -20,7 +20,7 @@ class GameOverState(BaseState):
     
     def update(self, dt: float) -> None:
         self.time_display += 1
-        if self.time_display > 1:
+        if self.time_display > 2:
             self.display = not self.display
             self.time_display = 0
             
@@ -48,14 +48,14 @@ class GameOverState(BaseState):
             settings.FONTS["largePlus"],
             875,
             215,
-            (0,0,0),
+            settings.COLOR_BLACK,
             center = True,
         )
         
-        color_display = (206,173,139)
+        color_display = settings.COLOR_LIGHT
         font_display = settings.FONTS["medium"]
         if self.display:
-            color_display = (255, 175,37)
+            color_display = settings.COLOR_ORANGE
             font_display = settings.FONTS["mediumPlus"]
 
         render_text(
@@ -68,11 +68,11 @@ class GameOverState(BaseState):
             center = True,
         )
        
-        color = (206,173,139)
+        color = settings.COLOR_LIGHT
         font = settings.FONTS["small"]
         self.list_icons[0] = 14
         if self.selected == 1:
-            color = (0, 0, 0)
+            color = settings.COLOR_BLACK
             font = settings.FONTS["smallPlus"]
             self.list_icons[0] = 38        
         render_text(
@@ -85,12 +85,12 @@ class GameOverState(BaseState):
             center= False,
         )
 
-        color = (206,173,139)
+        color = settings.COLOR_LIGHT
         font = settings.FONTS["small"]
         self.list_icons[1] = 18
         if self.selected == 2:
             self.list_icons[1] = 42
-            color = (0, 0, 0)
+            color = settings.COLOR_BLACK
             font = settings.FONTS["smallPlus"]
         
         render_text(
@@ -103,11 +103,11 @@ class GameOverState(BaseState):
             center= False,
         )
 
-        color = (206,173,139)
+        color = settings.COLOR_LIGHT
         font = settings.FONTS["small"]
         self.list_icons[2] = 8
         if self.selected == 3:
-            color = (0, 0, 0)
+            color = color = settings.COLOR_BLACK
             font = settings.FONTS["smallPlus"]
             self.list_icons[2] = 32
         
