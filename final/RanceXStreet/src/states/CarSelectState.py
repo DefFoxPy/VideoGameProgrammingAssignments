@@ -77,17 +77,16 @@ class CarSelectState(BaseState):
                 center = True,
             )
 
-            #icon left           
+            #icon left   
+            surface.blit(settings.TEXTURES["icons"], ((settings.VIRTUAL_WIDTH) // 2 - 130 - settings.ICON_WIDHT, (settings.VIRTUAL_HEIGHT) // 2 - 40), settings.FRAMES["list_icons"][26])        
             if self.player.skin == 0:
                 surface.blit(settings.TEXTURES["icons"], ((settings.VIRTUAL_WIDTH) // 2 - 130 - settings.ICON_WIDHT, (settings.VIRTUAL_HEIGHT) // 2 - 45), settings.FRAMES["list_icons"][2])
-            else:
-                surface.blit(settings.TEXTURES["icons"], ((settings.VIRTUAL_WIDTH) // 2 - 130 - settings.ICON_WIDHT, (settings.VIRTUAL_HEIGHT) // 2 - 40), settings.FRAMES["list_icons"][26])
 
-            #icon right                        
-            self.player.render(surface)
+            #icon right
+            surface.blit(settings.TEXTURES["icons"], ((settings.VIRTUAL_WIDTH) // 2 + 130, (settings.VIRTUAL_HEIGHT) // 2 - 40), settings.FRAMES["list_icons"][27]) 
             if self.player.skin == 8:
                 surface.blit(settings.TEXTURES["icons"], ((settings.VIRTUAL_WIDTH) // 2 + 130, (settings.VIRTUAL_HEIGHT) // 2 - 45), settings.FRAMES["list_icons"][3]) 
-            else:
-                surface.blit(settings.TEXTURES["icons"], ((settings.VIRTUAL_WIDTH) // 2 + 130, (settings.VIRTUAL_HEIGHT) // 2 - 40), settings.FRAMES["list_icons"][27]) 
+            self.player.render(surface)                      
             self.player.render(surface)
+
         

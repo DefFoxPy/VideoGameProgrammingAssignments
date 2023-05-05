@@ -24,3 +24,4 @@ class World:
             surface.blit(settings.TEXTURES["road_0_left"],[380, self.yRelativa])
             surface.blit(settings.TEXTURES["road_0_right"],[681, self.yRelativa])
         
+        

@@ -15,9 +15,11 @@ class HighScoreState(BaseState):
         InputHandler.register_listener(self)
     
     def exit(self) -> None:
-        self.retardo = True
         InputHandler.unregister_listener(self)
     
+    def update(self, dt: float) -> None:
+        self.retardo = True
+
     def on_input(self, input_id: str, input_data: InputData):
         if input_id == "enter" and input_data.pressed and self.retardo:
             self.state_machine.change("start")
@@ -75,4 +77,14 @@ class HighScoreState(BaseState):
                 color,
                 center = False,
             )
+
+        render_text(
+            surface,
+            "Press enter for continue",
+            settings.FONTS["mediumPlus"],
+            820,
+            650,
+            settings.COLOR_BLACK,
+            center=True,
+        )
 

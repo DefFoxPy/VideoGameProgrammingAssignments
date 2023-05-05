@@ -23,6 +23,9 @@ class PlayState(BaseState):
         self.time_game_over = 0
         self.world = World()        
         InputHandler.register_listener(self)
+    
+    def exit(self)  -> None:
+        InputHandler.unregister_listener(self)
         
     def update(self, dt: float) -> None:
         self.world.update(dt, self.score/100)
@@ -78,13 +81,17 @@ class PlayState(BaseState):
             133,
             settings.COLOR_LIGHT,
             center= False,
-        ) 
-               
+        )
+        surface.blit(settings.TEXTURES["icons"], (1000, 10), settings.FRAMES["list_icons"][5])
+        surface.blit(settings.TEXTURES["icons"], (1010 + settings.ICON_WIDHT , 10), settings.FRAMES["list_icons"][18])
+
         pygame.display.flip()
             
     def on_input(self, input_id: str, input_data: InputData) -> None:
         if input_id == 'pause':
-            self.state_machine.change("pause", player=self.player ,score=self.score, car_list=self.car_list, datos=[self.score, self.time_car, self.old_posx_car, self.old_skin_car], world = self.world)
+            self.state_machine.change("pause", player=self.player ,score=self.score, car_list=self.car_list, datos=[self.score, self.time_car, self.old_posx_car, self.old_skin_car], world = self.world, opc = 0)
+        elif input_id == 'home':
+            self.state_machine.change("pause", player=self.player ,score=self.score, car_list=self.car_list, datos=[self.score, self.time_car, self.old_posx_car, self.old_skin_car], world = self.world, opc = 1)
         elif input_id == "move_left":
             if input_data.pressed:
                 self.player.vx = -settings.PLAYER_SPEED

@@ -46,4 +46,4 @@ class Player:
         surface.blit(pygame.transform.rotate(settings.TEXTURES["Set_vehicle"+str(self.set)],self.rotate) , (self.x, self.y), settings.FRAMES["list_cars"][self.skin])
         #surface.blit(pygame.transform.rotate(settings.TEXTURES["Set_vehicle0"],self.rotate) , (self.x, self.y), settings.FRAMES["list_cars"][1])
         #surface.blit(settings.TEXTURES["Set_vehicle"+str(self.set)], (self.x, self.y), settings.FRAMES["list_cars"][self.skin])
-    #surface.blit(settings.TEXTURES["icons"], ((settings.VIRTUAL_WIDTH) // 2 + 130, (settings.VIRTUAL_HEIGHT) // 2 - 45), settings.FRAMES["list_icons"][3]) 
+    

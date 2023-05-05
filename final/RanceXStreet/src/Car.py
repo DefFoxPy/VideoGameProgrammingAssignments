@@ -12,6 +12,7 @@ class Car:
         self.width = settings.TEXTURES["car1"].get_width()
         self.height = settings.TEXTURES["car1"].get_height()
         self.skin = skin
+        self.set = random.randint(0,3)
         if self.x > 1:
             self.rotate = 0
             if settings.CAR_SPEED[self.skin] == settings.MAX_CAR_SPEED:
@@ -35,5 +36,5 @@ class Car:
 
     def render(self, surface: pygame.Surface) -> None:
         surface.blit(pygame.transform.rotate(settings.TEXTURES["car"+str(self.skin)],self.rotate) , (settings.POS_SET[self.x], self.y))
-
+        #surface.blit(pygame.transform.rotate(settings.TEXTURES["Set_vehicle"+str(self.set)],self.rotate) , (self.x, self.y), settings.FRAMES["list_cars"][self.skin])
     

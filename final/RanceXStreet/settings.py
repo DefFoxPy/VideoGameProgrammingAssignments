@@ -17,6 +17,7 @@ input_handler.InputHandler.set_keyboard_action(input_handler.KEY_DOWN, "move_dow
 input_handler.InputHandler.set_keyboard_action(input_handler.KEY_RIGHT, "move_right")
 input_handler.InputHandler.set_keyboard_action(input_handler.KEY_LEFT, "move_left")
 input_handler.InputHandler.set_keyboard_action(input_handler.KEY_p, "pause")
+input_handler.InputHandler.set_keyboard_action(input_handler.KEY_q, "home")
 
 # Size we want to emulate
 VIRTUAL_WIDTH = 1280
@@ -62,6 +63,7 @@ TEXTURES = {
     "cartel2": pygame.image.load(BASE_DIR / "graphics" / "cartel2.png"),
     "cartel3": pygame.image.load(BASE_DIR / "graphics" / "cartel3.png"),
     "cartel4": pygame.image.load(BASE_DIR / "graphics" / "cartel4.png"),
+    "cartel5": pygame.image.load(BASE_DIR / "graphics" / "cartel5.png"),
     "carSelectState": pygame.image.load(BASE_DIR / "graphics" / "carSelectState.png"),
     "startate": pygame.image.load(BASE_DIR / "graphics" / "startstate.png"),
     "icons": pygame.image.load(BASE_DIR / "graphics" / "icons.png"),
