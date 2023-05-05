@@ -83,7 +83,25 @@ class PlayState(BaseState):
             center= False,
         )
         surface.blit(settings.TEXTURES["icons"], (1000, 10), settings.FRAMES["list_icons"][5])
+        render_text(
+            surface,
+            "P",
+            settings.FONTS["small"],
+            1000 + settings.ICON_WIDHT - 10,
+            settings.ICON_HEIGTH + 5,
+            settings.COLOR_BLACK,
+            center= False,
+        )
         surface.blit(settings.TEXTURES["icons"], (1010 + settings.ICON_WIDHT , 10), settings.FRAMES["list_icons"][18])
+        render_text(
+            surface,
+            "Q",
+            settings.FONTS["small"],
+            1010 + 2 * settings.ICON_WIDHT - 10,
+            settings.ICON_HEIGTH + 5,
+            settings.COLOR_BLACK,
+            center= False,
+        )
 
         pygame.display.flip()
             
