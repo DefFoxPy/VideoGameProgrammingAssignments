@@ -59,7 +59,7 @@ class PlayState(BaseState):
             if car.y > settings.VIRTUAL_HEIGHT and car.vy > 0:
                 indice = self.car_list.index(car)
                 self.car_list.pop(indice)
-            elif car.y < 0 and car.vy < 0:
+            elif car.y < 0-car.height and car.vy < 0:
                 indice = self.car_list.index(car)
                 self.car_list.pop(indice)
 
