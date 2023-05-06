@@ -54,7 +54,11 @@ COLOR_LIGHT = (206,173,139)
 TEXTURES = {
     "road_0_left": pygame.image.load(BASE_DIR / "graphics" / "object" / "road_0_left.png"),
     "road_0_right": pygame.image.load(BASE_DIR / "graphics" / "object" / "road_0_right.png"),
-    "Soil_Tile": pygame.image.load(BASE_DIR / "graphics" / "object" / "Soil_Tile.png"),
+    "Soil_Tile1": pygame.image.load(BASE_DIR / "graphics" / "object" / "Soil_Tile1.png"),
+    "Soil_Tile2": pygame.image.load(BASE_DIR / "graphics" / "object" / "Soil_Tile2.png"),
+    "Soil_Tile3": pygame.image.load(BASE_DIR / "graphics" / "object" / "Soil_Tile3.png"),
+    "Soil_Tile4": pygame.image.load(BASE_DIR / "graphics" / "object" / "Soil_Tile4.png"),
+    "Soil_Tile5": pygame.image.load(BASE_DIR / "graphics" / "object" / "Soil_Tile5.png"),
     "background": pygame.image.load(BASE_DIR / "graphics" / "background.png"),
     "EscenaStar": pygame.image.load(BASE_DIR / "graphics" / "EscenaStar.png"),
     "EscenaSelect": pygame.image.load(BASE_DIR / "graphics" / "EscenaSelect.png"),
