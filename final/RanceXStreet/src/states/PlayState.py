@@ -56,8 +56,12 @@ class PlayState(BaseState):
                 self.time_game_over += 1
                 if self.time_game_over == 2: ## para crear el efecto de humo
                     self.state_machine.change("enterHighScore",score = self.score / 100,world = self.world)
-            if car.y > settings.VIRTUAL_HEIGHT:
-                self.car_list.pop(0)
+            if car.y > settings.VIRTUAL_HEIGHT and car.vy > 0:
+                indice = self.car_list.index(car)
+                self.car_list.pop(indice)
+            elif car.y < 0 and car.vy < 0:
+                indice = self.car_list.index(car)
+                self.car_list.pop(indice)
 
     def render(self, surface: pygame.Surface) -> None:
         self.world.render(surface)

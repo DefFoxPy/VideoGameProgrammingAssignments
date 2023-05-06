@@ -15,15 +15,17 @@ class Car:
         self.set = random.randint(0,3)
         if self.x > 1:
             self.rotate = 0
+            self.y = settings.VIRTUAL_WIDTH
             if settings.CAR_SPEED[self.skin] == settings.MAX_CAR_SPEED:
-                self.vy = settings.MIN_CAR_SPEED
+                self.vy = -settings.MIN_CAR_SPEED
             elif settings.CAR_SPEED[self.skin] == settings.MIN_CAR_SPEED:
-                self.vy = settings.MAX_CAR_SPEED
+                self.vy = -settings.MAX_CAR_SPEED
             else:
-                self.vy = settings.CAR_SPEED[self.skin] - settings.MIN_CAR_SPEED
+                self.vy = -abs(settings.CAR_SPEED[self.skin] - settings.MIN_CAR_SPEED)
         else:
             self.rotate = 180
-            self.vy = settings.CAR_SPEED[self.skin]
+            aux = list(reversed(settings.CAR_SPEED))
+            self.vy = aux[self.skin]
     
     def get_collision_rect(self) -> pygame.Rect:
         return pygame.Rect(settings.POS_SET[self.x], self.y, self.width, self.height)
