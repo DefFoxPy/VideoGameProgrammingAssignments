@@ -13,15 +13,11 @@ class Car:
         self.height = settings.TEXTURES["car1"].get_height()
         self.skin = skin
         self.set = random.randint(0,3)
+        
         if self.x > 1:
             self.rotate = 0
             self.y = settings.VIRTUAL_WIDTH
-            if settings.CAR_SPEED[self.skin] == settings.MAX_CAR_SPEED:
-                self.vy = -settings.MIN_CAR_SPEED
-            elif settings.CAR_SPEED[self.skin] == settings.MIN_CAR_SPEED:
-                self.vy = -settings.MAX_CAR_SPEED
-            else:
-                self.vy = -abs(settings.CAR_SPEED[self.skin] - settings.MIN_CAR_SPEED)
+            self.vy = -settings.CAR_SPEED[self.skin]
         else:
             self.rotate = 180
             aux = list(reversed(settings.CAR_SPEED))
