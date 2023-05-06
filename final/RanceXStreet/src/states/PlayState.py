@@ -27,7 +27,7 @@ class PlayState(BaseState):
         InputHandler.unregister_listener(self)
         
     def update(self, dt: float) -> None:
-        self.world.update(dt, self.score//100)
+        self.world.update(dt, self.score/100)
         self.player.update(dt)            
         self.time_car += 1
         self.score += 1
