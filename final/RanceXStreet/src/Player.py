@@ -7,6 +7,7 @@ class Player:
     def __init__(self,x: int, y: int) -> None:
         self.x = x
         self.y = y
+        self.immunity = False
         self.width = settings.TEXTURES["car1"].get_width()
         self.height = settings.TEXTURES["car1"].get_height()
         self.skin = 0

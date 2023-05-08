@@ -65,7 +65,7 @@ class PlayState(BaseState):
                 indice = self.car_list.index(car)
                 self.car_list.pop(indice)
 
-            if car.collides(self.player):
+            if car.collides(self.player) and not self.player.immunity:
                 print("colision")
                 self.time_game_over += 1
                 if self.time_game_over == 2: ## para crear el efecto de humo
