@@ -30,7 +30,7 @@ class PlayState(BaseState):
         self.world.update(dt, self.score/100)
         self.player.update(dt)            
         self.time_car += 1
-        self.score += 1
+        self.score += (settings.PLAYER_SPEED * dt) // 10 
         
         if self.time_car >= settings.GENERATE_CAR * random.randint(1, max(1, 10-self.score//100)):
             aux_pos = random.randint(0,settings.NUM_VIAS-1)
