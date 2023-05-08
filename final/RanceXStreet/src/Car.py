@@ -30,7 +30,7 @@ class Car:
         return self.get_collision_rect().colliderect(another.get_collision_rect())
     
     def update(self, dt: float) -> None:
-        self.y += self.vy
+        self.y += self.vy * dt
 
     def render(self, surface: pygame.Surface) -> None:
         surface.blit(pygame.transform.rotate(settings.TEXTURES["Set_vehicle"+str(self.set)],self.rotate) , (settings.POS_SET[self.x], self.y), settings.FRAMES["list_cars"][self.skin])
