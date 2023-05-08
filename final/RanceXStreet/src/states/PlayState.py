@@ -16,6 +16,7 @@ class PlayState(BaseState):
         self.score = params["datos"][0]
         self.time_car = params["datos"][1]
         self.old_skin_car = params["datos"][2]
+        self.powerUp_limit = params["datos"][3]
         self.player.rotate = 0
         self.displayX = 0
         self.displayY = 0
@@ -54,6 +55,12 @@ class PlayState(BaseState):
                 if len(self.old_skin_car) == settings.NUM_SKIN // 2:
                     self.old_skin_car.pop(0)
                 self.time_car = 0
+
+        if self.player.immunity:
+            self.powerUp_limit += dt
+            if self.powerUp_limit >= settings.POWERUP_LIMIT:
+                self.player.immunity = False;
+                self.powerUp_limit = 0
 
         for car in self.car_list:
             car.update(dt)
@@ -119,9 +126,9 @@ class PlayState(BaseState):
             
     def on_input(self, input_id: str, input_data: InputData) -> None:
         if input_id == 'pause':
-            self.state_machine.change("pause", player=self.player ,score=self.score, car_list=self.car_list, datos=[self.score, self.time_car, self.old_skin_car], world = self.world, opc = 0)
+            self.state_machine.change("pause", player=self.player ,score=self.score, car_list=self.car_list, datos=[self.score, self.time_car, self.old_skin_car, self.powerUp_limit], world = self.world, opc = 0)
         elif input_id == 'home':
-            self.state_machine.change("pause", player=self.player ,score=self.score, car_list=self.car_list, datos=[self.score, self.time_car, self.old_skin_car], world = self.world, opc = 1)
+            self.state_machine.change("pause", player=self.player ,score=self.score, car_list=self.car_list, datos=[self.score, self.time_car, self.old_skin_car, self.powerUp_limit], world = self.world, opc = 1)
         elif input_id == "move_left":
             if input_data.pressed:
                 self.player.vx = -settings.PLAYER_SPEED
