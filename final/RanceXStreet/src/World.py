@@ -14,7 +14,7 @@ class World:
     def update(self, dt: float, score: float) -> None:
         self.score = score
         self.yRelativa = self.displayY % settings.VIRTUAL_HEIGHT
-        self.displayY += 50
+        self.displayY += settings.PLAYER_SPEED * dt
         if self.score % 2 == 0:
             self.level += 1
             if self.level == 6:
