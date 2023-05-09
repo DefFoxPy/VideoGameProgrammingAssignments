@@ -19,6 +19,7 @@ input_handler.InputHandler.set_keyboard_action(input_handler.KEY_LEFT, "move_lef
 input_handler.InputHandler.set_keyboard_action(input_handler.KEY_p, "pause")
 input_handler.InputHandler.set_keyboard_action(input_handler.KEY_q, "home")
 input_handler.InputHandler.set_keyboard_action(input_handler.KEY_x, "powerup_1")
+input_handler.InputHandler.set_keyboard_action(input_handler.KEY_z, "powerup_2")
 
 # Size we want to emulate
 VIRTUAL_WIDTH = 1280
@@ -28,9 +29,10 @@ WINDOW_WIDTH = 1280
 WINDOW_HEIGHT = 720
 
 POWERUP_SPEED = 100
-POWERUP_LIMIT = 5
+POWERUP_LIMIT = 3
+POWERUP_LIMIT_SLOWLY = 5
 
-PLAYER_SPEED = 250
+PLAYER_SPEED = 200
 CAR_SPEED = [PLAYER_SPEED//2, PLAYER_SPEED, PLAYER_SPEED//2, PLAYER_SPEED//2, PLAYER_SPEED//2, PLAYER_SPEED//2, PLAYER_SPEED//4, PLAYER_SPEED//2, PLAYER_SPEED//5]
 GENERATE_CAR = 2
 NUM_SKIN = 9
