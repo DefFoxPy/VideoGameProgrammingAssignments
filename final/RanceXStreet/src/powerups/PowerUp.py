@@ -32,7 +32,7 @@ class PowerUp:
     def render(self, surface: pygame.Surface) -> None:
         surface.blit(
             settings.TEXTURES["powerUp"],
-            (self.x, self.y),
+            (settings.POS_SET[self.x], self.y),
             settings.FRAMES["list_powerUp"][self.frame],
         )
 
