@@ -12,8 +12,7 @@ class World:
         self.map = map
 
     def update(self, dt: float, score: float) -> None:
-        self.yRelativa = self.displayY % settings.VIRTUAL_HEIGHT
-        #self.displayY += 50      
+        self.yRelativa = self.displayY % settings.VIRTUAL_HEIGHT     
         self.displayY += settings.PLAYER_SPEED * dt
 
         self.map = int(score // 0.1)
