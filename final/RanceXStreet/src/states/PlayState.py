@@ -20,7 +20,7 @@ class PlayState(BaseState):
         self.score = params["datos"][0]
         self.time_car = params["datos"][1]
         self.old_skin_car = params["datos"][2]
-        self.powerUp_limit = params["datos"][3]
+        self.powerUp_limit_ghost = params["datos"][3]
         self.powerUp_limit_slowly = params["datos"][4]
         self.powerUpGhost = params["datos"][5]
         self.powerUpSlowly = params["datos"][6]
@@ -83,12 +83,12 @@ class PlayState(BaseState):
 
 
         if self.player.ghost:
-            self.powerUp_limit += dt
+            self.powerUp_limit_ghost += dt
             self.player.set = 4
-            if self.powerUp_limit >= settings.POWERUP_LIMIT:
+            if self.powerUp_limit_ghost >= settings.POWERUP_LIMIT_GHOST:
                 self.player.ghost = False
                 self.player.set = self.player.old_set
-                self.powerUp_limit = 0
+                self.powerUp_limit_ghost = 0
 
         if self.player.slowly:
             self.powerUp_limit_slowly += dt
@@ -171,10 +171,10 @@ class PlayState(BaseState):
     def on_input(self, input_id: str, input_data: InputData) -> None:
         if input_id == 'pause':
             self.state_machine.change("pause", player=self.player ,score=self.score, car_list=self.car_list, datos=[self.score, self.time_car, self.old_skin_car, 
-                self.powerUp_limit, self.powerUp_limit_slowly, self.powerUpGhost, self.powerUpSlowly], world = self.world, powerups=self.powerups, opc = 0)
+                self.powerUp_limit_ghost, self.powerUp_limit_slowly, self.powerUpGhost, self.powerUpSlowly], world = self.world, powerups=self.powerups, opc = 0)
         elif input_id == 'home':
             self.state_machine.change("pause", player=self.player ,score=self.score, car_list=self.car_list, datos=[self.score, self.time_car, self.old_skin_car, 
-                self.powerUp_limit, self.powerUp_limit_slowly, self.powerUpGhost, self.powerUpSlowly], world = self.world, powerups=self.powerups, opc = 1)
+                self.powerUp_limit_ghost, self.powerUp_limit_slowly, self.powerUpGhost, self.powerUpSlowly], world = self.world, powerups=self.powerups, opc = 1)
         elif input_id == "move_left":
             if input_data.pressed:
                 self.player.vx = -settings.PLAYER_SPEED
@@ -197,8 +197,10 @@ class PlayState(BaseState):
                 self.player.vy = 0
         elif input_id == "powerup_1" and self.powerUpGhost:
             self.player.ghost = True
+            self.powerUpGhost = False
         elif input_id == "powerup_2" and self.powerUpSlowly:
             self.player.slowly = True
+            self.powerUpSlowly = False
  
 
                 

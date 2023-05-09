@@ -18,7 +18,7 @@ class PowerUp:
         self.frame = frame
 
     def get_collision_rect(self) -> pygame.Rect:
-        return pygame.Rect(self.x, self.y, 16, 16)
+        return pygame.Rect(settings.POS_SET[self.x], self.y, 16, 16)
 
     def collides(self, obj: Any) -> bool:
         return self.get_collision_rect().colliderect(obj.get_collision_rect())
