@@ -15,7 +15,7 @@ class World:
         self.yRelativa = self.displayY % settings.VIRTUAL_HEIGHT     
         self.displayY += settings.PLAYER_SPEED * dt
 
-        self.map = int(score // 0.1)
+        self.map = int(score // settings.NEXT_MAP)
         while self.map >= len(settings.LIST_MAP):
             self.map -= len(settings.LIST_MAP)
 
