@@ -6,26 +6,26 @@ from gale.state_machine import BaseState
 from gale.text import render_text
 
 class World:
-    def __init__(self) -> None:
+    def __init__(self, map : int) -> None:
         self.displayX = 0
         self.displayY = 0
-        self.level = 0
+        self.map = map
 
     def update(self, dt: float, score: float) -> None:
-        self.score = score
         self.yRelativa = self.displayY % settings.VIRTUAL_HEIGHT
-        self.displayY += 50
-        if self.score % 2 == 0:
-            self.level += 1
-            if self.level == 6:
-                self.level = 0             
+        #self.displayY += 50      
+        self.displayY += settings.PLAYER_SPEED * dt
+
+        self.map = int(score // 0.1)
+        while self.map >= len(settings.LIST_MAP):
+            self.map -= len(settings.LIST_MAP)
 
     def render(self, surface: pygame.Surface) -> None:
-        surface.blit(settings.TEXTURES["Soil_Tile" + str(self.level)],[self.displayX, self.yRelativa - settings.VIRTUAL_HEIGHT])        
+        surface.blit(settings.TEXTURES[settings.LIST_MAP[self.map]],[self.displayX, self.yRelativa - settings.VIRTUAL_HEIGHT])        
         surface.blit(settings.TEXTURES["road_0_left"],[380, self.yRelativa - settings.VIRTUAL_HEIGHT])
         surface.blit(settings.TEXTURES["road_0_right"],[681, self.yRelativa - settings.VIRTUAL_HEIGHT])
         if self.yRelativa < settings.VIRTUAL_HEIGHT:
-            surface.blit(settings.TEXTURES["Soil_Tile" + str(self.level)],[self.displayX, self.yRelativa])
+            surface.blit(settings.TEXTURES[settings.LIST_MAP[self.map]],[self.displayX, self.yRelativa])
             surface.blit(settings.TEXTURES["road_0_left"],[380, self.yRelativa])
             surface.blit(settings.TEXTURES["road_0_right"],[681, self.yRelativa])
         

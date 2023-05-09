@@ -38,7 +38,8 @@ ICON_WIDHT = 80.9
 CAR_HEIGHT = 164
 CAR_WIDTH = 75
 NUM_HIGHSCORES = 7
-
+LIST_MAP = ["map1","map2","map3","map4","map5"]
+NEXT_MAP = 2
 COLOR_BLACK = (0 , 0, 0)
 COLOR_ORANGE = (249, 154, 2)
 COLOR_ORANGE_DARK = (240, 38, 10)
@@ -52,11 +53,11 @@ COLOR_LIGHT = (206,173,139)
 TEXTURES = {
     "road_0_left": pygame.image.load(BASE_DIR / "graphics" / "object" / "road_0_left.png"),
     "road_0_right": pygame.image.load(BASE_DIR / "graphics" / "object" / "road_0_right.png"),
-    "Soil_Tile1": pygame.image.load(BASE_DIR / "graphics" / "object" / "Soil_Tile1.png"),
-    "Soil_Tile2": pygame.image.load(BASE_DIR / "graphics" / "object" / "Soil_Tile2.png"),
-    "Soil_Tile3": pygame.image.load(BASE_DIR / "graphics" / "object" / "Soil_Tile3.png"),
-    "Soil_Tile4": pygame.image.load(BASE_DIR / "graphics" / "object" / "Soil_Tile4.png"),
-    "Soil_Tile5": pygame.image.load(BASE_DIR / "graphics" / "object" / "Soil_Tile5.png"),
+    "map1": pygame.image.load(BASE_DIR / "graphics" / "object" / "Soil_Tile1.png"),
+    "map2": pygame.image.load(BASE_DIR / "graphics" / "object" / "Soil_Tile2.png"),
+    "map3": pygame.image.load(BASE_DIR / "graphics" / "object" / "Soil_Tile3.png"),
+    "map4": pygame.image.load(BASE_DIR / "graphics" / "object" / "Soil_Tile4.png"),
+    "map5": pygame.image.load(BASE_DIR / "graphics" / "object" / "Soil_Tile5.png"),
     "background": pygame.image.load(BASE_DIR / "graphics" / "background.png"),
     "EscenaStar": pygame.image.load(BASE_DIR / "graphics" / "EscenaStar.png"),
     "EscenaSelect": pygame.image.load(BASE_DIR / "graphics" / "EscenaSelect.png"),
