@@ -17,11 +17,9 @@ class Car:
         if self.x > 1:
             self.rotate = 0
             self.y = settings.VIRTUAL_WIDTH
-            self.vy = -settings.CAR_SPEED[self.skin]
+            
         else:
             self.rotate = 180
-            aux = list(reversed(settings.CAR_SPEED))
-            self.vy = aux[self.skin]
     
     def get_collision_rect(self) -> pygame.Rect:
         return pygame.Rect(settings.POS_SET[self.x], self.y, self.width, self.height)
@@ -30,6 +28,12 @@ class Car:
         return self.get_collision_rect().colliderect(another.get_collision_rect())
     
     def update(self, dt: float) -> None:
+        if self.x > 1:
+            self.vy = -settings.CAR_SPEED[self.skin]
+        else:
+            aux = list(reversed(settings.CAR_SPEED))
+            self.vy = aux[self.skin]
+            
         self.y += self.vy * dt
 
     def render(self, surface: pygame.Surface) -> None:

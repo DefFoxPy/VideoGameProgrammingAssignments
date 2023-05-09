@@ -8,6 +8,7 @@ class Player:
         self.x = x
         self.y = y
         self.immunity = False
+        self.slowly = False
         self.width = settings.CAR_WIDTH
         self.height = settings.CAR_HEIGHT
         self.skin = 0

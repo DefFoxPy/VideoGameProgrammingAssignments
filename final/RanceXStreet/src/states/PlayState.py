@@ -17,6 +17,7 @@ class PlayState(BaseState):
         self.time_car = params["datos"][1]
         self.old_skin_car = params["datos"][2]
         self.powerUp_limit = params["datos"][3]
+        self.powerUp_limit_slowly = params["datos"][4]
         self.player.rotate = 0
         self.displayX = 0
         self.displayY = 0
@@ -28,8 +29,12 @@ class PlayState(BaseState):
         InputHandler.unregister_listener(self)
         
     def update(self, dt: float) -> None:
-        settings.PLAYER_SPEED = min(500, settings.PLAYER_SPEED + self.score//100 // 2)
+        if not self.player.slowly:
+            settings.PLAYER_SPEED = min(500, settings.PLAYER_SPEED + self.score//100 // 2)
+        else:
+            settings.PLAYER_SPEED = 200
         settings.CAR_SPEED = [settings.PLAYER_SPEED//2, settings.PLAYER_SPEED, settings.PLAYER_SPEED//2, settings.PLAYER_SPEED//2, settings.PLAYER_SPEED//2, settings.PLAYER_SPEED//2, settings.PLAYER_SPEED//4, settings.PLAYER_SPEED//2, settings.PLAYER_SPEED//5] 
+        
         self.world.update(dt, self.score / 100)
         self.player.update(dt)            
         self.time_car += dt
@@ -59,11 +64,16 @@ class PlayState(BaseState):
         if self.player.immunity:
             self.powerUp_limit += dt
             self.player.set = 4
-            print(self.powerUp_limit)
             if self.powerUp_limit >= settings.POWERUP_LIMIT:
                 self.player.immunity = False
                 self.player.set = self.player.old_set
                 self.powerUp_limit = 0
+
+        if self.player.slowly:
+            self.powerUp_limit_slowly += dt
+            if self.powerUp_limit_slowly >= settings.POWERUP_LIMIT_SLOWLY:
+                self.player.slowly = False
+                self.powerUp_limit_slowly = 0
 
         for car in self.car_list:
             car.update(dt)
@@ -128,9 +138,9 @@ class PlayState(BaseState):
             
     def on_input(self, input_id: str, input_data: InputData) -> None:
         if input_id == 'pause':
-            self.state_machine.change("pause", player=self.player ,score=self.score, car_list=self.car_list, datos=[self.score, self.time_car, self.old_skin_car, self.powerUp_limit], world = self.world, opc = 0)
+            self.state_machine.change("pause", player=self.player ,score=self.score, car_list=self.car_list, datos=[self.score, self.time_car, self.old_skin_car, self.powerUp_limit, self.powerUp_limit_slowly], world = self.world, opc = 0)
         elif input_id == 'home':
-            self.state_machine.change("pause", player=self.player ,score=self.score, car_list=self.car_list, datos=[self.score, self.time_car, self.old_skin_car, self.powerUp_limit], world = self.world, opc = 1)
+            self.state_machine.change("pause", player=self.player ,score=self.score, car_list=self.car_list, datos=[self.score, self.time_car, self.old_skin_car, self.powerUp_limit, self.powerUp_limit_slowly], world = self.world, opc = 1)
         elif input_id == "move_left":
             if input_data.pressed:
                 self.player.vx = -settings.PLAYER_SPEED
@@ -153,6 +163,8 @@ class PlayState(BaseState):
                 self.player.vy = 0
         elif input_id == "powerup_1":
             self.player.immunity = True
+        elif input_id == "powerup_2":
+            self.player.slowly = True
  
 
                 
