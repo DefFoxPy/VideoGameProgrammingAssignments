@@ -7,7 +7,7 @@ class Player:
     def __init__(self,x: int, y: int) -> None:
         self.x = x
         self.y = y
-        self.immunity = False
+        self.ghost = False
         self.slowly = False
         self.width = settings.CAR_WIDTH
         self.height = settings.CAR_HEIGHT

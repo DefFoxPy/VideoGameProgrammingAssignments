@@ -8,7 +8,7 @@ from src.Player import Player
 from src.powerups.PowerUp import PowerUp
 
 
-class Immunity(PowerUp):
+class Ghost(PowerUp):
     """
     Power-up to make player immunity
     """
@@ -18,5 +18,5 @@ class Immunity(PowerUp):
 
     def take(self, play_state: TypeVar("PlayState")) -> None:
         player = play_state.player
-        player.immunity = True
+        player.ghost = True
         self.in_play = False

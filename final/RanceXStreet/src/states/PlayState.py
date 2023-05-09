@@ -61,11 +61,11 @@ class PlayState(BaseState):
                     self.old_skin_car.pop(0)
                 self.time_car = 0
 
-        if self.player.immunity:
+        if self.player.ghost:
             self.powerUp_limit += dt
             self.player.set = 4
             if self.powerUp_limit >= settings.POWERUP_LIMIT:
-                self.player.immunity = False
+                self.player.ghost = False
                 self.player.set = self.player.old_set
                 self.powerUp_limit = 0
 
@@ -85,7 +85,7 @@ class PlayState(BaseState):
                 indice = self.car_list.index(car)
                 self.car_list.pop(indice)
 
-            if car.collides(self.player) and not self.player.immunity:
+            if car.collides(self.player) and not self.player.ghost:
                 self.time_game_over += 1
                 if self.time_game_over == 2: ## para crear el efecto de humo
                     self.state_machine.change("enterHighScore",score = self.score / 100,world = self.world)
@@ -162,7 +162,7 @@ class PlayState(BaseState):
             elif input_data.released and self.player.vy > 0:
                 self.player.vy = 0
         elif input_id == "powerup_1":
-            self.player.immunity = True
+            self.player.ghost = True
         elif input_id == "powerup_2":
             self.player.slowly = True
  
