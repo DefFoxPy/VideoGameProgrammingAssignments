@@ -8,10 +8,11 @@ class Player:
         self.x = x
         self.y = y
         self.immunity = False
-        self.width = settings.TEXTURES["car1"].get_width()
-        self.height = settings.TEXTURES["car1"].get_height()
+        self.width = settings.CAR_WIDTH
+        self.height = settings.CAR_HEIGHT
         self.skin = 0
         self.set = 0
+        self.old_set = 0
         self.vx = 0
         self.vy = 0
         self.rotate = 0

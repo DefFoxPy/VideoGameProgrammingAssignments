@@ -8,9 +8,9 @@ import settings
 class Car:
     def __init__(self, posx: int, skin: int) -> None:
         self.x = posx
-        self.y = -settings.TEXTURES["car1"].get_height()
-        self.width = settings.TEXTURES["car1"].get_width()
-        self.height = settings.TEXTURES["car1"].get_height()
+        self.y = -settings.CAR_HEIGHT
+        self.width = settings.CAR_WIDTH
+        self.height = settings.CAR_HEIGHT
         self.skin = skin
         self.set = random.randint(0,3)
         

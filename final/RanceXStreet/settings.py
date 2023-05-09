@@ -18,6 +18,7 @@ input_handler.InputHandler.set_keyboard_action(input_handler.KEY_RIGHT, "move_ri
 input_handler.InputHandler.set_keyboard_action(input_handler.KEY_LEFT, "move_left")
 input_handler.InputHandler.set_keyboard_action(input_handler.KEY_p, "pause")
 input_handler.InputHandler.set_keyboard_action(input_handler.KEY_q, "home")
+input_handler.InputHandler.set_keyboard_action(input_handler.KEY_x, "powerup_1")
 
 # Size we want to emulate
 VIRTUAL_WIDTH = 1280
@@ -77,14 +78,7 @@ TEXTURES = {
     "Set_vehicle1": pygame.image.load(BASE_DIR / "graphics" / "vehicle" / "Set_vehicle2.png"),
     "Set_vehicle2": pygame.image.load(BASE_DIR / "graphics" / "vehicle" / "Set_vehicle3.png"),
     "Set_vehicle3": pygame.image.load(BASE_DIR / "graphics" / "vehicle" / "Set_vehicle4.png"),
-    "car0": pygame.image.load(BASE_DIR / "graphics" / "vehicle" / "Audi.png"),
-    "car1": pygame.image.load(BASE_DIR / "graphics" / "vehicle" / "Black_viper.png"),
-    "car2": pygame.image.load(BASE_DIR / "graphics" / "vehicle" / "Car.png"),
-    "car3": pygame.image.load(BASE_DIR / "graphics" / "vehicle" / "Mini_truck.png"),
-    "car4": pygame.image.load(BASE_DIR / "graphics" / "vehicle" / "Mini_van.png"),
-    "car5": pygame.image.load(BASE_DIR / "graphics" / "vehicle" / "Police.png"),
-    "car6": pygame.image.load(BASE_DIR / "graphics" / "vehicle" / "taxi.png"),
-    "car7": pygame.image.load(BASE_DIR / "graphics" / "vehicle" / "truck.png"),    
+    "Set_vehicle4": pygame.image.load(BASE_DIR / "graphics" / "vehicle" / "Set_vehicle5.png"),
 }
 
 # Register your frames, for instance:

@@ -36,9 +36,9 @@ class CarSelectState(BaseState):
         elif input_id == "move_left" and input_data.pressed:
             self.player.skin = max(0, self.player.skin - 1)
         elif input_id == "move_down" and input_data.pressed:
-            self.player.set = min(3, self.player.set + 1)
+            self.player.set, self.player.old_set = min(3, self.player.set + 1)
         elif input_id == "move_up" and input_data.pressed:
-            self.player.set = max(0, self.player.set - 1)
+            self.player.set, self.player.old_set = max(0, self.player.set - 1)
         elif input_id == "enter" and input_data.pressed and self.retardo:
             self.state_machine.change("play", player=self.player, car_list=[], datos=[0, 0, [], 0])
 

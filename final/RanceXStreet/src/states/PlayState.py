@@ -39,10 +39,8 @@ class PlayState(BaseState):
             old_posx_car = list()
         
             for car in self.car_list:
-                old_posx_car.append(car.x)
-            
+                old_posx_car.append(car.x)            
             if len(old_posx_car) < 4: 
-
                 while aux_pos in old_posx_car:
                     aux_pos = random.randint(0, settings.NUM_VIAS-1)
                 while aux_skin in self.old_skin_car:
@@ -58,8 +56,11 @@ class PlayState(BaseState):
 
         if self.player.immunity:
             self.powerUp_limit += dt
+            self.player.set = 4
+            print(self.powerUp_limit)
             if self.powerUp_limit >= settings.POWERUP_LIMIT:
                 self.player.immunity = False
+                self.player.set = self.player.old_set
                 self.powerUp_limit = 0
 
         for car in self.car_list:
@@ -73,7 +74,6 @@ class PlayState(BaseState):
                 self.car_list.pop(indice)
 
             if car.collides(self.player) and not self.player.immunity:
-                print("colision")
                 self.time_game_over += 1
                 if self.time_game_over == 2: ## para crear el efecto de humo
                     self.state_machine.change("enterHighScore",score = self.score / 100,world = self.world)
@@ -149,6 +149,13 @@ class PlayState(BaseState):
                 self.player.vy = settings.PLAYER_SPEED
             elif input_data.released and self.player.vy > 0:
                 self.player.vy = 0
+        elif input_id == "powerup_1":
+            self.player.immunity = True
+ 
+
+                
+
+            
 
         
         
