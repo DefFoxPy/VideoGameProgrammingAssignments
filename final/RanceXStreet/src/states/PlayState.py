@@ -28,10 +28,12 @@ class PlayState(BaseState):
         InputHandler.unregister_listener(self)
         
     def update(self, dt: float) -> None:
+        settings.PLAYER_SPEED = min(500, settings.PLAYER_SPEED + self.score//100 // 2)
+        settings.CAR_SPEED = [settings.PLAYER_SPEED//2, settings.PLAYER_SPEED, settings.PLAYER_SPEED//2, settings.PLAYER_SPEED//2, settings.PLAYER_SPEED//2, settings.PLAYER_SPEED//2, settings.PLAYER_SPEED//4, settings.PLAYER_SPEED//2, settings.PLAYER_SPEED//5] 
         self.world.update(dt, self.score / 100)
         self.player.update(dt)            
         self.time_car += dt
-        self.score += (settings.PLAYER_SPEED * dt) // 10 
+        self.score += (settings.PLAYER_SPEED * dt) // 7 
         
         if self.time_car >= settings.GENERATE_CAR + random.randint(1, max(1, 10-self.score//100)):
             aux_pos = random.randint(0,settings.NUM_VIAS-1)
