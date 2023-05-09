@@ -14,9 +14,8 @@ class Slowly(PowerUp):
     """
 
     def __init__(self, x: int, y: int) -> None:
-        super().__init__(x, y)
+        super().__init__(x, y, 1)
 
     def take(self, play_state: TypeVar("PlayState")) -> None:
-        player = play_state.player
-        player.slowly = True
+        play_state.powerUpSlowly = True
         self.in_play = False

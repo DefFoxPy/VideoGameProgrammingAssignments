@@ -14,9 +14,8 @@ class Ghost(PowerUp):
     """
 
     def __init__(self, x: int, y: int) -> None:
-        super().__init__(x, y, 8)
+        super().__init__(x, y, 0)
 
     def take(self, play_state: TypeVar("PlayState")) -> None:
-        player = play_state.player
-        player.ghost = True
+        play_state.powerUpGhost = True
         self.in_play = False

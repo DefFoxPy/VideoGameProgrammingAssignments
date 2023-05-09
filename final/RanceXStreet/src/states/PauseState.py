@@ -14,6 +14,7 @@ class PauseState(BaseState):
         self.datos = params["datos"]
         self.world = params["world"]
         self.opc = params["opc"]
+        self.powerups = params["powerups"]
         self.retardo = False
         self.list_icons = [9, 10]
         self.selected = 1
@@ -34,7 +35,7 @@ class PauseState(BaseState):
 
         elif input_id == "enter" and input_data.pressed and self.retardo:
             if self.selected == 1:
-                self.state_machine.change("play", player=self.player, car_list=self.car_list, datos=self.datos, world = self.world)
+                self.state_machine.change("play", player=self.player, car_list=self.car_list, powerups=self.powerups, datos=self.datos, world = self.world)
             else:
                 self.state_machine.change("start")
         

@@ -44,6 +44,7 @@ ICON_WIDHT = 80.9
 CAR_HEIGHT = 164
 CAR_WIDTH = 75
 NUM_HIGHSCORES = 7
+LIST_POWERUP = ["Ghost", "Slowly"]
 LIST_MAP = ["map1","map2","map3","map4","map5"]
 NEXT_MAP = 5
 COLOR_BLACK = (0 , 0, 0)

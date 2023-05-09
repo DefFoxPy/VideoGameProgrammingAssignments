@@ -3,11 +3,15 @@ import pygame, random
 
 from gale.input_handler import InputHandler, InputData
 from gale.state_machine import BaseState
+from gale.factory import AbstractFactory
+from gale.factory import Factory
 from gale.text import render_text
 import settings
+import src.powerups
 
 from src.Car import Car
 from src.World import World
+
 
 class PlayState(BaseState):
     def enter(self, **params: dict) -> None:  
@@ -18,11 +22,17 @@ class PlayState(BaseState):
         self.old_skin_car = params["datos"][2]
         self.powerUp_limit = params["datos"][3]
         self.powerUp_limit_slowly = params["datos"][4]
+        self.powerUpGhost = params["datos"][5]
+        self.powerUpSlowly = params["datos"][6]
+        self.powerups = params.get("powerups", [])
         self.player.rotate = 0
         self.displayX = 0
         self.displayY = 0
         self.time_game_over = 0
-        self.world = World(0)    
+        self.world = World(0)
+        
+        self.powerups_abstract_factory = AbstractFactory("src.powerups")    
+        
         InputHandler.register_listener(self)
     
     def exit(self)  -> None:
@@ -46,20 +56,31 @@ class PlayState(BaseState):
             old_posx_car = list()
         
             for car in self.car_list:
-                old_posx_car.append(car.x)            
+                old_posx_car.append(car.x)
+
             if len(old_posx_car) < 4: 
                 while aux_pos in old_posx_car:
                     aux_pos = random.randint(0, settings.NUM_VIAS-1)
                 while aux_skin in self.old_skin_car:
                     aux_skin = random.randint(0,settings.NUM_SKIN-1)
                 
-                car = Car(posx= aux_pos, skin= aux_skin)
-                self.car_list.append(car)
-                self.old_skin_car.append(aux_skin)
+                if random.random() < 0.1:
+                    name = random.choice(settings.LIST_POWERUP)
+                    self.powerups.append(
+                    self.powerups_abstract_factory.get_factory(name).create(
+                        aux_pos, -10
+                        )
+                    )
+                else:
+                    car = Car(posx= aux_pos, skin= aux_skin)
+                    self.car_list.append(car)
+                    self.old_skin_car.append(aux_skin)
+                    
+                    if len(self.old_skin_car) == settings.NUM_SKIN // 2:
+                        self.old_skin_car.pop(0)
                 
-                if len(self.old_skin_car) == settings.NUM_SKIN // 2:
-                    self.old_skin_car.pop(0)
                 self.time_car = 0
+
 
         if self.player.ghost:
             self.powerUp_limit += dt
@@ -74,6 +95,15 @@ class PlayState(BaseState):
             if self.powerUp_limit_slowly >= settings.POWERUP_LIMIT_SLOWLY:
                 self.player.slowly = False
                 self.powerUp_limit_slowly = 0
+
+        for powerup in self.powerups:
+            powerup.update(dt)
+
+            if powerup.collides(self.player):
+                powerup.take(self)
+
+        # Remove powerups that are not in play
+        self.powerups = [p for p in self.powerups if p.in_play]
 
         for car in self.car_list:
             car.update(dt)
@@ -95,6 +125,8 @@ class PlayState(BaseState):
         self.player.render(surface)  
         for car in self.car_list:
             car.render(surface)
+        for powerup in self.powerups:
+            powerup.render(surface) 
         render_text(
             surface,
             "Score:",
@@ -138,9 +170,11 @@ class PlayState(BaseState):
             
     def on_input(self, input_id: str, input_data: InputData) -> None:
         if input_id == 'pause':
-            self.state_machine.change("pause", player=self.player ,score=self.score, car_list=self.car_list, datos=[self.score, self.time_car, self.old_skin_car, self.powerUp_limit, self.powerUp_limit_slowly], world = self.world, opc = 0)
+            self.state_machine.change("pause", player=self.player ,score=self.score, car_list=self.car_list, datos=[self.score, self.time_car, self.old_skin_car, 
+                self.powerUp_limit, self.powerUp_limit_slowly, self.powerUpGhost, self.powerUpSlowly], world = self.world, powerups=self.powerups, opc = 0)
         elif input_id == 'home':
-            self.state_machine.change("pause", player=self.player ,score=self.score, car_list=self.car_list, datos=[self.score, self.time_car, self.old_skin_car, self.powerUp_limit, self.powerUp_limit_slowly], world = self.world, opc = 1)
+            self.state_machine.change("pause", player=self.player ,score=self.score, car_list=self.car_list, datos=[self.score, self.time_car, self.old_skin_car, 
+                self.powerUp_limit, self.powerUp_limit_slowly, self.powerUpGhost, self.powerUpSlowly], world = self.world, powerups=self.powerups, opc = 1)
         elif input_id == "move_left":
             if input_data.pressed:
                 self.player.vx = -settings.PLAYER_SPEED
@@ -161,9 +195,9 @@ class PlayState(BaseState):
                 self.player.vy = settings.PLAYER_SPEED
             elif input_data.released and self.player.vy > 0:
                 self.player.vy = 0
-        elif input_id == "powerup_1":
+        elif input_id == "powerup_1" and self.powerUpGhost:
             self.player.ghost = True
-        elif input_id == "powerup_2":
+        elif input_id == "powerup_2" and self.powerUpSlowly:
             self.player.slowly = True
  
 

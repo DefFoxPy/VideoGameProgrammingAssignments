@@ -30,13 +30,11 @@ class PowerUp:
         self.y += self.vy * dt
 
     def render(self, surface: pygame.Surface) -> None:
-        '''
         surface.blit(
-            settings.TEXTURES["spritesheet"],
+            settings.TEXTURES["powerUp"],
             (self.x, self.y),
-            settings.FRAMES["powerups"][self.frame],
+            settings.FRAMES["list_powerUp"][self.frame],
         )
-        '''
 
     def take(self, play_state: TypeVar("PlayState")) -> None:
         raise NotImplementedError
