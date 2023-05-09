@@ -8,7 +8,7 @@ import pygame
 from gale import frames
 from gale import input_handler
 
-from src.utilities.frames import generate_icons_frames, generate_cars_frames
+from src.utilities.frames import generate_icons_frames, generate_cars_frames, generate_powerUp_frames
 
 input_handler.InputHandler.set_keyboard_action(input_handler.KEY_ESCAPE, 'quit')
 input_handler.InputHandler.set_keyboard_action(input_handler.KEY_RETURN, "enter")
@@ -79,6 +79,7 @@ TEXTURES = {
     "Set_vehicle2": pygame.image.load(BASE_DIR / "graphics" / "vehicle" / "Set_vehicle3.png"),
     "Set_vehicle3": pygame.image.load(BASE_DIR / "graphics" / "vehicle" / "Set_vehicle4.png"),
     "Set_vehicle4": pygame.image.load(BASE_DIR / "graphics" / "vehicle" / "Set_vehicle5.png"),
+    "powerUp": pygame.image.load(BASE_DIR / "graphics" / "object" / "powerUp.png"),
 }
 
 # Register your frames, for instance:
@@ -88,6 +89,7 @@ TEXTURES = {
 FRAMES = {
     "list_icons": generate_icons_frames(),
     "list_cars" : generate_cars_frames(),
+    "list_powerUp": generate_powerUp_frames(),
 }
 
 pygame.mixer.init()

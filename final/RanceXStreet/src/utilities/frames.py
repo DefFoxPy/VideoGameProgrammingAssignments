@@ -28,3 +28,15 @@ def generate_cars_frames() ->List[pygame.Rect]:
         x += settings.CAR_WIDTH 
           
     return frames
+
+def generate_powerUp_frames() ->List[pygame.Rect]:
+    x = 0
+    y = 0
+    frames = []
+    for f in range(2):
+        for c in range(6):
+            frames.append(pygame.Rect(x,y, 50, 50))
+            x += 50
+        x = 0
+        y += 50 
+    return frames
