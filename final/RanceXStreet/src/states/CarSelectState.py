@@ -44,12 +44,12 @@ class CarSelectState(BaseState):
 
     def render(self, surface: pygame.Surface) -> None:    
         if self.displayX < settings.VIRTUAL_WIDTH:
-            surface.blit(settings.TEXTURES["EscenaStar"], [self.displayX,0])
+            surface.blit(settings.TEXTURES["EscenaStar"].convert_alpha(), [self.displayX,0])
         elif self.displayX < settings.VIRTUAL_WIDTH * 2:
-            surface.blit(settings.TEXTURES["EscenaSelect"], (self.displayX - settings.VIRTUAL_WIDTH *2, 0))
+            surface.blit(settings.TEXTURES["EscenaSelect"].convert_alpha(), (self.displayX - settings.VIRTUAL_WIDTH *2, 0))
         else:    
-            surface.blit(settings.TEXTURES["EscenaSelect"], (0, 0))
-            surface.blit(settings.TEXTURES["cartel1"], ((settings.VIRTUAL_WIDTH - settings.TEXTURES["cartel1"].get_width()) // 2, (settings.VIRTUAL_HEIGHT - settings.TEXTURES["cartel1"].get_height()) // 2))
+            surface.blit(settings.TEXTURES["EscenaSelect"].convert_alpha(), (0, 0))
+            surface.blit(settings.TEXTURES["cartel1"].convert_alpha(), ((settings.VIRTUAL_WIDTH - settings.TEXTURES["cartel1"].get_width()) // 2, (settings.VIRTUAL_HEIGHT - settings.TEXTURES["cartel1"].get_height()) // 2))
             
             render_text(
             surface,
@@ -78,14 +78,14 @@ class CarSelectState(BaseState):
             )
 
             #icon left   
-            surface.blit(settings.TEXTURES["icons"], ((settings.VIRTUAL_WIDTH) // 2 - 130 - settings.ICON_WIDHT, (settings.VIRTUAL_HEIGHT) // 2 - 40), settings.FRAMES["list_icons"][26])        
+            surface.blit(settings.TEXTURES["icons"].convert_alpha(), ((settings.VIRTUAL_WIDTH) // 2 - 130 - settings.ICON_WIDHT, (settings.VIRTUAL_HEIGHT) // 2 - 40), settings.FRAMES["list_icons"][26])        
             if self.player.skin == 0:
-                surface.blit(settings.TEXTURES["icons"], ((settings.VIRTUAL_WIDTH) // 2 - 130 - settings.ICON_WIDHT, (settings.VIRTUAL_HEIGHT) // 2 - 45), settings.FRAMES["list_icons"][2])
+                surface.blit(settings.TEXTURES["icons"].convert_alpha(), ((settings.VIRTUAL_WIDTH) // 2 - 130 - settings.ICON_WIDHT, (settings.VIRTUAL_HEIGHT) // 2 - 45), settings.FRAMES["list_icons"][2])
 
             #icon right
-            surface.blit(settings.TEXTURES["icons"], ((settings.VIRTUAL_WIDTH) // 2 + 130, (settings.VIRTUAL_HEIGHT) // 2 - 40), settings.FRAMES["list_icons"][27]) 
+            surface.blit(settings.TEXTURES["icons"].convert_alpha(), ((settings.VIRTUAL_WIDTH) // 2 + 130, (settings.VIRTUAL_HEIGHT) // 2 - 40), settings.FRAMES["list_icons"][27]) 
             if self.player.skin == 8:
-                surface.blit(settings.TEXTURES["icons"], ((settings.VIRTUAL_WIDTH) // 2 + 130, (settings.VIRTUAL_HEIGHT) // 2 - 45), settings.FRAMES["list_icons"][3]) 
+                surface.blit(settings.TEXTURES["icons"].convert_alpha(), ((settings.VIRTUAL_WIDTH) // 2 + 130, (settings.VIRTUAL_HEIGHT) // 2 - 45), settings.FRAMES["list_icons"][3]) 
             self.player.render(surface)                      
             self.player.render(surface)
 

@@ -44,7 +44,5 @@ class Player:
             self.y = self.y + self.height
 
     def render(self, surface: pygame.Surface) -> None:
-        surface.blit(pygame.transform.rotate(settings.TEXTURES["Set_vehicle"+str(self.set)],self.rotate) , (self.x, self.y), settings.FRAMES["list_cars"][self.skin])
-        #surface.blit(pygame.transform.rotate(settings.TEXTURES["Set_vehicle0"],self.rotate) , (self.x, self.y), settings.FRAMES["list_cars"][1])
-        #surface.blit(settings.TEXTURES["Set_vehicle"+str(self.set)], (self.x, self.y), settings.FRAMES["list_cars"][self.skin])
-    
+        surface.blit(pygame.transform.rotate(settings.TEXTURES["Set_vehicle"+str(self.set)],self.rotate).convert_alpha(), (self.x, self.y), settings.FRAMES["list_cars"][self.skin])
+        

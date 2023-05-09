@@ -52,7 +52,7 @@ class EnterHighScorestate(BaseState):
     
     def render(self, surface: pygame.Surface) -> None:
         self.world.render(surface)
-        surface.blit(settings.TEXTURES["cartel3"], ((settings.VIRTUAL_WIDTH - settings.TEXTURES["cartel3"].get_width()) // 2, (settings.VIRTUAL_HEIGHT - settings.TEXTURES["cartel3"].get_height()) // 2))  
+        surface.blit(settings.TEXTURES["cartel3"].convert_alpha(), ((settings.VIRTUAL_WIDTH - settings.TEXTURES["cartel3"].get_width()) // 2, (settings.VIRTUAL_HEIGHT - settings.TEXTURES["cartel3"].get_height()) // 2))  
         
         render_text(
             surface,

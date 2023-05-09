@@ -25,7 +25,7 @@ class HighScoreState(BaseState):
             self.state_machine.change("start")
     
     def render(self, surface: pygame.Surface) -> None:
-        surface.blit(settings.TEXTURES["cartel4"], (0, 0))
+        surface.blit(settings.TEXTURES["cartel4"].convert_alpha(), (0, 0))
         render_text(
             surface,
             "High Scores",

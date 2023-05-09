@@ -20,12 +20,12 @@ class World:
             self.map -= len(settings.LIST_MAP)
 
     def render(self, surface: pygame.Surface) -> None:
-        surface.blit(settings.TEXTURES[settings.LIST_MAP[self.map]],[self.displayX, self.yRelativa - settings.VIRTUAL_HEIGHT])        
-        surface.blit(settings.TEXTURES["road_0_left"],[380, self.yRelativa - settings.VIRTUAL_HEIGHT])
-        surface.blit(settings.TEXTURES["road_0_right"],[681, self.yRelativa - settings.VIRTUAL_HEIGHT])
+        surface.blit(settings.TEXTURES[settings.LIST_MAP[self.map]].convert_alpha(),[self.displayX, self.yRelativa - settings.VIRTUAL_HEIGHT])        
+        surface.blit(settings.TEXTURES["road_0_left"].convert_alpha(),[380, self.yRelativa - settings.VIRTUAL_HEIGHT])
+        surface.blit(settings.TEXTURES["road_0_right"].convert_alpha(),[681, self.yRelativa - settings.VIRTUAL_HEIGHT])
         if self.yRelativa < settings.VIRTUAL_HEIGHT:
-            surface.blit(settings.TEXTURES[settings.LIST_MAP[self.map]],[self.displayX, self.yRelativa])
-            surface.blit(settings.TEXTURES["road_0_left"],[380, self.yRelativa])
-            surface.blit(settings.TEXTURES["road_0_right"],[681, self.yRelativa])
+            surface.blit(settings.TEXTURES[settings.LIST_MAP[self.map]].convert_alpha(),[self.displayX, self.yRelativa])
+            surface.blit(settings.TEXTURES["road_0_left"].convert_alpha(),[380, self.yRelativa])
+            surface.blit(settings.TEXTURES["road_0_right"].convert_alpha(),[681, self.yRelativa])
         
         

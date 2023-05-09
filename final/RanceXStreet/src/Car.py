@@ -33,5 +33,5 @@ class Car:
         self.y += self.vy * dt
 
     def render(self, surface: pygame.Surface) -> None:
-        surface.blit(pygame.transform.rotate(settings.TEXTURES["Set_vehicle"+str(self.set)],self.rotate) , (settings.POS_SET[self.x], self.y), settings.FRAMES["list_cars"][self.skin])
+        surface.blit(pygame.transform.rotate(settings.TEXTURES["Set_vehicle"+str(self.set)].convert_alpha(),self.rotate) , (settings.POS_SET[self.x], self.y), settings.FRAMES["list_cars"][self.skin])
     

@@ -59,7 +59,7 @@ class PlayState(BaseState):
         if self.player.immunity:
             self.powerUp_limit += dt
             if self.powerUp_limit >= settings.POWERUP_LIMIT:
-                self.player.immunity = False;
+                self.player.immunity = False
                 self.powerUp_limit = 0
 
         for car in self.car_list:
@@ -101,7 +101,7 @@ class PlayState(BaseState):
             settings.COLOR_LIGHT,
             center= False,
         )
-        surface.blit(settings.TEXTURES["icons"], (1000, 10), settings.FRAMES["list_icons"][5])
+        surface.blit(settings.TEXTURES["icons"].convert_alpha(), (1000, 10), settings.FRAMES["list_icons"][5])
         render_text(
             surface,
             "P",
@@ -111,7 +111,7 @@ class PlayState(BaseState):
             settings.COLOR_BLACK,
             center= False,
         )
-        surface.blit(settings.TEXTURES["icons"], (1010 + settings.ICON_WIDHT , 10), settings.FRAMES["list_icons"][18])
+        surface.blit(settings.TEXTURES["icons"].convert_alpha(), (1010 + settings.ICON_WIDHT , 10), settings.FRAMES["list_icons"][18])
         render_text(
             surface,
             "Q",

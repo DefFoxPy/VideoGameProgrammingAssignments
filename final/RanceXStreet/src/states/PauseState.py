@@ -42,7 +42,7 @@ class PauseState(BaseState):
         self.world.render(surface)
                   
         if self.opc == 0:
-            surface.blit(settings.TEXTURES["cartel5"], ((settings.VIRTUAL_WIDTH - settings.TEXTURES["cartel5"].get_width()) // 2, (settings.VIRTUAL_HEIGHT - settings.TEXTURES["cartel5"].get_height()) // 2))  
+            surface.blit(settings.TEXTURES["cartel5"].convert_alpha(), ((settings.VIRTUAL_WIDTH - settings.TEXTURES["cartel5"].get_width()) // 2, (settings.VIRTUAL_HEIGHT - settings.TEXTURES["cartel5"].get_height()) // 2))  
             render_text(
                 surface,
                 "Pause",
@@ -63,7 +63,7 @@ class PauseState(BaseState):
                 center=True,
             )
         if self.opc == 1:
-            surface.blit(settings.TEXTURES["cartel1"], ((settings.VIRTUAL_WIDTH - settings.TEXTURES["cartel1"].get_width()) // 2, (settings.VIRTUAL_HEIGHT - settings.TEXTURES["cartel1"].get_height()) // 2)) 
+            surface.blit(settings.TEXTURES["cartel1"].convert_alpha(), ((settings.VIRTUAL_WIDTH - settings.TEXTURES["cartel1"].get_width()) // 2, (settings.VIRTUAL_HEIGHT - settings.TEXTURES["cartel1"].get_height()) // 2)) 
 
             render_text(
                 surface,

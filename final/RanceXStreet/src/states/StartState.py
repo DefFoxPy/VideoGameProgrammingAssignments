@@ -31,7 +31,7 @@ class StartState(BaseState):
                 pygame.quit()
     
     def render(self, surface: pygame.surface) -> None:
-        surface.blit(settings.TEXTURES["startate"], (0, 0))
+        surface.blit(settings.TEXTURES["startate"].convert_alpha(), (0, 0))
 
         color = settings.COLOR_LIGHT
         font = settings.FONTS["medium"]
