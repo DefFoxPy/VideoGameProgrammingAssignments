@@ -39,7 +39,7 @@ class PlayState(BaseState):
         
     def update(self, dt: float) -> None:
         if not self.player.slowly:
-            settings.PLAYER_SPEED = min(500, settings.PLAYER_SPEED + self.score//100 // 2)
+            settings.PLAYER_SPEED = min(450, settings.PLAYER_SPEED + self.score//100 // 2)
         
         else:
             settings.PLAYER_SPEED = settings.PLAYER_INITIAL_SPEED
