@@ -30,7 +30,6 @@ class PlayState(BaseState):
         self.displayY = 0
         self.time_game_over = 0
         self.world = World(0)
-        
         self.powerups_abstract_factory = AbstractFactory("src.powerups")    
         
         InputHandler.register_listener(self)

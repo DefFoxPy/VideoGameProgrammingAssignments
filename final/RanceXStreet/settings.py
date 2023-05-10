@@ -52,11 +52,6 @@ COLOR_ORANGE = (249, 154, 2)
 COLOR_ORANGE_DARK = (240, 38, 10)
 COLOR_LIGHT = (206,173,139)
 
-# Register your textures from the graphics folder, for instance:
-# TEXTURES = {
-#     'my_texture': pygame.image.load(BASE_DIR / "assets" / "graphics" / "my_texture.png")
-# }
-
 TEXTURES = {
     "road_0_left": pygame.image.load(BASE_DIR / "graphics" / "object" / "road_0_left.png"),
     "road_0_right": pygame.image.load(BASE_DIR / "graphics" / "object" / "road_0_right.png"),
@@ -85,10 +80,6 @@ TEXTURES = {
     "powerUp": pygame.image.load(BASE_DIR / "graphics" / "object" / "powerUp.png"),
 }
 
-# Register your frames, for instance:
-# FRAMES = {
-#     'my_frames': frames.generate_frames(TEXTURES['my_texture'], 16, 16)
-# }
 FRAMES = {
     "list_icons": generate_icons_frames(),
     "list_cars" : generate_cars_frames(),
@@ -97,18 +88,18 @@ FRAMES = {
 
 pygame.mixer.init()
 
-# Register your sound from the sounds folder, for instance:
-# SOUNDS = {
-#     'my_sound': pygame.mixer.Sound(BASE_DIR / "assets"  / "sounds" / "my_sound.wav"),
-# }
-SOUNDS = {}
+SOUNDS = {
+    "coin": pygame.mixer.Sound(BASE_DIR / "sounds" / "coin.wav"),
+    "powerUp": pygame.mixer.Sound(BASE_DIR / "sounds" / "powerUp.wav"),
+    "select": pygame.mixer.Sound(BASE_DIR / "sounds" / "menu_select.wav"),
+    "select2": pygame.mixer.Sound(BASE_DIR / "sounds" / "menu_select2.wav"),
+    "menu": pygame.mixer.Sound(BASE_DIR / "sounds" / "menu_stay_retro.ogg"),
+    "play1": pygame.mixer.Sound(BASE_DIR / "sounds" / "play_fragment_of_tomorrow.ogg"),
+    "play2": pygame.mixer.Sound(BASE_DIR / "sounds" / "play_hellfire.ogg"),
+}
 
 pygame.font.init()
 
-# Register your fonts from the fonts folder, for instance:
-# FONTS = {
-#     'small': pygame.font.Font(BASE_DIR / "assets"  / "fonts" / "font.ttf", 8)
-# }
 FONTS = {
     "tiny": pygame.font.Font(BASE_DIR / "fonts" / "Supersonic Rocketship.ttf", 20),
     "small": pygame.font.Font(BASE_DIR / "fonts" / "Supersonic Rocketship.ttf", 32),

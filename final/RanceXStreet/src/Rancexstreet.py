@@ -26,6 +26,7 @@ class Rancexstreet(Game):
             }
         )
         self.state_machine.change("start")
+        pygame.mixer.Sound.play(settings.SOUNDS["play2"], -1).set_volume(0.7) 
         InputHandler.register_listener(self)
 
     def update(self, dt: float) -> None:
