@@ -79,8 +79,8 @@ class PauseState(BaseState):
             if self.selected == 1:
                 surface.blit(settings.TEXTURES["icons"], (settings.VIRTUAL_WIDTH // 2 - 100, settings.VIRTUAL_HEIGHT // 2 + 33), settings.FRAMES["list_icons"][self.list_icons[0]+24])
 
-            surface.blit(settings.TEXTURES["icons"], (settings.VIRTUAL_WIDTH // 2 + 100 - settings.ICON_WIDHT, settings.VIRTUAL_HEIGHT // 2 + 33), settings.FRAMES["list_icons"][self.list_icons[1]])
+            surface.blit(settings.TEXTURES["icons"], (settings.VIRTUAL_WIDTH // 2 + 100 - settings.ICON_WIDTH, settings.VIRTUAL_HEIGHT // 2 + 33), settings.FRAMES["list_icons"][self.list_icons[1]])
             if self.selected == 2:
-                surface.blit(settings.TEXTURES["icons"], (settings.VIRTUAL_WIDTH // 2 + 100 - settings.ICON_WIDHT, settings.VIRTUAL_HEIGHT // 2 + 33), settings.FRAMES["list_icons"][self.list_icons[1]+24])
+                surface.blit(settings.TEXTURES["icons"], (settings.VIRTUAL_WIDTH // 2 + 100 - settings.ICON_WIDTH, settings.VIRTUAL_HEIGHT // 2 + 33), settings.FRAMES["list_icons"][self.list_icons[1]+24])
             
 

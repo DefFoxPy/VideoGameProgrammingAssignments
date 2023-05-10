@@ -162,24 +162,48 @@ class PlayState(BaseState):
             surface,
             "P",
             settings.FONTS["small"],
-            1000 + settings.ICON_WIDHT - 10,
-            settings.ICON_HEIGTH + 5,
+            1000 + settings.ICON_WIDTH - 10,
+            settings.ICON_HEIGHT + 5,
             settings.COLOR_BLACK,
             center= False,
         )
         
-        surface.blit(settings.TEXTURES["icons"].convert_alpha(), (1010 + settings.ICON_WIDHT , 10), settings.FRAMES["list_icons"][18])
+        surface.blit(settings.TEXTURES["icons"].convert_alpha(), (1010 + settings.ICON_WIDTH , 10), settings.FRAMES["list_icons"][18])
         
         render_text(
             surface,
             "Q",
             settings.FONTS["small"],
-            1010 + 2 * settings.ICON_WIDHT - 10,
-            settings.ICON_HEIGTH + 5,
+            1010 + 2 * settings.ICON_WIDTH - 10,
+            settings.ICON_HEIGHT + 5,
             settings.COLOR_BLACK,
             center= False,
         )
 
+        surface.blit(settings.TEXTURES["icons"].convert_alpha(), (60 + settings.ICON_WIDTH , settings.VIRTUAL_HEIGHT - 140), settings.FRAMES["list_icons"][1])
+        if self.powerUpGhost:
+            surface.blit(settings.TEXTURES["icons"].convert_alpha(), (60 + settings.ICON_WIDTH , settings.VIRTUAL_HEIGHT - 140), settings.FRAMES["list_icons"][25])
+        render_text(
+            surface,
+            "X",
+            settings.FONTS["small"],
+            60 + 2 * settings.ICON_WIDTH - 10,
+            settings.VIRTUAL_HEIGHT - 70,
+            settings.COLOR_BLACK,
+            center= False,
+        )
+        surface.blit(settings.TEXTURES["icons"].convert_alpha(), (30, settings.VIRTUAL_HEIGHT - 140), settings.FRAMES["list_icons"][0])
+        if self.powerUpSlowly:
+            surface.blit(settings.TEXTURES["icons"].convert_alpha(), (30, settings.VIRTUAL_HEIGHT - 140), settings.FRAMES["list_icons"][24])
+        render_text(
+            surface,
+            "Z",
+            settings.FONTS["small"],
+            30 + settings.ICON_WIDTH - 10,
+            settings.VIRTUAL_HEIGHT - 70,
+            settings.COLOR_BLACK,
+            center= False,
+        )
         pygame.display.flip()
             
     def on_input(self, input_id: str, input_data: InputData) -> None:

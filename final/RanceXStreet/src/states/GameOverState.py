@@ -79,8 +79,8 @@ class GameOverState(BaseState):
             surface,
             "Restart",
             font,
-            850 - settings.ICON_WIDHT - 90,
-            380 + settings.ICON_HEIGTH + 25,
+            850 - settings.ICON_WIDTH - 90,
+            380 + settings.ICON_HEIGHT + 25,
             color,
             center= False,
         )
@@ -98,7 +98,7 @@ class GameOverState(BaseState):
             "Home",
             font,
             850,
-            380 + settings.ICON_HEIGTH + 25,
+            380 + settings.ICON_HEIGHT + 25,
             color,
             center= False,
         )
@@ -115,13 +115,13 @@ class GameOverState(BaseState):
             surface,
             "High Score",
             font,
-            850 + settings.ICON_WIDHT + 30,
-            380 + settings.ICON_HEIGTH + 25,
+            850 + settings.ICON_WIDTH + 30,
+            380 + settings.ICON_HEIGHT + 25,
             color,
             center= False,
         )
 
-        surface.blit(settings.TEXTURES["icons"].convert_alpha(), (850 - settings.ICON_WIDHT -70, 380), settings.FRAMES["list_icons"][self.list_icons[0]])
+        surface.blit(settings.TEXTURES["icons"].convert_alpha(), (850 - settings.ICON_WIDTH -70, 380), settings.FRAMES["list_icons"][self.list_icons[0]])
         surface.blit(settings.TEXTURES["icons"].convert_alpha(), (850,380), settings.FRAMES["list_icons"][self.list_icons[1]])
-        surface.blit(settings.TEXTURES["icons"].convert_alpha(), (850 + settings.ICON_WIDHT + 70, 380), settings.FRAMES["list_icons"][self.list_icons[2]])
+        surface.blit(settings.TEXTURES["icons"].convert_alpha(), (850 + settings.ICON_WIDTH + 70, 380), settings.FRAMES["list_icons"][self.list_icons[2]])
  

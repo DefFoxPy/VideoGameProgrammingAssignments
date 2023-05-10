@@ -13,10 +13,10 @@ def generate_icons_frames() ->List[pygame.Rect]:
     frames = []
     for f in range(4):
         for c in range(12):
-            frames.append(pygame.Rect(x,y, settings.ICON_WIDHT , settings.ICON_HEIGTH))
-            x += settings.ICON_WIDHT + space_left_icon
+            frames.append(pygame.Rect(x,y, settings.ICON_WIDTH , settings.ICON_HEIGHT))
+            x += settings.ICON_WIDTH + space_left_icon
         x = 0
-        y += settings.ICON_HEIGTH + space_bottom_icon    
+        y += settings.ICON_HEIGHT + space_bottom_icon    
     return frames
 
 def generate_cars_frames() ->List[pygame.Rect]:

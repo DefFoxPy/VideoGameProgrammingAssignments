@@ -26,7 +26,7 @@ class CarSelectState(BaseState):
         if self.displayX < settings.VIRTUAL_WIDTH * 2:
             self.displayX += (settings.VIRTUAL_WIDTH // 10.0) * 2
         self.time_display += 1
-        if self.time_display > 1:
+        if self.time_display > 2:
             self.display = not self.display
             self.time_display = 0
 
@@ -79,9 +79,9 @@ class CarSelectState(BaseState):
             )
 
             #icon left   
-            surface.blit(settings.TEXTURES["icons"].convert_alpha(), ((settings.VIRTUAL_WIDTH) // 2 - 130 - settings.ICON_WIDHT, (settings.VIRTUAL_HEIGHT) // 2 - 40), settings.FRAMES["list_icons"][26])        
+            surface.blit(settings.TEXTURES["icons"].convert_alpha(), ((settings.VIRTUAL_WIDTH) // 2 - 130 - settings.ICON_WIDTH, (settings.VIRTUAL_HEIGHT) // 2 - 40), settings.FRAMES["list_icons"][26])        
             if self.player.skin == 0:
-                surface.blit(settings.TEXTURES["icons"].convert_alpha(), ((settings.VIRTUAL_WIDTH) // 2 - 130 - settings.ICON_WIDHT, (settings.VIRTUAL_HEIGHT) // 2 - 45), settings.FRAMES["list_icons"][2])
+                surface.blit(settings.TEXTURES["icons"].convert_alpha(), ((settings.VIRTUAL_WIDTH) // 2 - 130 - settings.ICON_WIDTH, (settings.VIRTUAL_HEIGHT) // 2 - 45), settings.FRAMES["list_icons"][2])
 
             #icon right
             surface.blit(settings.TEXTURES["icons"].convert_alpha(), ((settings.VIRTUAL_WIDTH) // 2 + 130, (settings.VIRTUAL_HEIGHT) // 2 - 40), settings.FRAMES["list_icons"][27]) 
