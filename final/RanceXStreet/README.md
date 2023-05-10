@@ -7,5 +7,7 @@
 **Slowly:** It makes the player move slower as well as the other cars to allow him to maneuver more calmly. Duration: 5seg, activated with the "Z" key. 
 
 ## reference
-
-[used material](https://opengameart.org/)
+- https://opengameart.org/
+- https://pixabay.com/es/
+- https://www.freepik.es/
+- https://www.dafont.com/es/
