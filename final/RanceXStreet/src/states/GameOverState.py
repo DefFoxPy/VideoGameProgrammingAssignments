@@ -13,6 +13,8 @@ class GameOverState(BaseState):
         self.time_display = 0
         self.display = True
         self.list_icons = [14, 18, 8]
+        pygame.mixer.Sound.stop(settings.SOUNDS["play2"])
+        pygame.mixer.Sound.play(settings.SOUNDS["menu"]).set_volume(0.7) 
         InputHandler.register_listener(self)
     
     def exit(self) -> None:
