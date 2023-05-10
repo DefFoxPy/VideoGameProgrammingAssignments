@@ -42,7 +42,7 @@ class PlayState(BaseState):
             settings.PLAYER_SPEED = min(500, settings.PLAYER_SPEED + self.score//100 // 2)
         
         else:
-            settings.PLAYER_SPEED = 200
+            settings.PLAYER_SPEED = settings.PLAYER_INITIAL_SPEED
         
         settings.CAR_SPEED = [settings.PLAYER_SPEED//2, settings.PLAYER_SPEED, settings.PLAYER_SPEED//2, settings.PLAYER_SPEED//2, settings.PLAYER_SPEED//2, settings.PLAYER_SPEED//2, settings.PLAYER_SPEED//4, settings.PLAYER_SPEED//2, settings.PLAYER_SPEED//5] 
         
