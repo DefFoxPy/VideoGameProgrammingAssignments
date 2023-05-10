@@ -31,17 +31,22 @@ class CarSelectState(BaseState):
             self.time_display = 0
 
     def on_input(self, input_id: str, input_data: InputData) -> None:
-        if input_id == "move_right" and input_data.pressed:           
+        if input_id == "move_right" and input_data.pressed: 
+            settings.SOUNDS["select"].play()          
             self.player.skin = min(8, self.player.skin + 1)
         elif input_id == "move_left" and input_data.pressed:
+            settings.SOUNDS["select"].play()  
             self.player.skin = max(0, self.player.skin - 1)
         elif input_id == "move_down" and input_data.pressed:
+            settings.SOUNDS["select2"].play()  
             self.player.set = min(3, self.player.set + 1)
-            self.player.old_set = min(3, self.player.set + 1)
+            self.player.old_set = self.player.set
         elif input_id == "move_up" and input_data.pressed:
+            settings.SOUNDS["select2"].play()  
             self.player.set = max(0, self.player.set - 1)
-            self.player.old_set = max(0, self.player.set - 1)
+            self.player.old_set = self.player.set
         elif input_id == "enter" and input_data.pressed and self.retardo:
+            settings.SOUNDS["enter"].play()
             settings.PLAYER_SPEED = 200
             pygame.mixer.Sound.stop(settings.SOUNDS["menu"])
             pygame.mixer.Sound.play(settings.SOUNDS["play2"]).set_volume(0.7) 

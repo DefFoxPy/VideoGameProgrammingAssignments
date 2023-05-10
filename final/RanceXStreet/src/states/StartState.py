@@ -22,7 +22,7 @@ class StartState(BaseState):
             self.selected = max(1, self.selected - 1) 
             settings.SOUNDS["select2"].play()
         elif input_id == "enter" and input_data.pressed:
-
+            settings.SOUNDS["enter"].play()
             if self.selected == 1:
                 self.state_machine.change("carSelect")
             elif self.selected == 2:

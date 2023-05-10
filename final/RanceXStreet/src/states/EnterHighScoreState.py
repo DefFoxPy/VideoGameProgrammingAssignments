@@ -35,6 +35,7 @@ class EnterHighScorestate(BaseState):
 
     def on_input(self, input_id: str, input_data: InputData) -> None:
         if input_id == "enter" and input_data.pressed:
+            settings.SOUNDS["enter"].play()
             name = "".join([string.ascii_uppercase[i] for i in self.name])
             self.hs.append([name, self.score])
             self.hs.sort(key=lambda item: item[-1], reverse = True)
@@ -42,12 +43,16 @@ class EnterHighScorestate(BaseState):
             self.state_machine.change("gameOver", self.score)
         
         if input_id == "move_left" and input_data.pressed:
+            settings.SOUNDS["select"].play()
             self.selected = max(0, self.selected - 1)
         elif input_id == "move_right" and input_data.pressed:
+            settings.SOUNDS["select"].play()
             self.selected = min(2, self.selected + 1)
         elif input_id == "move_down" and input_data.pressed:
+            settings.SOUNDS["select2"].play()
             self.name[self.selected] = max(0, self.name[self.selected] - 1)
         elif input_id == "move_up" and input_data.pressed:
+            settings.SOUNDS["select2"].play()
             self.name[self.selected] = min(len(string.ascii_uppercase) - 1, self.name[self.selected] + 1)
     
     def render(self, surface: pygame.Surface) -> None:

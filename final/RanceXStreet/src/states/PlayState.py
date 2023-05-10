@@ -104,6 +104,7 @@ class PlayState(BaseState):
             powerup.update(dt)
 
             if powerup.collides(self.player):
+                settings.SOUNDS["powerUp"].play()
                 powerup.take(self)
 
         # Remove powerups that are not in play
@@ -207,10 +208,12 @@ class PlayState(BaseState):
             
     def on_input(self, input_id: str, input_data: InputData) -> None:
         if input_id == 'pause':
+            settings.SOUNDS["enter"].play()
             self.state_machine.change("pause", player=self.player ,score=self.score, car_list=self.car_list, datos=[self.score, self.time_car, self.old_skin_car, 
                 self.powerUp_limit_ghost, self.powerUp_limit_slowly, self.powerUpGhost, self.powerUpSlowly], world = self.world, powerups=self.powerups, opc = 0)
         
         elif input_id == 'home':
+            settings.SOUNDS["enter"].play()
             self.state_machine.change("pause", player=self.player ,score=self.score, car_list=self.car_list, datos=[self.score, self.time_car, self.old_skin_car, 
                 self.powerUp_limit_ghost, self.powerUp_limit_slowly, self.powerUpGhost, self.powerUpSlowly], world = self.world, powerups=self.powerups, opc = 1)
         
@@ -243,9 +246,11 @@ class PlayState(BaseState):
                 self.player.vy = 0
         
         elif input_id == "powerup_1" and self.powerUpGhost:
+            settings.SOUNDS["enter"].play()
             self.player.ghost = True
             self.powerUpGhost = False
         
         elif input_id == "powerup_2" and self.powerUpSlowly:
+            settings.SOUNDS["enter"].play()
             self.player.slowly = True
             self.powerUpSlowly = False

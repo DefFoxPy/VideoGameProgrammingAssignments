@@ -93,6 +93,7 @@ SOUNDS = {
     "powerUp": pygame.mixer.Sound(BASE_DIR / "sounds" / "powerUp.wav"),
     "select": pygame.mixer.Sound(BASE_DIR / "sounds" / "menu_select.wav"),
     "select2": pygame.mixer.Sound(BASE_DIR / "sounds" / "menu_select2.wav"),
+    "enter": pygame.mixer.Sound(BASE_DIR / "sounds" / "enter_button.wav"),
     "menu": pygame.mixer.Sound(BASE_DIR / "sounds" / "menu_stay_retro.ogg"),
     "play1": pygame.mixer.Sound(BASE_DIR / "sounds" / "play_fragment_of_tomorrow.ogg"),
     "play2": pygame.mixer.Sound(BASE_DIR / "sounds" / "play_hellfire.ogg"),

@@ -22,6 +22,7 @@ class HighScoreState(BaseState):
 
     def on_input(self, input_id: str, input_data: InputData):
         if input_id == "enter" and input_data.pressed and self.retardo:
+            settings.SOUNDS["enter"].play()
             self.state_machine.change("start")
     
     def render(self, surface: pygame.Surface) -> None:

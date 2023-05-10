@@ -28,12 +28,15 @@ class GameOverState(BaseState):
             
     def on_input(self, input_id: str, input_data: InputData) -> None:
         if input_id == "move_right" and input_data.pressed:
+            settings.SOUNDS["select2"].play()
             self.selected = min(3, self.selected + 1)
 
         elif input_id == "move_left" and input_data.pressed:
+            settings.SOUNDS["select2"].play()
             self.selected = max(1, self.selected - 1) 
 
         elif input_id == "enter" and input_data.pressed:
+            settings.SOUNDS["enter"].play()
             if self.selected == 1:
                 self.state_machine.change("carSelect")
             elif self.selected == 2:

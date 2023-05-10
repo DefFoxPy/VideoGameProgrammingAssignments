@@ -28,12 +28,15 @@ class PauseState(BaseState):
 
     def on_input(self, input_id: str, input_data: InputData) -> None:
         if input_id == "move_right" and input_data.pressed:
+            settings.SOUNDS["select2"].play()
             self.selected = min(2, self.selected + 1)
 
         elif input_id == "move_left" and input_data.pressed:
+            settings.SOUNDS["select"].play()
             self.selected = max(1, self.selected - 1) 
 
         elif input_id == "enter" and input_data.pressed and self.retardo:
+            settings.SOUNDS["enter"].play()
             if self.selected == 1:
                 self.state_machine.change("play", player=self.player, car_list=self.car_list, powerups=self.powerups, datos=self.datos, world = self.world)
             else:
