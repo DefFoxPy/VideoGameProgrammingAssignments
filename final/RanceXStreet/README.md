@@ -1,8 +1,6 @@
 <h1 align="center">RanceXStreet</h1>
 
-descripción aquí
-
-## Poderes
+## PowerUps
 
 **Ghost:**  Allows the player to pass through the other cars without this crash. Duration: 3 seg, activated with the "X" key.
 
