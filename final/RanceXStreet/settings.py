@@ -8,7 +8,7 @@ import pygame
 from gale import frames
 from gale import input_handler
 
-from src.utilities.frames import generate_icons_frames, generate_cars_frames, generate_powerUp_frames
+from src.utilities.frames import generate_icons_frames, generate_frames, generate_powerUp_frames
 
 input_handler.InputHandler.set_keyboard_action(input_handler.KEY_ESCAPE, 'quit')
 input_handler.InputHandler.set_keyboard_action(input_handler.KEY_RETURN, "enter")
@@ -78,12 +78,15 @@ TEXTURES = {
     "Set_vehicle2": pygame.image.load(BASE_DIR / "graphics" / "vehicle" / "Set_vehicle3.png"),
     "Set_vehicle3": pygame.image.load(BASE_DIR / "graphics" / "vehicle" / "Set_vehicle4.png"),
     "Set_vehicle4": pygame.image.load(BASE_DIR / "graphics" / "vehicle" / "Set_vehicle5.png"),
+    "Set_vehicle5": pygame.image.load(BASE_DIR / "graphics" / "vehicle" / "Set_vehicle6.png"),
     "powerUp": pygame.image.load(BASE_DIR / "graphics" / "object" / "powerUp.png"),
+    "explosion": pygame.image.load(BASE_DIR / "graphics" / "object" / "Explosion.png"),
 }
 
 FRAMES = {
     "list_icons": generate_icons_frames(),
-    "list_cars" : generate_cars_frames(),
+    "list_cars" : generate_frames(NUM_SKIN, CAR_WIDTH, CAR_HEIGHT),
+    "explosion_animation" : generate_frames(cant = 12, width = 150, height = 150),
     "list_powerUp": generate_powerUp_frames(),
 }
 
@@ -91,6 +94,8 @@ pygame.mixer.init()
 
 SOUNDS = {
     "coin": pygame.mixer.Sound(BASE_DIR / "sounds" / "coin.wav"),
+    "countdown": pygame.mixer.Sound(BASE_DIR / "sounds" / "countdown.wav"),
+    "explosion": pygame.mixer.Sound(BASE_DIR / "sounds" / "explosion.wav"),
     "powerUp": pygame.mixer.Sound(BASE_DIR / "sounds" / "powerUp.wav"),
     "select": pygame.mixer.Sound(BASE_DIR / "sounds" / "menu_select.wav"),
     "select2": pygame.mixer.Sound(BASE_DIR / "sounds" / "menu_select2.wav"),
@@ -110,4 +115,5 @@ FONTS = {
     "mediumPlus": pygame.font.Font(BASE_DIR / "fonts" / "Supersonic Rocketship.ttf", 43),
     "large": pygame.font.Font(BASE_DIR / "fonts" / "Supersonic Rocketship.ttf", 50),
     "largePlus": pygame.font.Font(BASE_DIR / "fonts" / "Supersonic Rocketship.ttf", 60),
+    "timer": pygame.font.Font(BASE_DIR / "fonts" / "Supersonic Rocketship.ttf", 200),
 }

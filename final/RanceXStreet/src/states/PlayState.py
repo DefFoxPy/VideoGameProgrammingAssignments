@@ -24,107 +24,133 @@ class PlayState(BaseState):
         self.powerUp_limit_slowly = params["datos"][4]
         self.powerUpGhost = params["datos"][5]
         self.powerUpSlowly = params["datos"][6]
+        self.animation = params["datos"][7]
         self.powerups = params.get("powerups", [])
         self.player.rotate = 0
-        self.displayX = 0
-        self.displayY = 0
-        self.time_game_over = 0
+        self.time_animation = 0      
+        self.start_timer = 3
+        self.position_carX = 0
+        self.position_carY = 0
         self.world = World(0)
-        self.powerups_abstract_factory = AbstractFactory("src.powerups")    
-        
+        self.powerups_abstract_factory = AbstractFactory("src.powerups")            
         InputHandler.register_listener(self)
     
     def exit(self)  -> None:
         InputHandler.unregister_listener(self)
         
     def update(self, dt: float) -> None:
-        if not self.player.slowly:
-            settings.PLAYER_SPEED = min(450, settings.PLAYER_SPEED + self.score//100 // 2)
-        
-        else:
-            settings.PLAYER_SPEED = settings.PLAYER_INITIAL_SPEED
-        
-        settings.CAR_SPEED = [settings.PLAYER_SPEED//2, settings.PLAYER_SPEED, settings.PLAYER_SPEED//2, settings.PLAYER_SPEED//2, settings.PLAYER_SPEED//2, settings.PLAYER_SPEED//2, settings.PLAYER_SPEED//4, settings.PLAYER_SPEED//2, settings.PLAYER_SPEED//5] 
-        
-        self.world.update(dt, self.score / 100)
-        self.player.update(dt)            
-        self.time_car += dt
-        self.score += (settings.PLAYER_SPEED * dt) // 7 
-        
-        if self.time_car >= settings.GENERATE_CAR + random.randint(1, max(1, 10-self.score//100)):
-            aux_pos = random.randint(0,settings.NUM_VIAS-1)
-            aux_skin = random.randint(0,settings.NUM_SKIN-1)
-            old_posx_car = list()
-        
-            for car in self.car_list:
-                old_posx_car.append(car.x)
+        if self.animation == 0:
+            self.world.update(dt, self.score / 100)
+            self.player.update(dt)
+            self.time_animation += 1            
+            if self.time_animation > 18:
+                self.animation = 1
+            if self.time_animation % 6 == 0:
+                settings.SOUNDS["countdown"].play()
+                self.start_timer -= 1 
 
-            if len(old_posx_car) < 4: 
-                while aux_pos in old_posx_car:
-                    aux_pos = random.randint(0, settings.NUM_VIAS-1)
-                
-                while aux_skin in self.old_skin_car:
-                    aux_skin = random.randint(0,settings.NUM_SKIN-1)
-                
-                if random.random() < 0.1:
-                    name = random.choice(settings.LIST_POWERUP)
-                    self.powerups.append(
-                    self.powerups_abstract_factory.get_factory(name).create(
-                        aux_pos, -10
-                        )
-                    )
-                
-                else:
-                    car = Car(posx= aux_pos, skin= aux_skin)
-                    self.car_list.append(car)
-                    self.old_skin_car.append(aux_skin)
+
+        elif self.animation == 1:
+            if not self.player.slowly:
+                settings.PLAYER_SPEED = min(450, settings.PLAYER_SPEED + self.score//100 // 2)
+            
+            else:
+                settings.PLAYER_SPEED = settings.PLAYER_INITIAL_SPEED
+            
+            settings.CAR_SPEED = [settings.PLAYER_SPEED//2, settings.PLAYER_SPEED, settings.PLAYER_SPEED//2, settings.PLAYER_SPEED//2, settings.PLAYER_SPEED//2, settings.PLAYER_SPEED//2, settings.PLAYER_SPEED//4, settings.PLAYER_SPEED//2, settings.PLAYER_SPEED//5] 
+            
+            self.world.update(dt, self.score / 100)
+            self.player.update(dt)            
+            self.time_car += dt
+            self.score += (settings.PLAYER_SPEED * dt) // 7 
+            
+            if self.time_car >= settings.GENERATE_CAR + random.randint(1, max(1, 10-self.score//100)):
+                aux_pos = random.randint(0,settings.NUM_VIAS-1)
+                aux_skin = random.randint(0,settings.NUM_SKIN-1)
+                old_posx_car = list()
+            
+                for car in self.car_list:
+                    old_posx_car.append(car.x)
+
+                if len(old_posx_car) < 4: 
+                    while aux_pos in old_posx_car:
+                        aux_pos = random.randint(0, settings.NUM_VIAS-1)
                     
-                    if len(self.old_skin_car) == settings.NUM_SKIN // 2:
-                        self.old_skin_car.pop(0)
+                    while aux_skin in self.old_skin_car:
+                        aux_skin = random.randint(0,settings.NUM_SKIN-1)
+                    
+                    if random.random() < 0.1:
+                        name = random.choice(settings.LIST_POWERUP)
+                        self.powerups.append(
+                        self.powerups_abstract_factory.get_factory(name).create(
+                            aux_pos, -10
+                            )
+                        )
+                    
+                    else:
+                        car = Car(posx= aux_pos, skin= aux_skin)
+                        self.car_list.append(car)
+                        self.old_skin_car.append(aux_skin)
+                        
+                        if len(self.old_skin_car) == settings.NUM_SKIN // 2:
+                            self.old_skin_car.pop(0)
+                    
+                    self.time_car = 0
+
+            if self.player.ghost:
+                self.powerUp_limit_ghost += dt
+                self.player.set = 4
                 
-                self.time_car = 0
+                if self.powerUp_limit_ghost >= settings.POWERUP_LIMIT_GHOST:
+                    self.player.ghost = False
+                    self.player.set = self.player.old_set
+                    self.powerUp_limit_ghost = 0
 
-        if self.player.ghost:
-            self.powerUp_limit_ghost += dt
-            self.player.set = 4
-            
-            if self.powerUp_limit_ghost >= settings.POWERUP_LIMIT_GHOST:
-                self.player.ghost = False
-                self.player.set = self.player.old_set
-                self.powerUp_limit_ghost = 0
+            if self.player.slowly:
+                self.powerUp_limit_slowly += dt
+                
+                if self.powerUp_limit_slowly >= settings.POWERUP_LIMIT_SLOWLY:
+                    self.player.slowly = False
+                    self.powerUp_limit_slowly = 0
 
-        if self.player.slowly:
-            self.powerUp_limit_slowly += dt
-            
-            if self.powerUp_limit_slowly >= settings.POWERUP_LIMIT_SLOWLY:
-                self.player.slowly = False
-                self.powerUp_limit_slowly = 0
+            for powerup in self.powerups:
+                powerup.update(dt)
 
-        for powerup in self.powerups:
-            powerup.update(dt)
+                if powerup.collides(self.player):
+                    settings.SOUNDS["powerUp"].play()
+                    powerup.take(self)
 
-            if powerup.collides(self.player):
-                settings.SOUNDS["powerUp"].play()
-                powerup.take(self)
+            # Remove powerups that are not in play
+            self.powerups = [p for p in self.powerups if p.in_play]
 
-        # Remove powerups that are not in play
-        self.powerups = [p for p in self.powerups if p.in_play]
+            for car in self.car_list:
+                car.update(dt)
+                
+                if car.y > settings.VIRTUAL_HEIGHT and car.vy > 0:
+                    indice = self.car_list.index(car)
+                    self.car_list.pop(indice)
+                
+                elif car.y < 0 - car.height and car.vy < 0:
+                    indice = self.car_list.index(car)
+                    self.car_list.pop(indice)
 
-        for car in self.car_list:
-            car.update(dt)
-            
-            if car.y > settings.VIRTUAL_HEIGHT and car.vy > 0:
-                indice = self.car_list.index(car)
-                self.car_list.pop(indice)
-            
-            elif car.y < 0 - car.height and car.vy < 0:
-                indice = self.car_list.index(car)
-                self.car_list.pop(indice)
-
-            if car.collides(self.player) and not self.player.ghost:
-                self.time_game_over += 1
-                if self.time_game_over == 2: ## para crear el efecto de humo
-                    self.state_machine.change("enterHighScore",score = self.score / 100,world = self.world)
+                if car.collides(self.player) and not self.player.ghost:
+                    car.set = 5
+                    self.position_carX = settings.POS_SET[car.x] - 25
+                    self.position_carY = car.y
+                    self.time_animation = 0
+                    self.start_timer = 0
+                    self.animation = 3
+        else:
+            self.player.set = 5
+            self.player.vx = 0
+            self.player.vy = 0
+            settings.SOUNDS["explosion"].play()
+            self.time_animation +=1
+            if self.start_timer == 11:
+                self.state_machine.change("enterHighScore",score = self.score / 100,world = self.world)
+            if self.time_animation % 2 == 0:
+                self.start_timer += 1
 
     def render(self, surface: pygame.Surface) -> None:
         self.world.render(surface)
@@ -162,27 +188,29 @@ class PlayState(BaseState):
             surface,
             "P",
             settings.FONTS["small"],
-            1000 + settings.ICON_WIDTH - 10,
+            1000 + settings.ICON_WIDTH,
             settings.ICON_HEIGHT + 5,
             settings.COLOR_BLACK,
             center= False,
         )
         
-        surface.blit(settings.TEXTURES["icons"].convert_alpha(), (1010 + settings.ICON_WIDTH , 10), settings.FRAMES["list_icons"][18])
+        surface.blit(settings.TEXTURES["icons"].convert_alpha(), (1020 + settings.ICON_WIDTH , 10), settings.FRAMES["list_icons"][18])
         
         render_text(
             surface,
             "Q",
             settings.FONTS["small"],
-            1010 + 2 * settings.ICON_WIDTH - 10,
+            1020 + 2 * settings.ICON_WIDTH,
             settings.ICON_HEIGHT + 5,
             settings.COLOR_BLACK,
             center= False,
         )
 
         surface.blit(settings.TEXTURES["icons"].convert_alpha(), (60 + settings.ICON_WIDTH , settings.VIRTUAL_HEIGHT - 140), settings.FRAMES["list_icons"][1])
+
         if self.powerUpGhost:
             surface.blit(settings.TEXTURES["icons"].convert_alpha(), (60 + settings.ICON_WIDTH , settings.VIRTUAL_HEIGHT - 140), settings.FRAMES["list_icons"][25])
+
         render_text(
             surface,
             "X",
@@ -192,9 +220,11 @@ class PlayState(BaseState):
             settings.COLOR_BLACK,
             center= False,
         )
+
         surface.blit(settings.TEXTURES["icons"].convert_alpha(), (30, settings.VIRTUAL_HEIGHT - 140), settings.FRAMES["list_icons"][0])
         if self.powerUpSlowly:
             surface.blit(settings.TEXTURES["icons"].convert_alpha(), (30, settings.VIRTUAL_HEIGHT - 140), settings.FRAMES["list_icons"][24])
+        
         render_text(
             surface,
             "Z",
@@ -204,18 +234,33 @@ class PlayState(BaseState):
             settings.COLOR_BLACK,
             center= False,
         )
+
+        if self.animation == 0:
+            render_text(
+            surface,
+            str(self.start_timer),
+            settings.FONTS["timer"],
+            settings.VIRTUAL_WIDTH // 2,
+            settings.VIRTUAL_HEIGHT // 2,
+            settings.COLOR_BLACK,
+            center= True,
+            )
+
+        if self.animation == 3:
+            surface.blit(settings.TEXTURES["explosion"].convert_alpha(), (self.player.x - 27, self.player.y - 15), settings.FRAMES["explosion_animation"][self.start_timer])
+            surface.blit(settings.TEXTURES["explosion"].convert_alpha(), (self.position_carX, self.position_carY), settings.FRAMES["explosion_animation"][self.start_timer])
         pygame.display.flip()
             
     def on_input(self, input_id: str, input_data: InputData) -> None:
         if input_id == 'pause':
             settings.SOUNDS["enter"].play()
             self.state_machine.change("pause", player=self.player ,score=self.score, car_list=self.car_list, datos=[self.score, self.time_car, self.old_skin_car, 
-                self.powerUp_limit_ghost, self.powerUp_limit_slowly, self.powerUpGhost, self.powerUpSlowly], world = self.world, powerups=self.powerups, opc = 0)
+                self.powerUp_limit_ghost, self.powerUp_limit_slowly, self.powerUpGhost, self.powerUpSlowly, self.animation], world = self.world, powerups=self.powerups, opc = 0)
         
         elif input_id == 'home':
             settings.SOUNDS["enter"].play()
             self.state_machine.change("pause", player=self.player ,score=self.score, car_list=self.car_list, datos=[self.score, self.time_car, self.old_skin_car, 
-                self.powerUp_limit_ghost, self.powerUp_limit_slowly, self.powerUpGhost, self.powerUpSlowly], world = self.world, powerups=self.powerups, opc = 1)
+                self.powerUp_limit_ghost, self.powerUp_limit_slowly, self.powerUpGhost, self.powerUpSlowly, self.animation], world = self.world, powerups=self.powerups, opc = 1)
         
         elif input_id == "move_left":
             if input_data.pressed:

@@ -19,14 +19,13 @@ def generate_icons_frames() ->List[pygame.Rect]:
         y += settings.ICON_HEIGHT + space_bottom_icon    
     return frames
 
-def generate_cars_frames() ->List[pygame.Rect]:
+def generate_frames(cant: int, width: int, height) ->List[pygame.Rect]:
     x = 0
     y = 0
     frames = []
-    for c in range(9):
-        frames.append(pygame.Rect(x,y, settings.CAR_WIDTH , settings.CAR_HEIGHT))
-        x += settings.CAR_WIDTH 
-          
+    for _ in range(cant):
+        frames.append(pygame.Rect(x,y, width, height))
+        x += width        
     return frames
 
 def generate_powerUp_frames() ->List[pygame.Rect]:

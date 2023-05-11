@@ -49,8 +49,8 @@ class CarSelectState(BaseState):
             settings.SOUNDS["enter"].play()
             settings.PLAYER_SPEED = settings.PLAYER_INITIAL_SPEED
             pygame.mixer.Sound.stop(settings.SOUNDS["menu"])
-            pygame.mixer.Sound.play(settings.SOUNDS["play2"],-1).set_volume(0.7) 
-            self.state_machine.change("play", player=self.player, car_list=[], datos=[0, 0, [], 0, 0, False, False])
+            pygame.mixer.Sound.play(settings.SOUNDS["play2"],-1).set_volume(0.5) 
+            self.state_machine.change("play", player=self.player, car_list=[], datos=[0, 0, [], 0, 0, False, False, 0])
 
     def render(self, surface: pygame.Surface) -> None:    
         if self.displayX < settings.VIRTUAL_WIDTH:
