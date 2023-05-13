@@ -9,7 +9,7 @@ _task code_
 
 4- [Match3](https://github.com/DefFoxPy/VideoGameProgrammingAssignments/tree/main/match3)
 
-5- [RanceXStreet](https://github.com/DefFoxPy/VideoGameProgrammingAssignments/tree/main/final/RanceXStreet)
+5- [RaceXStreet](https://github.com/DefFoxPy/VideoGameProgrammingAssignments/tree/main/final/RaceXStreet)
 
 ## Initial code where the assignments come from
 [R3mmurd](https://github.com/R3mmurd/VideoGameProgramming)
