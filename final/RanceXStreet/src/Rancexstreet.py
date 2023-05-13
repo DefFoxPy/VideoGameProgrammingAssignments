@@ -11,31 +11,32 @@ import settings
 
 from src import states
 
+
 class Rancexstreet(Game):
     def init(self) -> None:
         InputHandler.register_listener(self)
         self.state_machine = StateMachine(
-            {   
+            {
                 "start": states.StartState,
                 "carSelect": states.CarSelectState,
                 "play": states.PlayState,
                 "gameOver": states.GameOverState,
-                "pause": states.PauseState, 
+                "pause": states.PauseState,
                 "highScore": states.HighScoreState,
-                "enterHighScore" : states.EnterHighScorestate,
+                "enterHighScore": states.EnterHighScorestate,
             }
         )
         self.state_machine.change("start")
-        pygame.mixer.Sound.play(settings.SOUNDS["menu"], -1).set_volume(0.7) 
+        pygame.mixer.Sound.play(settings.SOUNDS["menu"], -1).set_volume(0.7)
         InputHandler.register_listener(self)
 
     def update(self, dt: float) -> None:
         self.state_machine.update(dt)
 
     def render(self, surface: pygame.Surface) -> None:
-        surface.blit(settings.TEXTURES["background"].convert_alpha(),[0, 0])
+        surface.blit(settings.TEXTURES["background"].convert_alpha(), [0, 0])
         self.state_machine.render(surface)
 
     def on_input(self, input_id: str, input_data: InputData) -> None:
-        if (input_id == 'quit' and input_data.pressed):
+        if input_id == "quit" and input_data.pressed:
             self.quit()

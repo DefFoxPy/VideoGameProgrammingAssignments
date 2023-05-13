@@ -1,10 +1,11 @@
-import pygame 
+import pygame
 
 from gale.input_handler import InputHandler, InputData
 from gale.state_machine import BaseState
 from gale.text import render_text
 
 import settings
+
 
 class GameOverState(BaseState):
     def enter(self, score: float) -> None:
@@ -14,18 +15,18 @@ class GameOverState(BaseState):
         self.display = True
         self.list_icons = [14, 18, 8]
         pygame.mixer.Sound.stop(settings.SOUNDS["play2"])
-        pygame.mixer.Sound.play(settings.SOUNDS["menu"],-1).set_volume(0.7) 
+        pygame.mixer.Sound.play(settings.SOUNDS["menu"], -1).set_volume(0.7)
         InputHandler.register_listener(self)
-    
+
     def exit(self) -> None:
         InputHandler.unregister_listener(self)
-    
+
     def update(self, dt: float) -> None:
         self.time_display += 1
         if self.time_display > 2:
             self.display = not self.display
             self.time_display = 0
-            
+
     def on_input(self, input_id: str, input_data: InputData) -> None:
         if input_id == "move_right" and input_data.pressed:
             settings.SOUNDS["select2"].play()
@@ -33,7 +34,7 @@ class GameOverState(BaseState):
 
         elif input_id == "move_left" and input_data.pressed:
             settings.SOUNDS["select2"].play()
-            self.selected = max(1, self.selected - 1) 
+            self.selected = max(1, self.selected - 1)
 
         elif input_id == "enter" and input_data.pressed:
             settings.SOUNDS["enter"].play()
@@ -43,7 +44,7 @@ class GameOverState(BaseState):
                 self.state_machine.change("start")
             else:
                 self.state_machine.change("highScore")
-        
+
     def render(self, surface: pygame.Surface) -> None:
         surface.blit(settings.TEXTURES["EscenaGameOver"].convert_alpha(), (0, 0))
         surface.blit(settings.TEXTURES["cartel2"].convert_alpha(), (0, 0))
@@ -54,9 +55,9 @@ class GameOverState(BaseState):
             875,
             215,
             settings.COLOR_BLACK,
-            center = True,
+            center=True,
         )
-        
+
         color_display = settings.COLOR_LIGHT
         font_display = settings.FONTS["medium"]
         if self.display:
@@ -70,16 +71,16 @@ class GameOverState(BaseState):
             875,
             290,
             color_display,
-            center = True,
+            center=True,
         )
-       
+
         color = settings.COLOR_LIGHT
         font = settings.FONTS["small"]
         self.list_icons[0] = 14
         if self.selected == 1:
             color = settings.COLOR_BLACK
             font = settings.FONTS["smallPlus"]
-            self.list_icons[0] = 38        
+            self.list_icons[0] = 38
         render_text(
             surface,
             "Restart",
@@ -87,7 +88,7 @@ class GameOverState(BaseState):
             850 - settings.ICON_WIDTH - 90,
             380 + settings.ICON_HEIGHT + 25,
             color,
-            center= False,
+            center=False,
         )
 
         color = settings.COLOR_LIGHT
@@ -97,7 +98,7 @@ class GameOverState(BaseState):
             self.list_icons[1] = 42
             color = settings.COLOR_BLACK
             font = settings.FONTS["smallPlus"]
-        
+
         render_text(
             surface,
             "Home",
@@ -105,7 +106,7 @@ class GameOverState(BaseState):
             850,
             380 + settings.ICON_HEIGHT + 25,
             color,
-            center= False,
+            center=False,
         )
 
         color = settings.COLOR_LIGHT
@@ -115,7 +116,7 @@ class GameOverState(BaseState):
             color = color = settings.COLOR_BLACK
             font = settings.FONTS["smallPlus"]
             self.list_icons[2] = 32
-        
+
         render_text(
             surface,
             "High Score",
@@ -123,10 +124,21 @@ class GameOverState(BaseState):
             850 + settings.ICON_WIDTH + 30,
             380 + settings.ICON_HEIGHT + 25,
             color,
-            center= False,
+            center=False,
         )
 
-        surface.blit(settings.TEXTURES["icons"].convert_alpha(), (850 - settings.ICON_WIDTH -70, 380), settings.FRAMES["list_icons"][self.list_icons[0]])
-        surface.blit(settings.TEXTURES["icons"].convert_alpha(), (850,380), settings.FRAMES["list_icons"][self.list_icons[1]])
-        surface.blit(settings.TEXTURES["icons"].convert_alpha(), (850 + settings.ICON_WIDTH + 70, 380), settings.FRAMES["list_icons"][self.list_icons[2]])
- 
+        surface.blit(
+            settings.TEXTURES["icons"].convert_alpha(),
+            (850 - settings.ICON_WIDTH - 70, 380),
+            settings.FRAMES["list_icons"][self.list_icons[0]],
+        )
+        surface.blit(
+            settings.TEXTURES["icons"].convert_alpha(),
+            (850, 380),
+            settings.FRAMES["list_icons"][self.list_icons[1]],
+        )
+        surface.blit(
+            settings.TEXTURES["icons"].convert_alpha(),
+            (850 + settings.ICON_WIDTH + 70, 380),
+            settings.FRAMES["list_icons"][self.list_icons[2]],
+        )

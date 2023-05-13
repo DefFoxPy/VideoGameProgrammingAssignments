@@ -10,7 +10,7 @@ from src.states.PauseState import PauseState
 from src.states.HighScoreState import HighScoreState
 from src.states.EnterHighScoreState import EnterHighScorestate
 
-{   
+{
     StartState,
     CarSelectState,
     PlayState,

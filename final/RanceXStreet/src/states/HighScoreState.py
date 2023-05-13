@@ -1,4 +1,3 @@
-
 import pygame
 
 from gale.input_handler import InputHandler, InputData
@@ -8,15 +7,16 @@ from gale.text import render_text
 import settings
 from src.utilities.highscores import read_highscores
 
+
 class HighScoreState(BaseState):
     def enter(self) -> None:
         self.hs = read_highscores()
         self.retardo = False
         InputHandler.register_listener(self)
-    
+
     def exit(self) -> None:
         InputHandler.unregister_listener(self)
-    
+
     def update(self, dt: float) -> None:
         self.retardo = True
 
@@ -24,7 +24,7 @@ class HighScoreState(BaseState):
         if input_id == "enter" and input_data.pressed and self.retardo:
             settings.SOUNDS["enter"].play()
             self.state_machine.change("start")
-    
+
     def render(self, surface: pygame.Surface) -> None:
         surface.blit(settings.TEXTURES["cartel4"].convert_alpha(), (0, 0))
         render_text(
@@ -45,9 +45,9 @@ class HighScoreState(BaseState):
                 item = self.hs[i]
                 name = item[0]
                 score = str(item[1])
-            
+
             color = settings.COLOR_ORANGE
-            if i%2 == 0:
+            if i % 2 == 0:
                 color = settings.COLOR_BLACK
 
             render_text(
@@ -57,7 +57,7 @@ class HighScoreState(BaseState):
                 settings.VIRTUAL_WIDTH // 2 + 50,
                 230 + i * 45,
                 color,
-                center = False,
+                center=False,
             )
 
             render_text(
@@ -67,7 +67,7 @@ class HighScoreState(BaseState):
                 settings.VIRTUAL_WIDTH // 2 + 90,
                 230 + i * 45,
                 color,
-                center = False,
+                center=False,
             )
             render_text(
                 surface,
@@ -76,7 +76,7 @@ class HighScoreState(BaseState):
                 settings.VIRTUAL_WIDTH // 2 + 190,
                 230 + i * 45,
                 color,
-                center = False,
+                center=False,
             )
 
         render_text(
@@ -88,4 +88,3 @@ class HighScoreState(BaseState):
             settings.COLOR_BLACK,
             center=True,
         )
-

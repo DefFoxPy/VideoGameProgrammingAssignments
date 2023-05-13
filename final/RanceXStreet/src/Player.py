@@ -1,10 +1,9 @@
-
 import pygame
 import settings
 
 
 class Player:
-    def __init__(self,x: int, y: int) -> None:
+    def __init__(self, x: int, y: int) -> None:
         self.x = x
         self.y = y
         self.ghost = False
@@ -20,7 +19,7 @@ class Player:
 
     def get_collision_rect(self) -> pygame.Rect:
         return pygame.Rect(self.x, self.y, self.width, self.height)
-   
+
     def update(self, dt: float) -> None:
         next_x = self.x + self.vx * dt
         next_y = self.y + self.vy * dt
@@ -29,12 +28,12 @@ class Player:
             self.x = max(0, next_x)
         else:
             self.x = min(settings.VIRTUAL_WIDTH - self.width, next_x)
-        
+
         if self.vy < 0:
             self.y = max(0, next_y)
         else:
             self.y = min(settings.VIRTUAL_HEIGHT - self.height, next_y)
-        
+
         if self.x < settings.POS_SET[0]:
             self.x = settings.POS_SET[0]
         if self.x > settings.POS_SET[3]:
@@ -46,5 +45,10 @@ class Player:
             self.y = self.y + self.height
 
     def render(self, surface: pygame.Surface) -> None:
-        surface.blit(pygame.transform.rotate(settings.TEXTURES["Set_vehicle"+str(self.set)],self.rotate).convert_alpha(), (self.x, self.y), settings.FRAMES["list_cars"][self.skin])
-        
+        surface.blit(
+            pygame.transform.rotate(
+                settings.TEXTURES["Set_vehicle" + str(self.set)], self.rotate
+            ).convert_alpha(),
+            (self.x, self.y),
+            settings.FRAMES["list_cars"][self.skin],
+        )

@@ -1,4 +1,4 @@
-import pygame 
+import pygame
 
 from gale.input_handler import InputHandler, InputData
 from gale.state_machine import BaseState
@@ -6,8 +6,8 @@ from gale.text import render_text
 
 import settings
 
-class PauseState(BaseState):
 
+class PauseState(BaseState):
     def enter(self, **params: dict) -> None:
         self.player = params["player"]
         self.car_list = params["car_list"]
@@ -19,11 +19,11 @@ class PauseState(BaseState):
         self.list_icons = [9, 10]
         self.selected = 1
         InputHandler.register_listener(self)
-    
+
     def exit(self) -> None:
         InputHandler.unregister_listener(self)
-    
-    def update(self,  dt: float) -> None:
+
+    def update(self, dt: float) -> None:
         self.retardo = True
 
     def on_input(self, input_id: str, input_data: InputData) -> None:
@@ -33,20 +33,38 @@ class PauseState(BaseState):
 
         elif input_id == "move_left" and input_data.pressed:
             settings.SOUNDS["select"].play()
-            self.selected = max(1, self.selected - 1) 
+            self.selected = max(1, self.selected - 1)
 
         elif input_id == "enter" and input_data.pressed and self.retardo:
             settings.SOUNDS["enter"].play()
             if self.selected == 1:
-                self.state_machine.change("play", player=self.player, car_list=self.car_list, powerups=self.powerups, datos=self.datos, world = self.world)
+                self.state_machine.change(
+                    "play",
+                    player=self.player,
+                    car_list=self.car_list,
+                    powerups=self.powerups,
+                    datos=self.datos,
+                    world=self.world,
+                )
             else:
                 self.state_machine.change("start")
-        
+
     def render(self, surface: pygame.Surface) -> None:
         self.world.render(surface)
-                  
+
         if self.opc == 0:
-            surface.blit(settings.TEXTURES["cartel5"].convert_alpha(), ((settings.VIRTUAL_WIDTH - settings.TEXTURES["cartel5"].get_width()) // 2, (settings.VIRTUAL_HEIGHT - settings.TEXTURES["cartel5"].get_height()) // 2))  
+            surface.blit(
+                settings.TEXTURES["cartel5"].convert_alpha(),
+                (
+                    (settings.VIRTUAL_WIDTH - settings.TEXTURES["cartel5"].get_width())
+                    // 2,
+                    (
+                        settings.VIRTUAL_HEIGHT
+                        - settings.TEXTURES["cartel5"].get_height()
+                    )
+                    // 2,
+                ),
+            )
             render_text(
                 surface,
                 "Pause",
@@ -54,7 +72,7 @@ class PauseState(BaseState):
                 settings.VIRTUAL_WIDTH // 2,
                 settings.VIRTUAL_HEIGHT // 2,
                 settings.COLOR_BLACK,
-                center = True,
+                center=True,
             )
 
             render_text(
@@ -67,7 +85,18 @@ class PauseState(BaseState):
                 center=True,
             )
         if self.opc == 1:
-            surface.blit(settings.TEXTURES["cartel1"].convert_alpha(), ((settings.VIRTUAL_WIDTH - settings.TEXTURES["cartel1"].get_width()) // 2, (settings.VIRTUAL_HEIGHT - settings.TEXTURES["cartel1"].get_height()) // 2)) 
+            surface.blit(
+                settings.TEXTURES["cartel1"].convert_alpha(),
+                (
+                    (settings.VIRTUAL_WIDTH - settings.TEXTURES["cartel1"].get_width())
+                    // 2,
+                    (
+                        settings.VIRTUAL_HEIGHT
+                        - settings.TEXTURES["cartel1"].get_height()
+                    )
+                    // 2,
+                ),
+            )
 
             render_text(
                 surface,
@@ -76,14 +105,37 @@ class PauseState(BaseState):
                 settings.VIRTUAL_WIDTH // 2,
                 settings.VIRTUAL_HEIGHT // 2,
                 settings.COLOR_BLACK,
-                center = True,
+                center=True,
             )
-            surface.blit(settings.TEXTURES["icons"], (settings.VIRTUAL_WIDTH // 2 - 100, settings.VIRTUAL_HEIGHT // 2 + 33), settings.FRAMES["list_icons"][self.list_icons[0]])
+            surface.blit(
+                settings.TEXTURES["icons"],
+                (settings.VIRTUAL_WIDTH // 2 - 100, settings.VIRTUAL_HEIGHT // 2 + 33),
+                settings.FRAMES["list_icons"][self.list_icons[0]],
+            )
             if self.selected == 1:
-                surface.blit(settings.TEXTURES["icons"], (settings.VIRTUAL_WIDTH // 2 - 100, settings.VIRTUAL_HEIGHT // 2 + 33), settings.FRAMES["list_icons"][self.list_icons[0]+24])
+                surface.blit(
+                    settings.TEXTURES["icons"],
+                    (
+                        settings.VIRTUAL_WIDTH // 2 - 100,
+                        settings.VIRTUAL_HEIGHT // 2 + 33,
+                    ),
+                    settings.FRAMES["list_icons"][self.list_icons[0] + 24],
+                )
 
-            surface.blit(settings.TEXTURES["icons"], (settings.VIRTUAL_WIDTH // 2 + 100 - settings.ICON_WIDTH, settings.VIRTUAL_HEIGHT // 2 + 33), settings.FRAMES["list_icons"][self.list_icons[1]])
+            surface.blit(
+                settings.TEXTURES["icons"],
+                (
+                    settings.VIRTUAL_WIDTH // 2 + 100 - settings.ICON_WIDTH,
+                    settings.VIRTUAL_HEIGHT // 2 + 33,
+                ),
+                settings.FRAMES["list_icons"][self.list_icons[1]],
+            )
             if self.selected == 2:
-                surface.blit(settings.TEXTURES["icons"], (settings.VIRTUAL_WIDTH // 2 + 100 - settings.ICON_WIDTH, settings.VIRTUAL_HEIGHT // 2 + 33), settings.FRAMES["list_icons"][self.list_icons[1]+24])
-            
-
+                surface.blit(
+                    settings.TEXTURES["icons"],
+                    (
+                        settings.VIRTUAL_WIDTH // 2 + 100 - settings.ICON_WIDTH,
+                        settings.VIRTUAL_HEIGHT // 2 + 33,
+                    ),
+                    settings.FRAMES["list_icons"][self.list_icons[1] + 24],
+                )
