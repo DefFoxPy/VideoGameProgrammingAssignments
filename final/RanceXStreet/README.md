@@ -1,5 +1,7 @@
 <h1 align="center">RanceXStreet</h1>
 
+**Description:** RanceXstreet is a racing game where you have the objective to go as far as possible without colliding with the other vehicles. You will have more than 8 different vehicles to start this great adventure of driving through the streets of RanceXstreet. The game will challenge you with new levels of difficulty that will increase as you progress on the track. Additionally, to achieve your goal you can get two types of objects that will help you get out of difficult situations, but only you will decide the right time to use them. A world of speed and agility will test your cunning and reflexes in this incredible racing game.
+
 ## PowerUps
 
 **Ghost:**  Allows the player to pass through the other cars without this crash. Duration: 3 seg, activated with the "X" key.
