@@ -12,7 +12,7 @@ import settings
 from src import states
 
 
-class Rancexstreet(Game):
+class Racexstreet(Game):
     def init(self) -> None:
         InputHandler.register_listener(self)
         self.state_machine = StateMachine(
