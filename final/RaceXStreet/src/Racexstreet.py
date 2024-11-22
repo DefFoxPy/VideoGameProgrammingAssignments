@@ -5,7 +5,7 @@ import pygame
 
 from gale.game import Game
 from gale.input_handler import InputData, InputHandler, InputListener
-from gale.state_machine import StateMachine
+from gale.state import StateMachine
 
 import settings
 

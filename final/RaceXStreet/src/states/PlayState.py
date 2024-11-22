@@ -1,7 +1,7 @@
 import pygame, random
 
 from gale.input_handler import InputHandler, InputData
-from gale.state_machine import BaseState
+from gale.state import BaseState
 from gale.factory import AbstractFactory
 from gale.factory import Factory
 from gale.text import render_text

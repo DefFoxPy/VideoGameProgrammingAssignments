@@ -1,6 +1,6 @@
 import pygame
 
-from gale.state_machine import BaseState
+from gale.state import BaseState
 from gale.input_handler import InputHandler, InputData
 from gale.text import render_text
 
